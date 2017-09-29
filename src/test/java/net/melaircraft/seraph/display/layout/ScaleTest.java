@@ -8,39 +8,39 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class ScalingTest {
+public class ScaleTest {
     Displayable store = new Buffer(new Null(10, 10));
 
     @Test
     public void testDimensionsFactorOne() {
-        Displayable scaling = new Scaling(store, 1);
+        Displayable scale = new Scale(store, 1);
 
-        assertEquals(10, scaling.getWidth());
-        assertEquals(10, scaling.getHeight());
+        assertEquals(10, scale.getWidth());
+        assertEquals(10, scale.getHeight());
     }
 
     @Test
     public void testDimensionsFactorTwo() {
-        Displayable scaling = new Scaling(store, 2);
+        Displayable scale = new Scale(store, 2);
 
-        assertEquals(5, scaling.getWidth());
-        assertEquals(5, scaling.getHeight());
+        assertEquals(5, scale.getWidth());
+        assertEquals(5, scale.getHeight());
     }
 
     @Test
     public void testDimensionsFactorThree() {
-        Displayable scaling = new Scaling(store, 3);
+        Displayable scale = new Scale(store, 3);
 
-        assertEquals(3, scaling.getWidth());
-        assertEquals(3, scaling.getHeight());
+        assertEquals(3, scale.getWidth());
+        assertEquals(3, scale.getHeight());
     }
 
     @Test
-    public void testSetPixelScalingTwo() {
-        Displayable scaling = new Scaling(store, 2);
+    public void testSetPixelscaleTwo() {
+        Displayable scale = new Scale(store, 2);
         PixelColour colour = new PixelColour(255, 0, 0);
 
-        scaling.setPixel(1, 1, colour);
+        scale.setPixel(1, 1, colour);
 
         assertEquals(colour, store.getPixel(2,2));
         assertEquals(colour, store.getPixel(3,2));
@@ -49,12 +49,12 @@ public class ScalingTest {
     }
 
     @Test
-    public void testGetPixelScalingTwo() {
-        Displayable scaling = new Scaling(store, 2);
+    public void testGetPixelscaleTwo() {
+        Displayable scale = new Scale(store, 2);
         PixelColour colour = new PixelColour(255, 0, 0);
 
-        scaling.setPixel(1, 1, colour);
+        scale.setPixel(1, 1, colour);
 
-        assertEquals(colour, scaling.getPixel(1, 1));
+        assertEquals(colour, scale.getPixel(1, 1));
     }
 }

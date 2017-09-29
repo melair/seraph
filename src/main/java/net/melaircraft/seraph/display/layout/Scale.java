@@ -4,12 +4,12 @@ import net.melaircraft.seraph.display.CheckedDisplayable;
 import net.melaircraft.seraph.display.Displayable;
 import net.melaircraft.seraph.display.PixelColour;
 
-public class Scaling extends CheckedDisplayable {
+public class Scale extends CheckedDisplayable {
     private final Displayable parent;
 
     private final int factor;
 
-    public Scaling(Displayable parent, int factor) {
+    public Scale(Displayable parent, int factor) {
         this.parent = parent;
         this.factor = factor;
     }
