@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 
 public class BorderTest {
     Displayable store = new Buffer(new Null(6, 6));
-    PixelColour colour = new PixelColour(255, 0, 0);
+    PixelColour colour = PixelColour.RED;
 
     @Test
     public void testBordersOnAllSidesDimensions() {
@@ -23,7 +23,7 @@ public class BorderTest {
     @Test
     public void testPixelWriteThrough() {
         Displayable border = new Border(store, colour, Border.Side.TOP, Border.Side.LEFT, Border.Side.RIGHT, Border.Side.BOTTOM);
-        PixelColour dot = new PixelColour(0, 255, 0);
+        PixelColour dot = PixelColour.GREEN;
 
         border.setPixel(0, 0, dot);
         border.setPixel(3, 3, dot);

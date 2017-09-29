@@ -12,7 +12,7 @@ public class RotateTest {
     final int originalWidth = 3;
     final int originalHeight = 2;
     Displayable store = new Buffer(new Null(originalWidth, originalHeight));
-    PixelColour pixelColour = new PixelColour(128, 128, 128);
+    PixelColour pixelColour = PixelColour.RED;
 
     @Test
     public void testRotationZeroDoesNotSwapDimensions() {

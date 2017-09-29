@@ -47,7 +47,7 @@ public class BookTest {
         Book book = new Book(store, true);
         Displayable page = book.addPage();
 
-        PixelColour pixelColour = new PixelColour(255, 0,0);
+        PixelColour pixelColour = PixelColour.RED;
         page.setPixel(0, 0, pixelColour);
 
         assertEquals(pixelColour, store.getPixel(0, 0));
@@ -59,7 +59,7 @@ public class BookTest {
         Displayable one = book.addPage();
         Displayable two = book.addPage();
 
-        PixelColour pixelColour = new PixelColour(255, 0, 0);
+        PixelColour pixelColour = PixelColour.RED;
         two.setPixel(0, 0, pixelColour);
 
         assertNotEquals(pixelColour, store.getPixel(0, 0));
@@ -73,7 +73,7 @@ public class BookTest {
         Displayable one = book.addPage();
         Displayable two = book.addPage();
 
-        PixelColour pixelColour = new PixelColour(255, 0, 0);
+        PixelColour pixelColour = PixelColour.RED;
         one.setPixel(0, 0, pixelColour);
 
         assertEquals(pixelColour, store.getPixel(0, 0));
@@ -111,7 +111,7 @@ public class BookTest {
         Book book = new Book(store, true);
         Displayable page = book.addPage();
 
-        PixelColour pixelColour = new PixelColour(255, 0,0);
+        PixelColour pixelColour = PixelColour.RED;
         page.setPixel(3, 1, pixelColour);
 
         assertNotEquals(pixelColour, store.getPixel(3, 1));

@@ -4,8 +4,6 @@ import net.melaircraft.seraph.display.CheckedDisplayable;
 import net.melaircraft.seraph.display.PixelColour;
 
 public final class Null extends CheckedDisplayable {
-    private static final PixelColour OFF = new PixelColour(0, 0 ,0);
-
     private final int width;
     private final int height;
 
@@ -30,6 +28,6 @@ public final class Null extends CheckedDisplayable {
 
     @Override
     protected PixelColour getActualPixel(int x, int y) {
-        return OFF;
+        return PixelColour.BLACK;
     }
 }

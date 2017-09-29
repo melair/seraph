@@ -5,8 +5,6 @@ import net.melaircraft.seraph.display.Displayable;
 import net.melaircraft.seraph.display.PixelColour;
 
 public class Buffer extends CheckedDisplayable {
-    private static final PixelColour OFF = new PixelColour(0, 0 ,0);
-
     private final Displayable parent;
     private final PixelColour[][] pixels;
 
@@ -17,7 +15,7 @@ public class Buffer extends CheckedDisplayable {
 
         for (int x = 0; x < getWidth(); x++) {
             for (int y = 0; y < getHeight(); y++) {
-                pixels[x][y] = OFF;
+                pixels[x][y] = PixelColour.BLACK;
             }
         }
     }

@@ -23,7 +23,7 @@ public class VirtualTest {
     @Test
     public void testSettingAndGettingOnCanvasOutsideParent() {
         Displayable virtual = new Virtual(store, 8, 8);
-        PixelColour colour = new PixelColour(255, 0, 0);
+        PixelColour colour = PixelColour.RED;
 
         virtual.setPixel(7, 7, colour);
         assertEquals(colour, virtual.getPixel(7, 7));
@@ -32,7 +32,7 @@ public class VirtualTest {
     @Test
     public void testSettingInSideViewPortUpdatesStore() {
         Displayable virtual = new Virtual(store, 8, 8);
-        PixelColour colour = new PixelColour(255, 0, 0);
+        PixelColour colour = PixelColour.RED;
 
         virtual.setPixel(0, 0, colour);
         assertEquals(colour, store.getPixel(0, 0));
@@ -41,7 +41,7 @@ public class VirtualTest {
     @Test
     public void testSettingOutSideViewPortDoesNotError() {
         Displayable virtual = new Virtual(store, 8, 8);
-        PixelColour colour = new PixelColour(255, 0, 0);
+        PixelColour colour = PixelColour.RED;
 
         virtual.setPixel(5, 5, colour);
     }
@@ -50,7 +50,7 @@ public class VirtualTest {
     public void testViewPort() {
         Displayable store = new Buffer(new Null(6, 6));
         Virtual virtual = new Virtual(store, 8, 8);
-        PixelColour colour = new PixelColour(255, 0, 0);
+        PixelColour colour = PixelColour.RED;
 
         virtual.setPixel(5, 5, colour);
 

@@ -34,7 +34,7 @@ public class PaneTest {
     @Test
     public void testRemappedCoordinates() {
         Displayable pane = new Pane(store, 2, 2, 4, 2);
-        PixelColour colour = new PixelColour(255, 0, 0);
+        PixelColour colour = PixelColour.BLUE;
 
         pane.setPixel(0, 0, colour);
 

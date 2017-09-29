@@ -38,7 +38,7 @@ public class ScaleTest {
     @Test
     public void testSetPixelscaleTwo() {
         Displayable scale = new Scale(store, 2);
-        PixelColour colour = new PixelColour(255, 0, 0);
+        PixelColour colour = PixelColour.RED;
 
         scale.setPixel(1, 1, colour);
 
@@ -51,7 +51,7 @@ public class ScaleTest {
     @Test
     public void testGetPixelscaleTwo() {
         Displayable scale = new Scale(store, 2);
-        PixelColour colour = new PixelColour(255, 0, 0);
+        PixelColour colour = PixelColour.RED;
 
         scale.setPixel(1, 1, colour);
 

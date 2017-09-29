@@ -26,7 +26,7 @@ public class Virtual implements Displayable {
                 int canvasX = viewportX + xI;
                 int canvasY = viewportY + yI;
 
-                PixelColour colour = new PixelColour(0, 0, 0);
+                PixelColour colour = PixelColour.BLACK;
 
                 if (canvasX < canvas.getWidth() && canvasY < canvas.getHeight()) {
                     colour = canvas.getPixel(canvasX, canvasY);

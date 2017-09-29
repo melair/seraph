@@ -1,6 +1,12 @@
 package net.melaircraft.seraph.display;
 
 public final class PixelColour {
+    public static final PixelColour BLACK = new PixelColour(0, 0, 0);
+    public static final PixelColour RED = new PixelColour(255, 0, 0);
+    public static final PixelColour GREEN = new PixelColour(0, 255, 0);
+    public static final PixelColour BLUE = new PixelColour(0, 0, 255);
+    public static final PixelColour WHITE = new PixelColour(255, 255, 255);
+
     private final int r;
     private final int g;
     private final int b;
