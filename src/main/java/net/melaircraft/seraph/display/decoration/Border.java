@@ -3,13 +3,13 @@ package net.melaircraft.seraph.display.decoration;
 import net.melaircraft.seraph.display.CheckedDisplayable;
 import net.melaircraft.seraph.display.Displayable;
 import net.melaircraft.seraph.display.PixelColour;
-import net.melaircraft.seraph.display.layout.Window;
+import net.melaircraft.seraph.display.layout.Pane;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class Border extends CheckedDisplayable {
-    private final Displayable window;
+    private final Displayable pane;
 
     public Border(Displayable parent, PixelColour colour, Side... sides) {
         List<Side> sideList = Arrays.asList(sides);
@@ -23,7 +23,7 @@ public class Border extends CheckedDisplayable {
         int reductionH = sideList.contains(Side.TOP) ? 1 : 0;
         reductionH += sideList.contains(Side.BOTTOM) ? 1 : 0;
 
-        this.window = new Window(parent, offsetX, offsetY, parent.getWidth() - reductionW, parent.getHeight() - reductionH);
+        this.pane = new Pane(parent, offsetX, offsetY, parent.getWidth() - reductionW, parent.getHeight() - reductionH);
 
         if (sideList.contains(Side.TOP)) {
             for (int x = 0; x < parent.getWidth(); x++) {
@@ -52,22 +52,22 @@ public class Border extends CheckedDisplayable {
 
     @Override
     protected void setActualPixel(int x, int y, int r, int g, int b) {
-        window.setPixel(x, y, r, g, b);
+        pane.setPixel(x, y, r, g, b);
     }
 
     @Override
     protected PixelColour getActualPixel(int x, int y) {
-        return window.getPixel(x, y);
+        return pane.getPixel(x, y);
     }
 
     @Override
     public int getWidth() {
-        return window.getWidth();
+        return pane.getWidth();
     }
 
     @Override
     public int getHeight() {
-        return window.getHeight();
+        return pane.getHeight();
     }
 
     enum Side {
