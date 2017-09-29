@@ -7,6 +7,7 @@ import net.melaircraft.seraph.display.output.Null;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class VirtualTest {
     Displayable store = new Buffer(new Null(4, 4));
@@ -43,5 +44,20 @@ public class VirtualTest {
         PixelColour colour = new PixelColour(255, 0, 0);
 
         virtual.setPixel(5, 5, colour);
+    }
+
+    @Test
+    public void testViewPort() {
+        Displayable store = new Buffer(new Null(6, 6));
+        Virtual virtual = new Virtual(store, 8, 8);
+        PixelColour colour = new PixelColour(255, 0, 0);
+
+        virtual.setPixel(5, 5, colour);
+
+        assertEquals(colour, store.getPixel(5, 5));
+        virtual.moveViewport(5, 5);
+
+        assertEquals(colour, store.getPixel(0, 0));
+        assertNotEquals(colour, store.getPixel(5, 5));
     }
 }
