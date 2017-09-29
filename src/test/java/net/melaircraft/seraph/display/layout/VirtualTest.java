@@ -14,7 +14,7 @@ public class VirtualTest {
 
     @Test
     public void testDimensions() {
-        Displayable virtual = new Virtual(store, 8, 8);
+        Displayable virtual = new Virtual(store, 8, 8, false);
 
         assertEquals(8, virtual.getWidth());
         assertEquals(8, virtual.getHeight());
@@ -22,7 +22,7 @@ public class VirtualTest {
 
     @Test
     public void testSettingAndGettingOnCanvasOutsideParent() {
-        Displayable virtual = new Virtual(store, 8, 8);
+        Displayable virtual = new Virtual(store, 8, 8, false);
         PixelColour colour = PixelColour.RED;
 
         virtual.setPixel(7, 7, colour);
@@ -31,7 +31,7 @@ public class VirtualTest {
 
     @Test
     public void testSettingInSideViewPortUpdatesStore() {
-        Displayable virtual = new Virtual(store, 8, 8);
+        Displayable virtual = new Virtual(store, 8, 8, false);
         PixelColour colour = PixelColour.RED;
 
         virtual.setPixel(0, 0, colour);
@@ -40,7 +40,7 @@ public class VirtualTest {
 
     @Test
     public void testSettingOutSideViewPortDoesNotError() {
-        Displayable virtual = new Virtual(store, 8, 8);
+        Displayable virtual = new Virtual(store, 8, 8, false);
         PixelColour colour = PixelColour.RED;
 
         virtual.setPixel(5, 5, colour);
@@ -49,7 +49,7 @@ public class VirtualTest {
     @Test
     public void testViewPort() {
         Displayable store = new Buffer(new Null(6, 6));
-        Virtual virtual = new Virtual(store, 8, 8);
+        Virtual virtual = new Virtual(store, 8, 8, false);
         PixelColour colour = PixelColour.RED;
 
         virtual.setPixel(5, 5, colour);
@@ -59,5 +59,15 @@ public class VirtualTest {
 
         assertEquals(colour, store.getPixel(0, 0));
         assertNotEquals(colour, store.getPixel(5, 5));
+    }
+
+    @Test
+    public void testWrapping() {
+        Virtual virtual = new Virtual(store, 4, 4, false);
+
+        virtual.setPixel(0, 0, PixelColour.RED);
+        virtual.moveViewport(2, 2);
+
+        assertEquals(PixelColour.RED, store.getPixel(2,2));
     }
 }

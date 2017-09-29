@@ -9,12 +9,15 @@ public class Virtual implements Displayable {
     private final Displayable parent;
     private final Displayable canvas;
 
+    private final boolean wrap;
+
     private int viewportX = 0;
     private int viewportY = 0;
 
-    public Virtual(Displayable parent, int width, int height) {
+    public Virtual(Displayable parent, int width, int height, boolean wrap) {
         this.parent = parent;
         this.canvas = new Buffer(new Null(width, height));
+        this.wrap = wrap;
     }
 
     public void moveViewport(int x, int y) {
