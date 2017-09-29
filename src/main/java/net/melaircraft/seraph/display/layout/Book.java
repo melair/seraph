@@ -13,12 +13,15 @@ import java.util.List;
 public class Book extends CheckedDisplayable {
     static final PixelColour ACTIVE_PAGE_COLOUR = new PixelColour(255, 255, 255);
     static final PixelColour INACTIVE_PAGE_COLOUR = new PixelColour(128, 128, 128);
+
     private final Displayable parent;
     private final List<Page> pages = new ArrayList<>();
+    private final boolean pagination;
     private int currentPage = 0;
 
-    public Book(Displayable parent) {
+    public Book(Displayable parent, boolean pagination) {
         this.parent = parent;
+        this.pagination = pagination;
     }
 
     public Displayable addPage() {
@@ -42,7 +45,19 @@ public class Book extends CheckedDisplayable {
 
     protected void setPagePixel(Page page, int x, int y, int r, int g, int b) {
         if (pages.indexOf(page) == currentPage) {
-            parent.setPixel(x, y, r, g, b);
+            boolean allowDraw = true;
+
+            if (pagination) {
+                if (y == (parent.getHeight() - 1)) {
+                    if (x >= (parent.getWidth() - pages.size())) {
+                        allowDraw = false;
+                    }
+                }
+            }
+
+            if (allowDraw) {
+                parent.setPixel(x, y, r, g, b);
+            }
         }
     }
 
@@ -70,17 +85,19 @@ public class Book extends CheckedDisplayable {
     }
 
     private void drawPagination() {
-        int y = parent.getHeight() - 1;
-        int x = parent.getWidth() - pages.size();
+        if (pagination) {
+            int y = parent.getHeight() - 1;
+            int x = parent.getWidth() - pages.size();
 
-        for (int i = 0; i < pages.size(); i++) {
-            PixelColour colour = INACTIVE_PAGE_COLOUR;
+            for (int i = 0; i < pages.size(); i++) {
+                PixelColour colour = INACTIVE_PAGE_COLOUR;
 
-            if (i == currentPage) {
-                colour = ACTIVE_PAGE_COLOUR;
+                if (i == currentPage) {
+                    colour = ACTIVE_PAGE_COLOUR;
+                }
+
+                parent.setPixel(x + i, y, colour);
             }
-
-            parent.setPixel(x + i, y, colour);
         }
     }
 

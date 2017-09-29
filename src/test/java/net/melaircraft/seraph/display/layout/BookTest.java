@@ -15,7 +15,7 @@ public class BookTest {
 
     @Test
     public void testDimensionsArePassedThrough() {
-        Displayable book = new Book(store);
+        Displayable book = new Book(store, true);
 
         assertEquals(store.getHeight(), book.getHeight());
         assertEquals(store.getWidth(), book.getWidth());
@@ -23,19 +23,19 @@ public class BookTest {
 
     @Test(expected = NonExistentPixelException.class)
     public void testDirectSetThrowsException() {
-        Displayable book = new Book(store);
+        Displayable book = new Book(store, true);
         book.setPixel(0, 0, 0, 0, 0);
     }
 
     @Test(expected = NonExistentPixelException.class)
     public void testDirectGetThrowsException() {
-        Displayable book = new Book(store);
+        Displayable book = new Book(store, true);
         book.getPixel(0, 0);
     }
 
     @Test
     public void testPageIsGivenOut() {
-        Book book = new Book(store);
+        Book book = new Book(store, true);
         Displayable page = book.addPage();
 
         assertEquals(store.getWidth(), page.getWidth());
@@ -44,7 +44,7 @@ public class BookTest {
 
     @Test
     public void testFirstPageWritesToParentIfActive() {
-        Book book = new Book(store);
+        Book book = new Book(store, true);
         Displayable page = book.addPage();
 
         PixelColour pixelColour = new PixelColour(255, 0,0);
@@ -55,7 +55,7 @@ public class BookTest {
 
     @Test
     public void testSecondPageWritesOnNextPage() {
-        Book book = new Book(store);
+        Book book = new Book(store, true);
         Displayable one = book.addPage();
         Displayable two = book.addPage();
 
@@ -69,7 +69,7 @@ public class BookTest {
 
     @Test
     public void testTwoPageCycle() {
-        Book book = new Book(store);
+        Book book = new Book(store, true);
         Displayable one = book.addPage();
         Displayable two = book.addPage();
 
@@ -85,7 +85,7 @@ public class BookTest {
 
     @Test
     public void testPaginationForOnePage() {
-        Book book = new Book(store);
+        Book book = new Book(store, true);
         Displayable one = book.addPage();
 
         assertEquals(Book.ACTIVE_PAGE_COLOUR, store.getPixel(3, 1));
@@ -93,7 +93,7 @@ public class BookTest {
 
     @Test
     public void testPaginationForTwoPage() {
-        Book book = new Book(store);
+        Book book = new Book(store, true);
         Displayable one = book.addPage();
         Displayable two = book.addPage();
 
@@ -104,5 +104,16 @@ public class BookTest {
 
         assertEquals(Book.INACTIVE_PAGE_COLOUR, store.getPixel(2, 1));
         assertEquals(Book.ACTIVE_PAGE_COLOUR, store.getPixel(3, 1));
+    }
+
+    @Test
+    public void testPaginationCanNotBeOverwritten() {
+        Book book = new Book(store, true);
+        Displayable page = book.addPage();
+
+        PixelColour pixelColour = new PixelColour(255, 0,0);
+        page.setPixel(3, 1, pixelColour);
+
+        assertNotEquals(pixelColour, store.getPixel(3, 1));
     }
 }
