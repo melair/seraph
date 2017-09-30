@@ -1,4 +1,4 @@
-package net.melaircraft.seraph.display.output;
+package net.melaircraft.seraph.display.buffer;
 
 import net.melaircraft.seraph.display.Displayable;
 import net.melaircraft.seraph.display.PixelColour;

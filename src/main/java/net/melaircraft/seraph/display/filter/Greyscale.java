@@ -1,7 +1,7 @@
 package net.melaircraft.seraph.display.filter;
 
 import net.melaircraft.seraph.display.Displayable;
-import net.melaircraft.seraph.display.output.Buffer;
+import net.melaircraft.seraph.display.buffer.Buffer;
 
 public class Greyscale extends Buffer {
     private final Displayable parent;

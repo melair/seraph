@@ -2,7 +2,7 @@ package net.melaircraft.seraph.display.layout;
 
 import net.melaircraft.seraph.display.Displayable;
 import net.melaircraft.seraph.display.PixelColour;
-import net.melaircraft.seraph.display.output.Buffer;
+import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.output.Null;
 import org.junit.Test;
 
