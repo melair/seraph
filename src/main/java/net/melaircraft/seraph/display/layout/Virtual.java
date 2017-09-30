@@ -2,6 +2,7 @@ package net.melaircraft.seraph.display.layout;
 
 import net.melaircraft.seraph.display.Displayable;
 import net.melaircraft.seraph.display.PixelColour;
+import net.melaircraft.seraph.display.exception.InvalidVirtualSizeException;
 import net.melaircraft.seraph.display.output.Buffer;
 import net.melaircraft.seraph.display.output.Null;
 
@@ -15,6 +16,10 @@ public class Virtual implements Displayable {
     private int viewportY = 0;
 
     public Virtual(Displayable parent, int width, int height, boolean wrap) {
+        if (width < parent.getWidth() || height < parent.getHeight()) {
+            throw new InvalidVirtualSizeException("Virtual display can not be smaller then parent display.");
+        }
+
         this.parent = parent;
         this.canvas = new Buffer(new Null(width, height));
         this.wrap = wrap;
@@ -30,6 +35,11 @@ public class Virtual implements Displayable {
                 int canvasY = viewportY + yI;
 
                 PixelColour colour = PixelColour.BLACK;
+
+                if (wrap) {
+                    canvasX = canvasX % canvas.getWidth();
+                    canvasY = canvasY % canvas.getHeight();
+                }
 
                 if (canvasX < canvas.getWidth() && canvasY < canvas.getHeight()) {
                     colour = canvas.getPixel(canvasX, canvasY);
@@ -58,7 +68,14 @@ public class Virtual implements Displayable {
         int adjustY = y - viewportY;
 
         if (adjustX >= 0 && adjustX < parent.getWidth() && adjustY >= 0 && adjustY < parent.getHeight()) {
-            parent.setPixel(x, y, r, g, b);
+            parent.setPixel(adjustX, adjustY, r, g, b);
+        } else {
+            adjustX += parent.getWidth();
+            adjustY += parent.getHeight();
+
+            if (adjustX >= 0 && adjustX < parent.getWidth() && adjustY >= 0 && adjustY < parent.getHeight()) {
+                parent.setPixel(adjustX, adjustY, r, g, b);
+            }
         }
     }
 
