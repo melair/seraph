@@ -116,4 +116,20 @@ public class BookTest {
 
         assertNotEquals(pixelColour, store.getPixel(3, 1));
     }
+
+    @Test
+    public void testNoPagination() {
+        Book book = new Book(store, false);
+
+        Displayable page = book.addPage();
+
+        PixelColour pixelColour = PixelColour.RED;
+        page.setPixel(3, 1, pixelColour);
+
+        assertEquals(pixelColour, store.getPixel(3, 1));
+
+        book.addPage();
+
+        assertEquals(pixelColour, store.getPixel(3, 1));
+    }
 }
