@@ -11,6 +11,10 @@ import net.melaircraft.seraph.display.layout.Pane;
 import net.melaircraft.seraph.display.layout.Stack;
 import net.melaircraft.seraph.display.output.SwingGUI;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 public class SimpleDemoApp {
     public static void main(String[] args) throws InterruptedException {
         SwingGUI guiOne = new SwingGUI(128, 32);
@@ -38,16 +42,9 @@ public class SimpleDemoApp {
         Pane paneThree = new Pane(three, 0, 0, tee.getWidth(), tee.getHeight() - 1);
         Border borderThree = new Border(paneThree, PixelColour.BLUE, Border.Side.TOP, Border.Side.LEFT, Border.Side.RIGHT, Border.Side.BOTTOM);
 
-        int i = 0;
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
-        while(true) {
-            Thread.sleep(300);
-
-            snow.tick();
-
-            if ((i++ % 10) == 0) {
-                book.nextPage();
-            }
-        }
+        scheduler.scheduleAtFixedRate(snow, 0, 400, TimeUnit.MILLISECONDS);
+        scheduler.scheduleAtFixedRate(book::nextPage, 0, 1500, TimeUnit.MILLISECONDS);
     }
 }

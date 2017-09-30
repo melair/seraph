@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Random;
 
-public class Snow {
+public class Snow implements Runnable {
     private static final PixelColour[] SNOW_COLOUR = { new PixelColour(255, 255, 255), new PixelColour(200, 200, 200), new PixelColour(225, 225, 225) };
 
     private final Displayable parent;
@@ -20,7 +20,8 @@ public class Snow {
         this.maxSnow = maxSnow;
     }
 
-    public void tick() {
+    @Override
+    public void run() {
         flakes.removeIf(Flake::tick);
 
         if (flakes.size() < maxSnow && random.nextInt(5) < 4) {
