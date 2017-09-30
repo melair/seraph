@@ -3,12 +3,10 @@ package net.melaircraft.seraph.demo;
 import net.melaircraft.seraph.display.Displayable;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.decoration.Border;
+import net.melaircraft.seraph.display.decoration.animation.Matrix;
 import net.melaircraft.seraph.display.decoration.animation.Snow;
-import net.melaircraft.seraph.display.filter.Rotate;
-import net.melaircraft.seraph.display.filter.Tee;
 import net.melaircraft.seraph.display.layout.Book;
 import net.melaircraft.seraph.display.layout.Pane;
-import net.melaircraft.seraph.display.layout.Stack;
 import net.melaircraft.seraph.display.output.SwingGUI;
 
 import java.util.concurrent.Executors;
@@ -17,34 +15,24 @@ import java.util.concurrent.TimeUnit;
 
 public class SimpleDemoApp {
     public static void main(String[] args) throws InterruptedException {
-        SwingGUI guiOne = new SwingGUI(128, 32);
-        SwingGUI guiTwo = new SwingGUI(128, 32);
+        SwingGUI gui = new SwingGUI(128, 32);
 
-        Tee tee = new Tee(guiOne, new Rotate(guiTwo, Rotate.Rotation.ROTATE_180));
-
-        Stack stack = new Stack(tee);
-
-        Displayable layerOne = stack.addLayer();
-        Snow snow = new Snow(layerOne, 64);
-
-        Displayable layerTwo = stack.addLayer();
-        Book book = new Book(layerTwo, true);
+        Book book = new Book(gui, true);
 
         Displayable one = book.addPage();
-        Pane paneOne = new Pane(one, 0, 0, tee.getWidth(), tee.getHeight() - 1);
-        Border borderOne = new Border(paneOne, PixelColour.RED, Border.Side.TOP, Border.Side.LEFT, Border.Side.RIGHT, Border.Side.BOTTOM);
+        Pane paneOne = new Pane(one, 0, 0, gui.getWidth(), gui.getHeight() - 1);
+        Border borderOne = new Border(paneOne, new PixelColour(100, 255, 100), Border.Side.BOTTOM);
+        Matrix matrix = new Matrix(borderOne);
 
         Displayable two = book.addPage();
-        Pane paneTwo = new Pane(two, 0, 0, tee.getWidth(), tee.getHeight() - 1);
-        Border borderTwo = new Border(paneTwo, PixelColour.GREEN, Border.Side.TOP, Border.Side.LEFT, Border.Side.RIGHT, Border.Side.BOTTOM);
-
-        Displayable three = book.addPage();
-        Pane paneThree = new Pane(three, 0, 0, tee.getWidth(), tee.getHeight() - 1);
-        Border borderThree = new Border(paneThree, PixelColour.BLUE, Border.Side.TOP, Border.Side.LEFT, Border.Side.RIGHT, Border.Side.BOTTOM);
+        Pane paneTwo = new Pane(two, 0, 0, gui.getWidth(), gui.getHeight() - 1);
+        Border borderTwo = new Border(paneTwo, new PixelColour(150, 150, 150), Border.Side.BOTTOM);
+        Snow snow = new Snow(borderTwo, 40);
 
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
-        scheduler.scheduleAtFixedRate(snow, 0, 400, TimeUnit.MILLISECONDS);
-        scheduler.scheduleAtFixedRate(book::nextPage, 0, 1500, TimeUnit.MILLISECONDS);
+        scheduler.scheduleAtFixedRate(snow, 0, 300, TimeUnit.MILLISECONDS);
+        scheduler.scheduleAtFixedRate(matrix, 0, 100, TimeUnit.MILLISECONDS);
+        scheduler.scheduleAtFixedRate(book::nextPage, 5000, 5000, TimeUnit.MILLISECONDS);
     }
 }
