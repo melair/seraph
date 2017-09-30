@@ -48,4 +48,13 @@ public final class PixelColour {
         result = 31 * result + b;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "PixelColour{" +
+                "r=" + r +
+                ", g=" + g +
+                ", b=" + b +
+                '}';
+    }
 }
