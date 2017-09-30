@@ -45,7 +45,7 @@ public class Rotate implements Displayable {
             case ROTATE_90:
                 return (parent.getWidth() - 1) - y;
             case ROTATE_180:
-                return (parent.getWidth() - 1) - y;
+                return (parent.getWidth() - 1) - x;
             case ROTATE_270:
                 return y;
         }
@@ -58,13 +58,13 @@ public class Rotate implements Displayable {
             case ROTATE_90:
                 return x;
             case ROTATE_180:
-                return (parent.getHeight() - 1) - x;
+                return (parent.getHeight() - 1) - y;
             case ROTATE_270:
                 return (parent.getHeight() - 1) - x;
         }
     }
 
-    enum Rotation {
+    public enum Rotation {
         ROTATE_0(false),
         ROTATE_90(true),
         ROTATE_180(false),

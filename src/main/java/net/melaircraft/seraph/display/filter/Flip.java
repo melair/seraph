@@ -25,7 +25,7 @@ public class Flip implements Displayable {
 
     @Override
     public int getHeight() {
-        return parent.getWidth();
+        return parent.getHeight();
     }
 
     @Override
@@ -44,7 +44,7 @@ public class Flip implements Displayable {
         return parent.getPixel(translatedX, translatedY);
     }
 
-    enum Direction {
+    public enum Direction {
         HORIZONTAL,
         VERTICAL
     }
