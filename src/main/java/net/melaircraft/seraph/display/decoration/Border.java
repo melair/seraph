@@ -70,7 +70,7 @@ public class Border extends CheckedDisplayable {
         return pane.getHeight();
     }
 
-    enum Side {
+    public enum Side {
         TOP,
         LEFT,
         RIGHT,

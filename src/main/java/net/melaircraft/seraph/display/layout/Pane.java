@@ -19,7 +19,7 @@ public class Pane extends CheckedDisplayable {
         this.width = width;
         this.height = height;
 
-        if (offsetX + width >= parent.getWidth() || offsetY + height >= parent.getHeight()) {
+        if (offsetX + width > parent.getWidth() || offsetY + height > parent.getHeight()) {
             throw new InvalidPaneLocationException("Can not place a window of " + width + "," + height + " at " + offsetX + "," + offsetY + " when parent is only " + parent.getWidth() + "," + parent.getHeight() + ".");
         }
     }

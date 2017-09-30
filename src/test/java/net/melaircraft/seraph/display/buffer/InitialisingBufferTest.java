@@ -8,14 +8,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class BufferTest {
+public class InitialisingBufferTest {
     @Test
     public void testInitialisationSetsParentToBlack() {
         Displayable store = mock(Displayable.class);
         when(store.getWidth()).thenReturn(2);
         when(store.getHeight()).thenReturn(1);
 
-        Buffer buffer = new Buffer(store);
+        InitialisingBuffer buffer = new InitialisingBuffer(store);
 
         verify(store).setPixel(0, 0, 0, 0, 0);
         verify(store).setPixel(1, 0, 0, 0, 0);
@@ -35,7 +35,7 @@ public class BufferTest {
         img[1][0] = PixelColour.GREEN;
         img[2][0] = PixelColour.BLUE;
 
-        Buffer buffer = new Buffer(store, img, imgWidth, imgHeight);
+        InitialisingBuffer buffer = new InitialisingBuffer(store, img, imgWidth, imgHeight);
 
         verify(store).setPixel(0, 0, 255, 0, 0);
         verify(store).setPixel(0, 1, 0, 0, 0);
