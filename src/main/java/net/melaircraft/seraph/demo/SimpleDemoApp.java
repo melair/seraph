@@ -4,9 +4,11 @@ import net.melaircraft.seraph.display.Displayable;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.component.Text;
 import net.melaircraft.seraph.display.decoration.Border;
+import net.melaircraft.seraph.display.decoration.Rainbow;
 import net.melaircraft.seraph.display.decoration.animation.Matrix;
 import net.melaircraft.seraph.display.decoration.animation.Snow;
 import net.melaircraft.seraph.display.filter.Brightness;
+import net.melaircraft.seraph.display.filter.Mask;
 import net.melaircraft.seraph.display.filter.Tee;
 import net.melaircraft.seraph.display.layout.Book;
 import net.melaircraft.seraph.display.layout.Pane;
@@ -31,20 +33,21 @@ public class SimpleDemoApp {
         PixelPusher pixelPusher = new PixelPusher(64, 32, inetAddress, 5078);
         SwingGUI gui = new SwingGUI(64, 32);
 
-        Tee tee = new Tee(new Brightness(pixelPusher, 0.40F), gui);
+        Tee tee = new Tee(new Brightness(pixelPusher, 0.4F), gui);
 
         Stack stack = new Stack(tee);
         Displayable top = stack.addLayer();
 
-        Stack stack2 = new Stack(top);
+        Mask mask = new Mask(top);
+        new Rainbow(mask.getMask());
+
+        Stack stack2 = new Stack(mask);
         Displayable top2 = stack2.addLayer();
         Displayable bottom2 = stack2.addLayer();
 
-        BitmapFont bitmapFont = BDFFontFactory.load(new FileInputStream("contrib/bbc8.bdf"));
-        PixelColour teal = new PixelColour(128, 0,  128);
-
-        Text text = new Text(top2, bitmapFont, teal, Text.Justification.CENTER, Text.Alignment.MIDDLE, getTime());
-        Text text2 = new Text(bottom2, bitmapFont, teal, Text.Justification.CENTER, Text.Alignment.TOP, "Time is");
+        BitmapFont bitmapFont = BDFFontFactory.load(new FileInputStream("contrib/zevv-peep-iso8859-1-07x14.bdf"));
+        Text text = new Text(top2, bitmapFont, PixelColour.WHITE, Text.Justification.CENTER, Text.Alignment.BOTTOM, getTime());
+        Text text2 = new Text(bottom2, bitmapFont, PixelColour.WHITE, Text.Justification.CENTER, Text.Alignment.TOP, "Time is");
 
         Displayable bottom = stack.addLayer();
         Book book = new Book(bottom, true);
