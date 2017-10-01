@@ -32,7 +32,7 @@ public class SimpleDemoApp {
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
         scheduler.scheduleAtFixedRate(snow, 0, 300, TimeUnit.MILLISECONDS);
-        scheduler.scheduleAtFixedRate(matrix, 0, 100, TimeUnit.MILLISECONDS);
+        scheduler.scheduleAtFixedRate(matrix, 0, 75, TimeUnit.MILLISECONDS);
         scheduler.scheduleAtFixedRate(book::nextPage, 5000, 5000, TimeUnit.MILLISECONDS);
     }
 }

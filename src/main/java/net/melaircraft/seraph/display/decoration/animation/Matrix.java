@@ -58,7 +58,7 @@ public class Matrix implements Runnable {
                     } else if (pos == 3) {
                         colour = new PixelColour(50, 255, 50);
                     } else if (remaining > 10) {
-                        int green = 200 + (int) Math.round(random.nextFloat() * 55.0);
+                        int green = 155 + (int) Math.round(random.nextFloat() * 100.0);
                         colour = new PixelColour(0, green, 0);
                     } else if (remaining <= 1) {
                         colour = new PixelColour(0, 0, 0);
