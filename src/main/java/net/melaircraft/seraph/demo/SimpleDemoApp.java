@@ -6,15 +6,19 @@ import net.melaircraft.seraph.display.component.Text;
 import net.melaircraft.seraph.display.decoration.Border;
 import net.melaircraft.seraph.display.decoration.animation.Matrix;
 import net.melaircraft.seraph.display.decoration.animation.Snow;
+import net.melaircraft.seraph.display.filter.Brightness;
+import net.melaircraft.seraph.display.filter.Tee;
 import net.melaircraft.seraph.display.layout.Book;
 import net.melaircraft.seraph.display.layout.Pane;
 import net.melaircraft.seraph.display.layout.Stack;
+import net.melaircraft.seraph.display.output.PixelPusher;
 import net.melaircraft.seraph.display.output.SwingGUI;
 import net.melaircraft.seraph.fonts.BDFFontFactory;
 import net.melaircraft.seraph.fonts.BitmapFont;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.concurrent.Executors;
@@ -23,20 +27,24 @@ import java.util.concurrent.TimeUnit;
 
 public class SimpleDemoApp {
     public static void main(String[] args) throws IOException {
-        SwingGUI gui = new SwingGUI(128, 32);
+        InetAddress inetAddress = InetAddress.getByAddress(new byte[] { 10, 10, 8, 70 });
+        PixelPusher pixelPusher = new PixelPusher(64, 32, inetAddress, 5078);
+        SwingGUI gui = new SwingGUI(64, 32);
 
-        Stack stack = new Stack(gui);
+        Tee tee = new Tee(new Brightness(pixelPusher, 0.40F), gui);
+
+        Stack stack = new Stack(tee);
         Displayable top = stack.addLayer();
 
         Stack stack2 = new Stack(top);
         Displayable top2 = stack2.addLayer();
         Displayable bottom2 = stack2.addLayer();
 
-        BitmapFont bitmapFont = BDFFontFactory.load(new FileInputStream("contrib/c64-8.bdf"));
-        PixelColour teal = new PixelColour(0, 128, 128);
+        BitmapFont bitmapFont = BDFFontFactory.load(new FileInputStream("contrib/bbc8.bdf"));
+        PixelColour teal = new PixelColour(128, 0,  128);
 
         Text text = new Text(top2, bitmapFont, teal, Text.Justification.CENTER, Text.Alignment.MIDDLE, getTime());
-        Text text2 = new Text(bottom2, bitmapFont, teal, Text.Justification.CENTER, Text.Alignment.TOP, "COMMODORE 64");
+        Text text2 = new Text(bottom2, bitmapFont, teal, Text.Justification.CENTER, Text.Alignment.TOP, "Time is");
 
         Displayable bottom = stack.addLayer();
         Book book = new Book(bottom, true);
@@ -44,7 +52,7 @@ public class SimpleDemoApp {
         Displayable one = book.addPage();
         Pane paneOne = new Pane(one, 0, 0, gui.getWidth(), gui.getHeight() - 1);
         Border borderOne = new Border(paneOne, new PixelColour(100, 255, 100), Border.Side.BOTTOM);
-        Matrix matrix = new Matrix(borderOne);
+        Matrix matrix = new Matrix(new Brightness(borderOne, 0.25F));
 
         Displayable two = book.addPage();
         Pane paneTwo = new Pane(two, 0, 0, gui.getWidth(), gui.getHeight() - 1);
@@ -52,6 +60,9 @@ public class SimpleDemoApp {
         Snow snow = new Snow(borderTwo, 40);
 
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+        scheduler.scheduleAtFixedRate(pixelPusher, 0, 50, TimeUnit.MILLISECONDS);
+        scheduler.scheduleAtFixedRate(pixelPusher::setNextKeyFrame, 0, 5, TimeUnit.SECONDS);
 
         scheduler.scheduleAtFixedRate(() -> text.setText(getTime()), 1, 1, TimeUnit.SECONDS);
         scheduler.scheduleAtFixedRate(snow, 0, 300, TimeUnit.MILLISECONDS);

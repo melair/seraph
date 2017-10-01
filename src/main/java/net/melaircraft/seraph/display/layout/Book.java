@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Book extends CheckedDisplayable {
     static final PixelColour ACTIVE_PAGE_COLOUR = new PixelColour(255, 255, 255);
-    static final PixelColour INACTIVE_PAGE_COLOUR = new PixelColour(128, 128, 128);
+    static final PixelColour INACTIVE_PAGE_COLOUR = new PixelColour(32, 32, 32);
 
     private final Displayable parent;
     private final List<Page> pages = new ArrayList<>();
