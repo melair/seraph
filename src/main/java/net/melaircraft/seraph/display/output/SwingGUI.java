@@ -63,7 +63,7 @@ public class SwingGUI extends Buffer {
 
                     PixelColour pixelColour = getActualPixel(x, y);
                     g.setColor(new Color(pixelColour.getRed(), pixelColour.getGreen(), pixelColour.getBlue()));
-                    g.fillRect(xD + 1, yD + 1, pixelSize - 2, pixelSize - 2 );
+                    g.fillRect(xD + 1, yD + 1, pixelSize - 1, pixelSize - 1 );
                 }
             }
         }

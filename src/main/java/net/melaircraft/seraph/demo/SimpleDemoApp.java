@@ -2,8 +2,6 @@ package net.melaircraft.seraph.demo;
 
 import net.melaircraft.seraph.display.Displayable;
 import net.melaircraft.seraph.display.PixelColour;
-import net.melaircraft.seraph.fonts.BDFFontFactory;
-import net.melaircraft.seraph.fonts.BitmapFont;
 import net.melaircraft.seraph.display.component.Text;
 import net.melaircraft.seraph.display.decoration.Border;
 import net.melaircraft.seraph.display.decoration.animation.Matrix;
@@ -12,6 +10,8 @@ import net.melaircraft.seraph.display.layout.Book;
 import net.melaircraft.seraph.display.layout.Pane;
 import net.melaircraft.seraph.display.layout.Stack;
 import net.melaircraft.seraph.display.output.SwingGUI;
+import net.melaircraft.seraph.fonts.BDFFontFactory;
+import net.melaircraft.seraph.fonts.BitmapFont;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -28,8 +28,15 @@ public class SimpleDemoApp {
         Stack stack = new Stack(gui);
         Displayable top = stack.addLayer();
 
-        BitmapFont bitmapFont = BDFFontFactory.load(new FileInputStream("contrib/unifont-10.0.06.bdf"));
-        Text text = new Text(top, bitmapFont, Text.Justification.RIGHT, Text.Alignment.TOP, getTime());
+        Stack stack2 = new Stack(top);
+        Displayable top2 = stack2.addLayer();
+        Displayable bottom2 = stack2.addLayer();
+
+        BitmapFont bitmapFont = BDFFontFactory.load(new FileInputStream("contrib/c64-8.bdf"));
+        PixelColour teal = new PixelColour(0, 128, 128);
+
+        Text text = new Text(top2, bitmapFont, teal, Text.Justification.CENTER, Text.Alignment.MIDDLE, getTime());
+        Text text2 = new Text(bottom2, bitmapFont, teal, Text.Justification.CENTER, Text.Alignment.TOP, "COMMODORE 64");
 
         Displayable bottom = stack.addLayer();
         Book book = new Book(bottom, true);
@@ -46,6 +53,7 @@ public class SimpleDemoApp {
 
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
+        scheduler.scheduleAtFixedRate(() -> text.setText(getTime()), 1, 1, TimeUnit.SECONDS);
         scheduler.scheduleAtFixedRate(snow, 0, 300, TimeUnit.MILLISECONDS);
         scheduler.scheduleAtFixedRate(matrix, 0, 75, TimeUnit.MILLISECONDS);
         scheduler.scheduleAtFixedRate(book::nextPage, 5000, 5000, TimeUnit.MILLISECONDS);

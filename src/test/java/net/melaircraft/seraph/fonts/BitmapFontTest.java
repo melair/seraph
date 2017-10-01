@@ -1,7 +1,5 @@
 package net.melaircraft.seraph.fonts;
 
-import net.melaircraft.seraph.fonts.BitmapCharacter;
-import net.melaircraft.seraph.fonts.BitmapFont;
 import org.junit.Test;
 
 import java.util.Optional;
