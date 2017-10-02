@@ -4,7 +4,6 @@ import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.output.Null;
 import net.melaircraft.seraph.fonts.BDFFontFactory;
-import net.melaircraft.seraph.fonts.BDFFontFactoryTest;
 import net.melaircraft.seraph.fonts.BitmapFont;
 import org.junit.Test;
 
@@ -18,7 +17,7 @@ public class TextTest {
     public void testTextBeingSetTopLeft() throws IOException {
         Buffer store = new Buffer(new Null(32, 32));
 
-        InputStream inputStream = BDFFontFactoryTest.class.getResourceAsStream("/testfont.bdf");
+        InputStream inputStream = TextTest.class.getResourceAsStream("/testfont.bdf");
         BitmapFont font = BDFFontFactory.load(inputStream);
         inputStream.close();
 
@@ -36,7 +35,7 @@ public class TextTest {
     public void testTextBeingSetCentreMiddle() throws IOException {
         Buffer store = new Buffer(new Null(32, 32));
 
-        InputStream inputStream = BDFFontFactoryTest.class.getResourceAsStream("/testfont.bdf");
+        InputStream inputStream = TextTest.class.getResourceAsStream("/testfont.bdf");
         BitmapFont font = BDFFontFactory.load(inputStream);
         inputStream.close();
 
@@ -54,7 +53,7 @@ public class TextTest {
     public void testTextBeingSetBottomRight() throws IOException {
         Buffer store = new Buffer(new Null(32, 32));
 
-        InputStream inputStream = BDFFontFactoryTest.class.getResourceAsStream("/testfont.bdf");
+        InputStream inputStream = TextTest.class.getResourceAsStream("/testfont.bdf");
         BitmapFont font = BDFFontFactory.load(inputStream);
         inputStream.close();
 

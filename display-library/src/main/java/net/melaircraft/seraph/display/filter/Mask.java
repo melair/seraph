@@ -22,8 +22,7 @@ public class Mask extends Buffer {
         PixelColour colour = getActualPixel(x, y);
         setActualPixel(x, y, colour.getRed(), colour.getGreen(), colour.getBlue());
     }
-
-
+    
     @Override
     protected void setActualPixel(int x, int y, int r, int g, int b) {
         double intensity = ((0.2125 * r) + (0.7154 * g) + (0.0721 * b)) / 255;
