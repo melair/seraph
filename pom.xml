@@ -9,7 +9,7 @@
 
     <modules>
         <module>display-demo</module>
-        <module>display-font</module>
+        <module>bitmap-font</module>
         <module>display-library</module>
     </modules>
 </project>

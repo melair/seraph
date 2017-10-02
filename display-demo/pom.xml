@@ -58,7 +58,7 @@
         </dependency>
         <dependency>
             <groupId>net.melaircraft.seraph</groupId>
-            <artifactId>display-font</artifactId>
+            <artifactId>bitmap-font</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
