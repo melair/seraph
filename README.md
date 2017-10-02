@@ -23,3 +23,7 @@ A simple library for loading and using bitmap fonts.
 ### Display Demo
 
 A rapidly mutating demonstration application to test Seraph on a larger scale.
+
+## License
+
+[GPL v3](https://github.com/melair/seraph/blob/master/LICENSE.md)
