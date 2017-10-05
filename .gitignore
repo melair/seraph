@@ -2,3 +2,5 @@
 *.iml
 target/
 contrib/*.bdf
+*.o
+raspberry-pi-hub85-server/server
