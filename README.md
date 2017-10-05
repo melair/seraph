@@ -4,7 +4,9 @@ Seraph is a toolkit for organising, laying out and manipulating LED matrix scree
 
 If you wish to make use of the HUB75 server ensure that you check out with submodules.
 
-```git clone --recursive git@github.com:melair/seraph.git```
+```bash
+git clone --recursive git@github.com:melair/seraph.git
+```
 
 ## Java Modules
 
