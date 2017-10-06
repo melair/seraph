@@ -66,7 +66,7 @@ int parsePacketFill(char *buffer, int bufferLen) {
 }
 
 void checkCursor() {
-    if (cursor >= (matrix->width() * matrix->height()) {
+    if (cursor >= (matrix->width() * matrix->height())) {
         cursor = 0;
     }
 }
@@ -81,7 +81,7 @@ int parsePacketPositionSet(char *buffer, int bufferLen) {
 
     cursor = (*y * matrix->width()) + *x;
     checkCursor();
-    return sizeof(uint16_t) * 2);
+    return sizeof(uint16_t) * 2;
 }
 
 int parsePacketPositionAdvance(char *buffer, int bufferLen) {
@@ -99,7 +99,7 @@ int parsePacketSet(char *buffer, int bufferLen) {
         return -1;
     }
 
-    uint16_t *pixels = (uint16 *) buffer;
+    uint16_t *pixels = (uint16_t *) buffer;
 
     int totalSize = sizeof(uint16_t) + (*pixels * sizeof(Colour));
 
@@ -117,7 +117,7 @@ int parsePacketSet(char *buffer, int bufferLen) {
 
         matrix->SetPixel(x, y, colour->red, colour->green, colour->blue);
 
-        pos += sizeof(Colour)
+        pos += sizeof(Colour);
         cursor++;
         checkCursor();
     }
