@@ -56,30 +56,72 @@ int parsePacketSync(char *buffer, int bufferLen) {
 }
 
 int parsePacketFill(char *buffer, int bufferLen) {
-    if (bufferLen >= (int) sizeof(Colour)) {
-        Colour *colour = (Colour *) buffer;
-        offscreen->Fill(colour->red, colour->green, colour->blue);
-        return sizeof(Colour);
-    } else {
+    if (bufferLen < (int) sizeof(Colour)) {
         return -1;
+    }
+
+    Colour *colour = (Colour *) buffer;
+    offscreen->Fill(colour->red, colour->green, colour->blue);
+    return sizeof(Colour);
+}
+
+void checkCursor() {
+    if (cursor >= (matrix->width() * matrix->height()) {
+        cursor = 0;
     }
 }
 
 int parsePacketPositionSet(char *buffer, int bufferLen) {
-    if (bufferLen >= (int) (sizeof(uint16_t) * 2)) {
-        uint16_t *x = (uint16_t *) buffer;
-        uint16_t *y = (uint16_t *) buffer[sizeof(uint16_t)];
-    } else {
+    if (bufferLen < (int) (sizeof(uint16_t) * 2)) {
         return -1;
     }
+
+    uint16_t *x = (uint16_t *) buffer;
+    uint16_t *y = (uint16_t *) buffer[sizeof(uint16_t)];
+
+    cursor = (*y * matrix->width()) + *x;
+    checkCursor();
+    return sizeof(uint16_t) * 2);
 }
 
 int parsePacketPositionAdvance(char *buffer, int bufferLen) {
-    return 0;
+    if (bufferLen < (int) (sizeof(uint8_t))) {
+        return -1;
+    }
+
+    cursor += (int) buffer;
+    checkCursor();
+    return sizeof(uint8_t);
 }
 
 int parsePacketSet(char *buffer, int bufferLen) {
-    return 0;
+    if (bufferLen < (int) (sizeof(uint16_t))) {
+        return -1;
+    }
+
+    uint16_t *pixels = (uint16 *) buffer;
+
+    int totalSize = sizeof(uint16_t) + (*pixels * sizeof(Colour));
+
+    if (bufferLen < totalSize) {
+        return -1;
+    }
+
+    int pos = sizeof(uint16_t);
+
+    for (int i = 0; i < *pixels; i++) {
+        Colour *colour = (Colour *) buffer[sizeof(Colour) * i];
+
+        int y = cursor / matrix->width();
+        int x = cursor - (y * matrix->width());
+
+        matrix->SetPixel(x, y, colour->red, colour->green, colour->blue);
+
+        cursor++;
+        checkCursor();
+    }
+
+    return totalSize;
 }
 
 void parsePacket(char *buffer, int bufferLen) {
