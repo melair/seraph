@@ -89,7 +89,7 @@ int parsePacketPositionAdvance(char *buffer, int bufferLen) {
         return -1;
     }
 
-    cursor += (int) buffer;
+    cursor += (uint8_t) buffer;
     checkCursor();
     return sizeof(uint8_t);
 }
@@ -110,13 +110,14 @@ int parsePacketSet(char *buffer, int bufferLen) {
     int pos = sizeof(uint16_t);
 
     for (int i = 0; i < *pixels; i++) {
-        Colour *colour = (Colour *) buffer[sizeof(Colour) * i];
+        Colour *colour = (Colour *) buffer[pos];
 
         int y = cursor / matrix->width();
         int x = cursor - (y * matrix->width());
 
         matrix->SetPixel(x, y, colour->red, colour->green, colour->blue);
 
+        pos += sizeof(Colour)
         cursor++;
         checkCursor();
     }
@@ -233,30 +234,6 @@ int server(int port, int mtu, RGBMatrix *matrix) {
 
     return 0;
 }
-
-/*
- *
-    FrameCanvas *onscreen = matrix->SwapOnVSync(NULL);
-    FrameCanvas *offscreen = matrix->CreateFrameCanvas();
-
-    offscreen->Fill(128, 128, 0);
-
-    onscreen->CopyFrom(*offscreen);
-    offscreen = matrix->SwapOnVSync(offscreen);
-
-
-    sleep(5);
-
-    offscreen = matrix->SwapOnVSync(offscreen);
-
-    sleep(5);
-
-    offscreen = matrix->SwapOnVSync(offscreen);
-
-    sleep(5);
-
-
- */
 
 int main(int argc, char *argv[]) {
     bool ushape_display = false;  // 64x64
