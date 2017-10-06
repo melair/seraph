@@ -76,8 +76,8 @@ int parsePacketPositionSet(char *buffer, int bufferLen) {
         return -1;
     }
 
-    uint16_t *x = (uint16_t *) buffer;
-    uint16_t *y = (uint16_t *) buffer[sizeof(uint16_t)];
+    uint16_t *x = (uint16_t *) &buffer;
+    uint16_t *y = (uint16_t *) &buffer[sizeof(uint16_t)];
 
     cursor = (*y * matrix->width()) + *x;
     checkCursor();
@@ -89,7 +89,7 @@ int parsePacketPositionAdvance(char *buffer, int bufferLen) {
         return -1;
     }
 
-    cursor += (uint8_t) buffer;
+    cursor += (uint8_t) *buffer;
     checkCursor();
     return sizeof(uint8_t);
 }
@@ -110,7 +110,7 @@ int parsePacketSet(char *buffer, int bufferLen) {
     int pos = sizeof(uint16_t);
 
     for (int i = 0; i < *pixels; i++) {
-        Colour *colour = (Colour *) buffer[pos];
+        Colour *colour = (Colour *) &buffer[pos];
 
         int y = cursor / matrix->width();
         int x = cursor - (y * matrix->width());
@@ -219,7 +219,8 @@ int server(int port, int mtu, RGBMatrix *matrix) {
             fprintf(stderr, "Ignoring packet, too short.");
         }
 
-        int sequence = (int) buffer;
+        int *seqPtr = (int *) &buffer;
+        int sequence = *seqPtr;
 
         if (sequence < last_sequence) {
             fprintf(stderr, "Packet out of order - this is %d, last was %d.", sequence, last_sequence);
