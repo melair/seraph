@@ -13,8 +13,8 @@ import net.melaircraft.seraph.display.filter.Tee;
 import net.melaircraft.seraph.display.layout.Book;
 import net.melaircraft.seraph.display.layout.Pane;
 import net.melaircraft.seraph.display.layout.Stack;
-import net.melaircraft.seraph.display.output.PixelPusher;
 import net.melaircraft.seraph.display.output.SwingGUI;
+import net.melaircraft.seraph.display.output.seraph.SeraphProtocol;
 import net.melaircraft.seraph.fonts.BDFFontFactory;
 import net.melaircraft.seraph.fonts.BitmapFont;
 
@@ -30,10 +30,10 @@ import java.util.concurrent.TimeUnit;
 public class SimpleDemoApp {
     public static void main(String[] args) throws IOException {
         InetAddress inetAddress = InetAddress.getByAddress(new byte[] { 10, 10, 8, 70 });
-        PixelPusher pixelPusher = new PixelPusher(64, 32, inetAddress, 5078);
-        SwingGUI gui = new SwingGUI(64, 32);
+        SeraphProtocol seraphProtocol = new SeraphProtocol(128, 32, inetAddress, 7777, 1450);
+        SwingGUI gui = new SwingGUI(128, 32);
 
-        Tee tee = new Tee(new Brightness(pixelPusher, 0.4F), gui);
+        Tee tee = new Tee(new Brightness(seraphProtocol, 0.4F), gui);
 
         Stack stack = new Stack(tee);
         Displayable top = stack.addLayer();
@@ -64,12 +64,11 @@ public class SimpleDemoApp {
 
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
-        scheduler.scheduleAtFixedRate(pixelPusher, 0, 50, TimeUnit.MILLISECONDS);
-        scheduler.scheduleAtFixedRate(pixelPusher::setNextKeyFrame, 0, 5, TimeUnit.SECONDS);
+        scheduler.scheduleAtFixedRate(seraphProtocol, 0, 50, TimeUnit.MILLISECONDS);
 
         scheduler.scheduleAtFixedRate(() -> text.setText(getTime()), 1, 1, TimeUnit.SECONDS);
         scheduler.scheduleAtFixedRate(snow, 0, 300, TimeUnit.MILLISECONDS);
-        scheduler.scheduleAtFixedRate(matrix, 0, 75, TimeUnit.MILLISECONDS);
+        scheduler.scheduleAtFixedRate(matrix, 0, 50, TimeUnit.MILLISECONDS);
         scheduler.scheduleAtFixedRate(book::nextPage, 5000, 5000, TimeUnit.MILLISECONDS);
     }
 

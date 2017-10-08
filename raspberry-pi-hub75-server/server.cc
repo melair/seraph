@@ -51,7 +51,7 @@ struct Colour {
 int parsePacketSync(char *buffer, int bufferLen) {
     FrameCanvas *current = offscreen;
     offscreen = matrix->SwapOnVSync(offscreen);
-    offscreen->CopyFrom(*current);
+    current->CopyFrom(*offscreen);
     return 0;
 }
 
@@ -76,11 +76,12 @@ int parsePacketPositionSet(char *buffer, int bufferLen) {
         return -1;
     }
 
-    uint16_t *x = (uint16_t *) &buffer;
-    uint16_t *y = (uint16_t *) &buffer[sizeof(uint16_t)];
+    uint16_t *x = (uint16_t *) buffer;
+    uint16_t *y = (uint16_t *) &buffer[2];
 
     cursor = (*y * matrix->width()) + *x;
     checkCursor();
+
     return sizeof(uint16_t) * 2;
 }
 
@@ -152,12 +153,12 @@ void parsePacket(char *buffer, int bufferLen) {
                 delta = parsePacketSet(&buffer[pos], remaining);
                 break;
             default:
-                fprintf(stderr, "Unrecognised op code, %d.", opcode);
+                fprintf(stderr, "Unrecognised op code, %d.\n", opcode);
                 return;
         }
 
         if (delta < 0) {
-            fprintf(stderr, "Failed to correctly parse op code %d.", opcode);
+            fprintf(stderr, "Failed to correctly parse op code %d.\n", opcode);
             return;
         }
 
@@ -169,7 +170,7 @@ int server(int port, int mtu, RGBMatrix *matrix) {
     int fd;
 
     if ((fd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1) {
-        fprintf(stderr, "Could not obtain UDP socket.");
+        fprintf(stderr, "Could not obtain UDP socket.\n");
         return 1;
     }
 
@@ -181,7 +182,7 @@ int server(int port, int mtu, RGBMatrix *matrix) {
     local.sin_addr.s_addr = htonl(INADDR_ANY);
 
     if(bind(fd, (struct sockaddr *) &local, sizeof(local)) == -1) {
-        fprintf(stderr, "Could not bind UDP socket to port.");
+        fprintf(stderr, "Could not bind UDP socket to port.\n");
         return 1;
     }
 
@@ -190,7 +191,7 @@ int server(int port, int mtu, RGBMatrix *matrix) {
     tv.tv_usec = 0;
 
     if (setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv)) < 0) {
-        fprintf(stderr, "Failed to set receive timeout!");
+        fprintf(stderr, "Failed to set receive timeout!\n");
         return 1;
     }
 
@@ -208,7 +209,7 @@ int server(int port, int mtu, RGBMatrix *matrix) {
     while (!interrupt_received) {
         if ((recv_len = recvfrom(fd, buffer, mtu, 0, (struct sockaddr *) &remote, &remote_length)) == -1) {
             if (errno != EWOULDBLOCK) {
-                fprintf(stderr, "Failed to receive UDP packet.");
+                fprintf(stderr, "Failed to receive UDP packet.\n");
                 return 1;
             }
 
@@ -216,14 +217,14 @@ int server(int port, int mtu, RGBMatrix *matrix) {
         }
 
         if (recv_len < 5) {
-            fprintf(stderr, "Ignoring packet, too short.");
+            fprintf(stderr, "Ignoring packet, too short.\n");
         }
 
         int *seqPtr = (int *) &buffer;
         int sequence = *seqPtr;
 
         if (sequence < last_sequence) {
-            fprintf(stderr, "Packet out of order - this is %d, last was %d.", sequence, last_sequence);
+            fprintf(stderr, "Packet out of order - this is %d, last was %d.\n", sequence, last_sequence);
         }
 
         last_sequence = sequence;
