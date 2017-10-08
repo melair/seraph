@@ -27,7 +27,7 @@ public class SeraphProtocol implements Displayable, Runnable {
     private final int port;
     private final int mtu;
 
-    private List<Pixel> changedPixels = new ArrayList<>();
+    private final boolean[][] changedOutput;
     private final PixelColour[][] output;
 
     private final DatagramSocket clientSocket;
@@ -43,10 +43,12 @@ public class SeraphProtocol implements Displayable, Runnable {
         this.mtu = mtu;
 
         this.output = new PixelColour[width][height];
+        this.changedOutput = new boolean[width][height];
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 output[x][y] = PixelColour.BLACK;
+                changedOutput[x][y] = false;
             }
         }
 
@@ -63,15 +65,13 @@ public class SeraphProtocol implements Displayable, Runnable {
             fullFrame = true;
         }
 
-        List<Pixel> pixelsToProcess = changedPixels;
-        changedPixels = new ArrayList<>();
+        List<Pixel> pixelsToProcess = new ArrayList<>();
 
-        if (fullFrame) {
-            pixelsToProcess.clear();
-
-            for (int y = 0; y < height; y++) {
-                for (int x = 0; x < width; x++) {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                if (fullFrame || changedOutput[x][y]) {
                     pixelsToProcess.add(new Pixel(x, y, output[x][y]));
+                    changedOutput[x][y] = false;
                 }
             }
         }
@@ -161,8 +161,7 @@ public class SeraphProtocol implements Displayable, Runnable {
         }
 
         output[x][y] = newColour;
-
-        changedPixels.add(new Pixel(x, y, newColour));
+        changedOutput[x][y] = true;
     }
 
     @Override
