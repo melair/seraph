@@ -45,6 +45,9 @@ public class BDFFontFactory {
         Character character = null;
         boolean bitmap[][] = null;
 
+        int characterWidth = 0;
+        int characterHeight = 0;
+
         while ((line = reader.readLine()) != null) {
             String[] parts = line.split(" ");
 
@@ -59,6 +62,12 @@ public class BDFFontFactory {
                     fontHeight = Integer.parseInt(parts[2]);
                     fontOffsetX = Integer.parseInt(parts[3]);
                     fontOffsetY = Integer.parseInt(parts[4]);
+                    break;
+
+                case "DWIDTH":
+                    characterWidth = Integer.parseInt(parts[1]);
+                    characterHeight = Integer.parseInt(parts[2]);
+
                     break;
 
                 case "BITMAP":
@@ -85,7 +94,7 @@ public class BDFFontFactory {
 
                 case "ENDCHAR":
                     if (character != null) {
-                        font.addCharacter(character, new BitmapCharacter(bitmap, fontWidth, fontHeight, fontOffsetX, fontOffsetY));
+                        font.addCharacter(character, new BitmapCharacter(bitmap, fontWidth, fontHeight, fontOffsetX, fontOffsetY, characterWidth, characterHeight));
                     }
                     return;
             }

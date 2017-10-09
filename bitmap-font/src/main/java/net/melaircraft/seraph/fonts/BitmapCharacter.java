@@ -2,36 +2,51 @@ package net.melaircraft.seraph.fonts;
 
 public class BitmapCharacter {
     private final boolean[][] bitmap;
-    private final int width;
-    private final int height;
-    private final int offsetX;
-    private final int offsetY;
 
-    public BitmapCharacter(boolean[][] bitmap, int width, int height, int offsetX, int offsetY) {
+    private final int bitmapWidth;
+    private final int bitmapHeight;
+
+    private final int bitmapOffsetX;
+    private final int bitmapOffsetY;
+
+    private final int characterWidth;
+    private final int characterHeight;
+
+    public BitmapCharacter(boolean[][] bitmap, int bitmapWidth, int bitmapHeight, int bitmapOffsetX, int bitmapOffsetY, int characterWidth, int characterHeight) {
         this.bitmap = bitmap;
-        this.width = width;
-        this.height = height;
-        this.offsetX = offsetX;
-        this.offsetY = offsetY;
+        this.bitmapWidth = bitmapWidth;
+        this.bitmapHeight = bitmapHeight;
+        this.bitmapOffsetX = bitmapOffsetX;
+        this.bitmapOffsetY = bitmapOffsetY;
+        this.characterWidth = characterWidth;
+        this.characterHeight = characterHeight;
     }
 
     public boolean[][] getBitmap() {
         return bitmap;
     }
 
-    public int getWidth() {
-        return width;
+    public int getBitmapWidth() {
+        return bitmapWidth;
     }
 
-    public int getHeight() {
-        return height;
+    public int getBitmapHeight() {
+        return bitmapHeight;
     }
 
-    public int getOffsetX() {
-        return offsetX;
+    public int getBitmapOffsetX() {
+        return bitmapOffsetX;
     }
 
-    public int getOffsetY() {
-        return offsetY;
+    public int getBitmapOffsetY() {
+        return bitmapOffsetY;
+    }
+
+    public int getCharacterWidth() {
+        return characterWidth;
+    }
+
+    public int getCharacterHeight() {
+        return characterHeight;
     }
 }

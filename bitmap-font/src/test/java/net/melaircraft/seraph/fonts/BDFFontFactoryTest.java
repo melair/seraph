@@ -23,10 +23,14 @@ public class BDFFontFactoryTest {
 
         BitmapCharacter character = optional.get();
 
-        assertEquals(8, character.getWidth());
-        assertEquals(16, character.getHeight());
-        assertEquals(0, character.getOffsetX());
-        assertEquals(-2, character.getOffsetY());
+        assertEquals(8, character.getBitmapWidth());
+        assertEquals(16, character.getBitmapHeight());
+
+        assertEquals(0, character.getBitmapOffsetX());
+        assertEquals(-2, character.getBitmapOffsetY());
+
+        assertEquals(8, character.getCharacterWidth());
+        assertEquals(0, character.getCharacterHeight());
 
         boolean[][] bitmap = character.getBitmap();
 

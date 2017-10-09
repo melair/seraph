@@ -49,16 +49,16 @@ public class Text {
             int positionX = 0;
 
             for (BitmapCharacter character : characters) {
-                int xDiff = character.getWidth() + character.getOffsetX();
+                int xDiff = character.getBitmapWidth() + character.getBitmapOffsetX();
 
-                lowestX = Math.min(lowestX, character.getOffsetX() + positionX);
+                lowestX = Math.min(lowestX, character.getBitmapOffsetX() + positionX);
                 highestX = Math.max(highestX, xDiff + positionX);
                 positionX += xDiff;
 
-                int yOffset = character.getOffsetY() * -1;
+                int yOffset = character.getBitmapOffsetY() * -1;
 
                 lowestY = Math.min(lowestY, yOffset);
-                highestY = Math.max(highestY, character.getHeight());
+                highestY = Math.max(highestY, character.getBitmapHeight());
             }
 
             int dX = 0;
@@ -83,8 +83,8 @@ public class Text {
             }
 
             for (BitmapCharacter character : characters) {
-                for (int x = 0; x < character.getWidth(); x++) {
-                    for (int y = 0; y < character.getHeight(); y++) {
+                for (int x = 0; x < character.getBitmapWidth(); x++) {
+                    for (int y = 0; y < character.getBitmapHeight(); y++) {
                         if (dX + x >= 0 && dX + x < parent.getWidth() && dY + y >= 0 && dY + y < parent.getHeight()) {
                             if (character.getBitmap()[x][y]) {
                                 deltaBuffer.setPixel(dX + x, dY + y, colour);
@@ -93,7 +93,7 @@ public class Text {
                     }
                 }
 
-                dX += character.getWidth();
+                dX += character.getBitmapWidth();
             }
         }
 
