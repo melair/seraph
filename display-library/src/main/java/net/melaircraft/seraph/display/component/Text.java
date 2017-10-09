@@ -5,6 +5,7 @@ import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.DeltaBuffer;
 import net.melaircraft.seraph.fonts.BitmapCharacter;
 import net.melaircraft.seraph.fonts.BitmapFont;
+import net.melaircraft.seraph.fonts.FontOutput;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,70 +31,38 @@ public class Text {
     }
 
     public void setText(String content) {
-        List<BitmapCharacter> characters = content.chars()
-                .mapToObj(i -> (char)i)
-                .map(bitmapFont::getCharacter)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .collect(Collectors.toList());
+        FontOutput fontOutput = bitmapFont.render(content);
 
         deltaBuffer.clearCurrent();
 
-        if (characters.size() > 0) {
-            int lowestX = 0;
-            int highestX = 0;
+        int dX = 0;
+        int dY = 0;
 
-            int lowestY = Integer.MAX_VALUE;
-            int highestY = 0;
+        switch (justification) {
+            case CENTER:
+                dX = (parent.getWidth() - fontOutput.getWidth()) / 2;
+                break;
+            case RIGHT:
+                dX = parent.getWidth() - fontOutput.getWidth();
+                break;
+        }
 
-            int positionX = 0;
+        switch (alignment) {
+            case MIDDLE:
+                dY = (parent.getHeight() - fontOutput.getHeight()) / 2;
+                break;
+            case BOTTOM:
+                dY = parent.getHeight() - fontOutput.getHeight();
+                break;
+        }
 
-            for (BitmapCharacter character : characters) {
-                int xDiff = character.getBitmapWidth() + character.getBitmapOffsetX();
+        boolean[][] bitmap = fontOutput.getBitmap();
 
-                lowestX = Math.min(lowestX, character.getBitmapOffsetX() + positionX);
-                highestX = Math.max(highestX, xDiff + positionX);
-                positionX += xDiff;
-
-                int yOffset = character.getBitmapOffsetY() * -1;
-
-                lowestY = Math.min(lowestY, yOffset);
-                highestY = Math.max(highestY, character.getBitmapHeight());
-            }
-
-            int dX = 0;
-            int dY = 0;
-
-            switch (justification) {
-                case CENTER:
-                    dX = (parent.getWidth() - (highestX - lowestX)) / 2;
-                    break;
-                case RIGHT:
-                    dX = parent.getWidth() - highestX;
-                    break;
-            }
-
-            switch (alignment) {
-                case MIDDLE:
-                    dY = (parent.getHeight() - (highestY - lowestY)) / 2;
-                    break;
-                case BOTTOM:
-                    dY = parent.getHeight() - highestY;
-                    break;
-            }
-
-            for (BitmapCharacter character : characters) {
-                for (int x = 0; x < character.getBitmapWidth(); x++) {
-                    for (int y = 0; y < character.getBitmapHeight(); y++) {
-                        if (dX + x >= 0 && dX + x < parent.getWidth() && dY + y >= 0 && dY + y < parent.getHeight()) {
-                            if (character.getBitmap()[x][y]) {
-                                deltaBuffer.setPixel(dX + x, dY + y, colour);
-                            }
-                        }
-                    }
+        for (int x = 0; x < fontOutput.getWidth(); x++) {
+            for (int y = 0; y < fontOutput.getHeight(); y++) {
+                if (bitmap[x][y]) {
+                    deltaBuffer.setPixel(x + dX, y + dY, colour);
                 }
-
-                dX += character.getBitmapWidth();
             }
         }
 

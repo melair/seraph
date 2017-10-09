@@ -3,6 +3,7 @@ package net.melaircraft.seraph.display.component;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.output.Null;
+import net.melaircraft.seraph.display.output.SwingGUI;
 import net.melaircraft.seraph.fonts.BDFFontFactory;
 import net.melaircraft.seraph.fonts.BitmapFont;
 import org.junit.Test;
@@ -43,10 +44,10 @@ public class TextTest {
 
         Text text = new Text(store, font, colour, Text.Justification.CENTER, Text.Alignment.MIDDLE, "A");
 
-        assertEquals(PixelColour.RED, store.getPixel(15, 13));
-        assertEquals(PixelColour.RED, store.getPixel(16, 13));
-        assertEquals(PixelColour.RED, store.getPixel(14, 14));
-        assertEquals(PixelColour.RED, store.getPixel(17, 14));
+        assertEquals(PixelColour.RED, store.getPixel(15, 12));
+        assertEquals(PixelColour.RED, store.getPixel(16, 12));
+        assertEquals(PixelColour.RED, store.getPixel(14, 13));
+        assertEquals(PixelColour.RED, store.getPixel(17, 13));
     }
 
     @Test

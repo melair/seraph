@@ -35,7 +35,7 @@ public class BitmapFont {
 
             for (int x = 0; x < character.getBitmapWidth(); x++) {
                 for (int y = 0; y < character.getBitmapHeight(); y++) {
-                    pixels.add(new BitmapPixel(originX + offsetX + x, originY + offsetY + y, bitmap[x][y]));
+                    pixels.add(new BitmapPixel(originX + offsetX + x, originY + offsetY + y, bitmap[x][(character.getBitmapHeight()-1)-y]));
                 }
             }
 
@@ -55,7 +55,7 @@ public class BitmapFont {
         FontOutput fontOutput = new FontOutput(width, height);
 
         pixels.stream().filter(BitmapPixel::isSet).forEach((pixel) -> {
-            fontOutput.set(pixel.getX() + correctionX, pixel.getY() + correctionY);
+            fontOutput.set(pixel.getX() + correctionX, (height - 1) - (pixel.getY() + correctionY));
         });
 
         return fontOutput;
