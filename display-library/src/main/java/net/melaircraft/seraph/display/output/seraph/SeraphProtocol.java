@@ -5,6 +5,7 @@ import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.exception.InvalidPixelColourException;
 import net.melaircraft.seraph.display.exception.NonExistentPixelException;
 import net.melaircraft.seraph.display.output.seraph.operations.AdvancePosition;
+import net.melaircraft.seraph.display.output.seraph.operations.Fill;
 import net.melaircraft.seraph.display.output.seraph.operations.SetPixels;
 import net.melaircraft.seraph.display.output.seraph.operations.SetPosition;
 import net.melaircraft.seraph.display.output.seraph.operations.Sync;
@@ -70,7 +71,7 @@ public class SeraphProtocol implements Displayable, Runnable {
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                if (fullFrame || changedOutput[x][y]) {
+                if ((fullFrame && !output[x][y].equals(PixelColour.BLACK) )|| changedOutput[x][y]) {
                     pixelsToProcess.add(new Pixel(x, y, output[x][y]));
                     changedOutput[x][y] = false;
                 }
@@ -94,6 +95,11 @@ public class SeraphProtocol implements Displayable, Runnable {
             if (currentPacket == null) {
                 currentPacket = new Packet(mtu, sequence++);
                 packets.add(currentPacket);
+
+                if (fullFrame) {
+                    currentPacket.add(new Fill(PixelColour.BLACK));
+                    fullFrame = false;
+                }
 
                 currentPacket.add(new SetPosition(pixel.getX(), pixel.getY()));
                 cursor = (pixel.getY() * width) + pixel.getX();
