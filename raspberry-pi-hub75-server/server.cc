@@ -51,7 +51,7 @@ struct Colour {
 int parsePacketSync(char *buffer, int bufferLen) {
     FrameCanvas *current = offscreen;
     offscreen = matrix->SwapOnVSync(offscreen);
-    current->CopyFrom(*offscreen);
+    offscreen->CopyFrom(*current);
     return 0;
 }
 
@@ -116,7 +116,7 @@ int parsePacketSet(char *buffer, int bufferLen) {
         int y = cursor / matrix->width();
         int x = cursor - (y * matrix->width());
 
-        matrix->SetPixel(x, y, colour->red, colour->green, colour->blue);
+        offscreen->SetPixel(x, y, colour->red, colour->green, colour->blue);
 
         pos += sizeof(Colour);
         cursor++;
