@@ -1,7 +1,6 @@
 package net.melaircraft.seraph.display.filter;
 
 import net.melaircraft.seraph.display.DestinationDisplay;
-import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.exception.InvalidPixelColourException;
 import net.melaircraft.seraph.display.exception.NonExistentPixelException;
@@ -11,10 +10,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Flip implements DestinationDisplay {
-    private final FullDisplay parent;
+    private final DestinationDisplay parent;
     private final Set<Direction> flipDirections;
 
-    public Flip(FullDisplay parent, Direction... directions) {
+    public Flip(DestinationDisplay parent, Direction... directions) {
         this.parent = parent;
 
         this.flipDirections = new HashSet<>();

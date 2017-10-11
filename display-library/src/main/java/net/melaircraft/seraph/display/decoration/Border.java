@@ -1,17 +1,17 @@
 package net.melaircraft.seraph.display.decoration;
 
-import net.melaircraft.seraph.display.CheckedDisplayable;
-import net.melaircraft.seraph.display.FullDisplay;
+import net.melaircraft.seraph.display.CheckedDestinationDisplay;
+import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.layout.Pane;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class Border extends CheckedDisplayable {
-    private final FullDisplay pane;
+public class Border implements CheckedDestinationDisplay {
+    private final DestinationDisplay pane;
 
-    public Border(FullDisplay parent, PixelColour colour, Side... sides) {
+    public Border(DestinationDisplay parent, PixelColour colour, Side... sides) {
         List<Side> sideList = Arrays.asList(sides);
 
         int offsetX = sideList.contains(Side.LEFT) ? 1 : 0;
@@ -51,13 +51,8 @@ public class Border extends CheckedDisplayable {
     }
 
     @Override
-    protected void setActualPixel(int x, int y, PixelColour pixelColour) {
+    public void setActualPixel(int x, int y, PixelColour pixelColour) {
         pane.setPixel(x, y, pixelColour);
-    }
-
-    @Override
-    protected PixelColour getActualPixel(int x, int y) {
-        return pane.getPixel(x, y);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package net.melaircraft.seraph.display.layout;
 
+import net.melaircraft.seraph.display.CheckedFullDisplay;
 import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
@@ -11,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 public class VirtualTest {
-    FullDisplay store = new Buffer(new Null(4, 4));
+    CheckedFullDisplay store = new Buffer(new Null(4, 4));
 
     @Test (expected = InvalidVirtualSizeException.class)
     public void testVirtualSmallerThenParent() {
@@ -54,7 +55,7 @@ public class VirtualTest {
 
     @Test
     public void testViewPort() {
-        FullDisplay store = new Buffer(new Null(6, 6));
+        CheckedFullDisplay store = new Buffer(new Null(6, 6));
         Virtual virtual = new Virtual(store, 8, 8, false);
         PixelColour colour = PixelColour.RED;
 

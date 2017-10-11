@@ -1,6 +1,7 @@
 package net.melaircraft.seraph.display.decoration;
 
-import net.melaircraft.seraph.display.FullDisplay;
+import net.melaircraft.seraph.display.CheckedFullDisplay;
+import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.output.Null;
@@ -9,12 +10,12 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class BorderTest {
-    FullDisplay store = new Buffer(new Null(6, 6));
+    CheckedFullDisplay store = new Buffer(new Null(6, 6));
     PixelColour colour = PixelColour.RED;
 
     @Test
     public void testBordersOnAllSidesDimensions() {
-        FullDisplay border = new Border(store, colour, Border.Side.TOP, Border.Side.LEFT, Border.Side.RIGHT, Border.Side.BOTTOM);
+        DestinationDisplay border = new Border(store, colour, Border.Side.TOP, Border.Side.LEFT, Border.Side.RIGHT, Border.Side.BOTTOM);
 
         assertEquals(store.getWidth() - 2, border.getWidth());
         assertEquals(store.getHeight() - 2, border.getHeight());
@@ -22,7 +23,7 @@ public class BorderTest {
 
     @Test
     public void testPixelWriteThrough() {
-        FullDisplay border = new Border(store, colour, Border.Side.TOP, Border.Side.LEFT, Border.Side.RIGHT, Border.Side.BOTTOM);
+        DestinationDisplay border = new Border(store, colour, Border.Side.TOP, Border.Side.LEFT, Border.Side.RIGHT, Border.Side.BOTTOM);
         PixelColour dot = PixelColour.GREEN;
 
         border.setPixel(0, 0, dot);
@@ -30,13 +31,11 @@ public class BorderTest {
 
         assertEquals(dot, store.getPixel(1, 1));
         assertEquals(dot, store.getPixel(4, 4));
-        assertEquals(dot, border.getPixel(0, 0));
-        assertEquals(dot, border.getPixel(3, 3));
     }
 
     @Test
     public void testBorders() {
-        FullDisplay border = new Border(store, colour, Border.Side.TOP, Border.Side.LEFT, Border.Side.RIGHT, Border.Side.BOTTOM);
+        DestinationDisplay border = new Border(store, colour, Border.Side.TOP, Border.Side.LEFT, Border.Side.RIGHT, Border.Side.BOTTOM);
 
         assertEquals(colour, store.getPixel(0, 1));
         assertEquals(colour, store.getPixel(1, 0));

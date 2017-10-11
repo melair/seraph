@@ -1,12 +1,17 @@
 package net.melaircraft.seraph.display.buffer;
 
-import net.melaircraft.seraph.display.CheckedDisplayable;
+import net.melaircraft.seraph.display.CheckedFullDisplay;
 import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
+import net.melaircraft.seraph.display.output.Null;
 
-public class Buffer extends CheckedDisplayable {
+public class Buffer implements CheckedFullDisplay {
     private final DestinationDisplay parent;
     private final PixelColour[][] pixels;
+
+    public Buffer(int width, int height) {
+        this(new Null(width, height));
+    }
 
     public Buffer(DestinationDisplay parent) {
         this.parent = parent;
@@ -20,13 +25,13 @@ public class Buffer extends CheckedDisplayable {
     }
 
     @Override
-    protected void setActualPixel(int x, int y, PixelColour pixelColour) {
+    public void setActualPixel(int x, int y, PixelColour pixelColour) {
         pixels[x][y] = pixelColour;
         parent.setPixel(x, y, pixelColour);
     }
 
     @Override
-    protected PixelColour getActualPixel(int x, int y) {
+    public PixelColour getActualPixel(int x, int y) {
         return pixels[x][y];
     }
 

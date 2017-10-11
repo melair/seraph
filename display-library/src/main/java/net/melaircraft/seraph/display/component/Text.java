@@ -1,20 +1,20 @@
 package net.melaircraft.seraph.display.component;
 
-import net.melaircraft.seraph.display.FullDisplay;
+import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.DeltaBuffer;
 import net.melaircraft.seraph.fonts.BitmapFont;
 import net.melaircraft.seraph.fonts.FontOutput;
 
 public class Text {
-    private final FullDisplay parent;
+    private final DestinationDisplay parent;
     private final BitmapFont bitmapFont;
     private final PixelColour colour;
     private final Justification justification;
     private final Alignment alignment;
     private final DeltaBuffer deltaBuffer;
 
-    public Text(FullDisplay parent, BitmapFont bitmapFont, PixelColour colour, Justification justification, Alignment alignment, String initialContent) {
+    public Text(DestinationDisplay parent, BitmapFont bitmapFont, PixelColour colour, Justification justification, Alignment alignment, String initialContent) {
         this.parent = parent;
         this.bitmapFont = bitmapFont;
         this.colour = colour;

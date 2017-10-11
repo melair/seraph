@@ -13,7 +13,7 @@ public class Greyscale extends Buffer {
     }
 
     @Override
-    protected void setActualPixel(int x, int y, PixelColour pixelColour) {
+    public void setActualPixel(int x, int y, PixelColour pixelColour) {
         super.setActualPixel(x, y, pixelColour);
         setParentPixelScaled(x, y, pixelColour);
     }

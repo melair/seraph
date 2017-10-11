@@ -1,5 +1,6 @@
 package net.melaircraft.seraph.display.layout;
 
+import net.melaircraft.seraph.display.CheckedFullDisplay;
 import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
@@ -11,7 +12,7 @@ import net.melaircraft.seraph.display.output.Null;
 
 public class Virtual implements FullDisplay {
     private final DestinationDisplay parent;
-    private final FullDisplay canvas;
+    private final CheckedFullDisplay canvas;
 
     private final boolean wrap;
 

@@ -1,7 +1,6 @@
 package net.melaircraft.seraph.display.layout;
 
 import net.melaircraft.seraph.display.DestinationDisplay;
-import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.output.Null;
@@ -26,7 +25,7 @@ public class Stack {
         parent.setPixel(x, y, colour);
     }
 
-    public FullDisplay addLayer() {
+    public DestinationDisplay addLayer() {
         Layer layer = new Layer(this);
         layers.add(layer);
         return layer;
@@ -41,7 +40,7 @@ public class Stack {
         }
 
         @Override
-        protected void setActualPixel(int x, int y, PixelColour pixelColour) {
+        public void setActualPixel(int x, int y, PixelColour pixelColour) {
             super.setActualPixel(x, y, pixelColour);
             stack.resolvePixel(x, y);
         }

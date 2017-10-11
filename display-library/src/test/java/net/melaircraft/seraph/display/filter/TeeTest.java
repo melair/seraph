@@ -15,15 +15,15 @@ import static org.mockito.Mockito.when;
 public class TeeTest {
     @Test(expected = MismatchedDisplaySizeException.class)
     public void testAddingParentsWithDifferingSizesFails() {
-        FullDisplay one = new Null(2, 1);
-        FullDisplay two = new Null(1, 1);
+        DestinationDisplay one = new Null(2, 1);
+        DestinationDisplay two = new Null(1, 1);
 
         DestinationDisplay tee = new Tee(one, two);
     }
 
     @Test
     public void testDimensionsPassThrough() {
-        FullDisplay one = new Null(1, 1);
+        DestinationDisplay one = new Null(1, 1);
 
         DestinationDisplay tee = new Tee(one);
 

@@ -1,6 +1,7 @@
 package net.melaircraft.seraph.display.layout;
 
-import net.melaircraft.seraph.display.FullDisplay;
+import net.melaircraft.seraph.display.CheckedFullDisplay;
+import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.output.Null;
@@ -10,12 +11,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 public class BookTest {
-    FullDisplay store = new Buffer(new Null(4, 2));
+    CheckedFullDisplay store = new Buffer(new Null(4, 2));
 
     @Test
     public void testPageIsGivenOut() {
         Book book = new Book(store, true);
-        FullDisplay page = book.addPage();
+        DestinationDisplay page = book.addPage();
 
         assertEquals(store.getWidth(), page.getWidth());
         assertEquals(store.getHeight(), page.getHeight());
@@ -24,7 +25,7 @@ public class BookTest {
     @Test
     public void testFirstPageWritesToParentIfActive() {
         Book book = new Book(store, true);
-        FullDisplay page = book.addPage();
+        DestinationDisplay page = book.addPage();
 
         PixelColour pixelColour = PixelColour.RED;
         page.setPixel(0, 0, pixelColour);
@@ -35,8 +36,8 @@ public class BookTest {
     @Test
     public void testSecondPageWritesOnNextPage() {
         Book book = new Book(store, true);
-        FullDisplay one = book.addPage();
-        FullDisplay two = book.addPage();
+        DestinationDisplay one = book.addPage();
+        DestinationDisplay two = book.addPage();
 
         PixelColour pixelColour = PixelColour.RED;
         two.setPixel(0, 0, pixelColour);
@@ -49,8 +50,8 @@ public class BookTest {
     @Test
     public void testTwoPageCycle() {
         Book book = new Book(store, true);
-        FullDisplay one = book.addPage();
-        FullDisplay two = book.addPage();
+        DestinationDisplay one = book.addPage();
+        DestinationDisplay two = book.addPage();
 
         PixelColour pixelColour = PixelColour.RED;
         one.setPixel(0, 0, pixelColour);
@@ -65,7 +66,7 @@ public class BookTest {
     @Test
     public void testPaginationForOnePage() {
         Book book = new Book(store, true);
-        FullDisplay one = book.addPage();
+        DestinationDisplay one = book.addPage();
 
         assertEquals(Book.ACTIVE_PAGE_COLOUR, store.getPixel(3, 1));
     }
@@ -73,8 +74,8 @@ public class BookTest {
     @Test
     public void testPaginationForTwoPage() {
         Book book = new Book(store, true);
-        FullDisplay one = book.addPage();
-        FullDisplay two = book.addPage();
+        DestinationDisplay one = book.addPage();
+        DestinationDisplay two = book.addPage();
 
         assertEquals(Book.ACTIVE_PAGE_COLOUR, store.getPixel(2, 1));
         assertEquals(Book.INACTIVE_PAGE_COLOUR, store.getPixel(3, 1));
@@ -88,7 +89,7 @@ public class BookTest {
     @Test
     public void testPaginationCanNotBeOverwritten() {
         Book book = new Book(store, true);
-        FullDisplay page = book.addPage();
+        DestinationDisplay page = book.addPage();
 
         PixelColour pixelColour = PixelColour.RED;
         page.setPixel(3, 1, pixelColour);
@@ -100,7 +101,7 @@ public class BookTest {
     public void testNoPagination() {
         Book book = new Book(store, false);
 
-        FullDisplay page = book.addPage();
+        DestinationDisplay page = book.addPage();
 
         PixelColour pixelColour = PixelColour.RED;
         page.setPixel(3, 1, pixelColour);

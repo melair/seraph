@@ -1,7 +1,6 @@
 package net.melaircraft.seraph.display.layout;
 
 import net.melaircraft.seraph.display.DestinationDisplay;
-import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.output.Null;
@@ -23,7 +22,7 @@ public class Book {
         this.pagination = pagination;
     }
 
-    public FullDisplay addPage() {
+    public DestinationDisplay addPage() {
         Page page = new Page(this);
         pages.add(page);
 
@@ -99,7 +98,7 @@ public class Book {
         }
 
         @Override
-        protected void setActualPixel(int x, int y, PixelColour pixelColour) {
+        public void setActualPixel(int x, int y, PixelColour pixelColour) {
             super.setActualPixel(x, y, pixelColour);
             book.setPagePixel(this, x, y, pixelColour);
         }

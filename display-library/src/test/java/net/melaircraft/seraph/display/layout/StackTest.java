@@ -1,6 +1,7 @@
 package net.melaircraft.seraph.display.layout;
 
-import net.melaircraft.seraph.display.FullDisplay;
+import net.melaircraft.seraph.display.CheckedFullDisplay;
+import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.output.Null;
@@ -9,12 +10,12 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class StackTest {
-    FullDisplay store = new Buffer(new Null(4, 2));
+    CheckedFullDisplay store = new Buffer(new Null(4, 2));
 
     @Test
     public void testLayerIsGivenOut() {
         Stack stack = new Stack(store);
-        FullDisplay page = stack.addLayer();
+        DestinationDisplay page = stack.addLayer();
 
         assertEquals(store.getWidth(), page.getWidth());
         assertEquals(store.getHeight(), page.getHeight());
@@ -23,17 +24,17 @@ public class StackTest {
     @Test
     public void testLayerBuffers() {
         Stack stack = new Stack(store);
-        FullDisplay page = stack.addLayer();
+        DestinationDisplay page = stack.addLayer();
 
         page.setPixel(0, 0, PixelColour.RED);
-        assertEquals(PixelColour.RED, page.getPixel(0,0));
+        assertEquals(PixelColour.RED, store.getPixel(0,0));
     }
 
     @Test
     public void testLayerOneOverwritesLayerTwo() {
         Stack stack = new Stack(store);
-        FullDisplay one = stack.addLayer();
-        FullDisplay two = stack.addLayer();
+        DestinationDisplay one = stack.addLayer();
+        DestinationDisplay two = stack.addLayer();
 
         two.setPixel(0, 0, PixelColour.RED);
         assertEquals(PixelColour.RED, store.getPixel(0,0));
@@ -44,8 +45,8 @@ public class StackTest {
     @Test
     public void testLayerRemoval() {
         Stack stack = new Stack(store);
-        FullDisplay one = stack.addLayer();
-        FullDisplay two = stack.addLayer();
+        DestinationDisplay one = stack.addLayer();
+        DestinationDisplay two = stack.addLayer();
 
         two.setPixel(0, 0, PixelColour.RED);
         one.setPixel(0, 0, PixelColour.BLUE);

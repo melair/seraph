@@ -1,6 +1,6 @@
 package net.melaircraft.seraph.demo;
 
-import net.melaircraft.seraph.display.FullDisplay;
+import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.component.Text;
 import net.melaircraft.seraph.display.decoration.Border;
@@ -31,35 +31,35 @@ public class SimpleDemoApp {
     public static void main(String[] args) throws IOException {
         InetAddress inetAddress = InetAddress.getByAddress(new byte[] { 10, 10, 8, 70 });
         SeraphProtocol seraphProtocol = new SeraphProtocol(128, 32, inetAddress, 7777, 1450);
-        SwingGUI gui = new SwingGUI(128, 32);
+        DestinationDisplay gui = new SwingGUI(128, 32);
 
-        Tee tee = new Tee(new Brightness(seraphProtocol, 0.4F), gui);
+        DestinationDisplay tee = new Tee(new Brightness(seraphProtocol, 0.4F), gui);
 
         Stack stack = new Stack(tee);
-        FullDisplay top = stack.addLayer();
+        DestinationDisplay top = stack.addLayer();
 
         Mask mask = new Mask(top);
         new Rainbow(mask.getMask());
 
         Stack stack2 = new Stack(mask);
-        FullDisplay top2 = stack2.addLayer();
-        FullDisplay bottom2 = stack2.addLayer();
+        DestinationDisplay top2 = stack2.addLayer();
+        DestinationDisplay bottom2 = stack2.addLayer();
 
         BitmapFont bitmapFont = BDFFontFactory.load(new FileInputStream("contrib/gohufont-11.bdf"));
         Text text = new Text(top2, bitmapFont, PixelColour.WHITE, Text.Justification.CENTER, Text.Alignment.BOTTOM, getTime());
         Text text2 = new Text(bottom2, bitmapFont, PixelColour.WHITE, Text.Justification.CENTER, Text.Alignment.TOP, "Time is");
 
-        FullDisplay bottom = stack.addLayer();
+        DestinationDisplay bottom = stack.addLayer();
         Book book = new Book(bottom, true);
 
-        FullDisplay one = book.addPage();
+        DestinationDisplay one = book.addPage();
         Pane paneOne = new Pane(one, 0, 0, gui.getWidth(), gui.getHeight() - 1);
-        Border borderOne = new Border(paneOne, new PixelColour(100, 255, 100), Border.Side.BOTTOM);
+        DestinationDisplay borderOne = new Border(paneOne, new PixelColour(100, 255, 100), Border.Side.BOTTOM);
         Matrix matrix = new Matrix(new Brightness(borderOne, 0.25F));
 
-        FullDisplay two = book.addPage();
+        DestinationDisplay two = book.addPage();
         Pane paneTwo = new Pane(two, 0, 0, gui.getWidth(), gui.getHeight() - 1);
-        Border borderTwo = new Border(paneTwo, new PixelColour(150, 150, 150), Border.Side.BOTTOM);
+        DestinationDisplay borderTwo = new Border(paneTwo, new PixelColour(150, 150, 150), Border.Side.BOTTOM);
         Snow snow = new Snow(borderTwo, 40);
 
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);

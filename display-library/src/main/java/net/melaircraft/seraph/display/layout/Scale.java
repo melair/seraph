@@ -1,15 +1,15 @@
 package net.melaircraft.seraph.display.layout;
 
-import net.melaircraft.seraph.display.CheckedDisplayable;
-import net.melaircraft.seraph.display.FullDisplay;
+import net.melaircraft.seraph.display.CheckedDestinationDisplay;
+import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 
-public class Scale extends CheckedDisplayable {
-    private final FullDisplay parent;
+public class Scale implements CheckedDestinationDisplay {
+    private final DestinationDisplay parent;
 
     private final int factor;
 
-    public Scale(FullDisplay parent, int factor) {
+    public Scale(DestinationDisplay parent, int factor) {
         this.parent = parent;
         this.factor = factor;
     }
@@ -25,7 +25,7 @@ public class Scale extends CheckedDisplayable {
     }
 
     @Override
-    protected void setActualPixel(int x, int y, PixelColour pixelColour) {
+    public void setActualPixel(int x, int y, PixelColour pixelColour) {
         int baseX = x * factor;
         int baseY = y * factor;
 
@@ -34,10 +34,5 @@ public class Scale extends CheckedDisplayable {
                 parent.setPixel(xI, yI, pixelColour);
             }
         }
-    }
-
-    @Override
-    protected PixelColour getActualPixel(int x, int y) {
-        return parent.getPixel(x * factor, y * factor);
     }
 }

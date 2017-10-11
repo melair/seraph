@@ -1,9 +1,9 @@
 package net.melaircraft.seraph.display.output;
 
-import net.melaircraft.seraph.display.CheckedDisplayable;
+import net.melaircraft.seraph.display.CheckedDestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 
-public final class Null extends CheckedDisplayable {
+public final class Null implements CheckedDestinationDisplay {
     private final int width;
     private final int height;
 
@@ -23,12 +23,7 @@ public final class Null extends CheckedDisplayable {
     }
 
     @Override
-    protected void setActualPixel(int x, int y, PixelColour pixelColour) {
+    public void setActualPixel(int x, int y, PixelColour pixelColour) {
 
-    }
-
-    @Override
-    protected PixelColour getActualPixel(int x, int y) {
-        return PixelColour.BLACK;
     }
 }

@@ -1,6 +1,7 @@
 package net.melaircraft.seraph.display.filter;
 
-import net.melaircraft.seraph.display.FullDisplay;
+import net.melaircraft.seraph.display.CheckedFullDisplay;
+import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.output.Null;
@@ -9,11 +10,11 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class GreyscaleTest {
-    FullDisplay store = new Buffer(new Null(4, 2));
+    CheckedFullDisplay store = new Buffer(new Null(4, 2));
 
     @Test
     public void testDimensionsPassThrough() {
-        FullDisplay greyscale = new Greyscale(store);
+        DestinationDisplay greyscale = new Greyscale(store);
 
         assertEquals(store.getWidth(), greyscale.getWidth());
         assertEquals(store.getHeight(), greyscale.getHeight());
@@ -21,33 +22,22 @@ public class GreyscaleTest {
 
     @Test
     public void testGreyscaleWriteThroughBrightWhite() {
-        FullDisplay greyscale = new Greyscale(store);
+        DestinationDisplay greyscale = new Greyscale(store);
 
-        greyscale.setPixel(0, 0, PixelColour.WHITE);
+        PixelColour colour = PixelColour.WHITE;
+        greyscale.setPixel(0, 0, colour);
 
-        assertEquals(255, store.getPixel(0, 0).getRed());
-        assertEquals(255, greyscale.getPixel(0, 0).getRed());
+        assertEquals(colour, store.getPixel(0, 0));
 
-        assertEquals(255, store.getPixel(0, 0).getGreen());
-        assertEquals(255, greyscale.getPixel(0, 0).getGreen());
-
-        assertEquals(255, store.getPixel(0, 0).getBlue());
-        assertEquals(255, greyscale.getPixel(0, 0).getBlue());
     }
 
     @Test
     public void testGreyscaleWriteThroughDimRed() {
-        FullDisplay greyscale = new Greyscale(store);
+        DestinationDisplay greyscale = new Greyscale(store);
 
-        greyscale.setPixel(0, 0, new PixelColour(60, 0, 0));
+        PixelColour colour = new PixelColour(60, 0, 0);
+        greyscale.setPixel(0, 0, colour);
 
-        assertEquals(13, store.getPixel(0, 0).getRed());
-        assertEquals(60, greyscale.getPixel(0, 0).getRed());
-
-        assertEquals(13, store.getPixel(0, 0).getGreen());
-        assertEquals(0, greyscale.getPixel(0, 0).getGreen());
-
-        assertEquals(13, store.getPixel(0, 0).getBlue());
-        assertEquals(0, greyscale.getPixel(0, 0).getBlue());
+        assertEquals(new PixelColour(13, 13, 13), store.getPixel(0, 0));
     }
 }
