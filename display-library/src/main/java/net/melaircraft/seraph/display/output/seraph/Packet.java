@@ -13,7 +13,7 @@ public class Packet {
     private final int sequence;
     private final List<Operation> operations = new ArrayList<>();
 
-    public Packet(int mtu, int sequence) {
+    Packet(int mtu, int sequence) {
         this.mtu = mtu;
         this.sequence = sequence;
     }

@@ -7,7 +7,7 @@ class Pixel implements Comparable<Pixel> {
     private final int y;
     private final PixelColour pixelColour;
 
-    public Pixel(int x, int y, PixelColour pixelColour) {
+    Pixel(int x, int y, PixelColour pixelColour) {
         this.x = x;
         this.y = y;
         this.pixelColour = pixelColour;

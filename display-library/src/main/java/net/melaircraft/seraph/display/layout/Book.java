@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Book {
-    private static final PixelColour ACTIVE_PAGE_COLOUR = new PixelColour(255, 255, 255);
-    private static final PixelColour INACTIVE_PAGE_COLOUR = new PixelColour(32, 32, 32);
+    protected static final PixelColour ACTIVE_PAGE_COLOUR = new PixelColour(255, 255, 255);
+    protected static final PixelColour INACTIVE_PAGE_COLOUR = new PixelColour(32, 32, 32);
 
     private final DestinationDisplay destination;
     private final List<Page> pages = new ArrayList<>();
@@ -95,7 +95,7 @@ public class Book {
         private final Book book;
         private final Buffer buffer;
 
-        public Page(Book book) {
+        Page(Book book) {
             this.book = book;
             this.buffer = new Buffer(book.destination.getWidth(), book.destination.getHeight());
             buffer.registerCallback(this);

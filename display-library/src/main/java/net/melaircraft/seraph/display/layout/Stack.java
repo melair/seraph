@@ -37,7 +37,7 @@ public class Stack implements Buffer.BufferCallback {
         private final int width;
         private final int height;
 
-        public Layer(Stack stack) {
+        Layer(Stack stack) {
             this.width = stack.destination.getWidth();
             this.height = stack.destination.getHeight();
             buffer = new Buffer(width, height);
