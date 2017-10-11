@@ -5,24 +5,24 @@ import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.exception.NonExistentPixelException;
 
 public class Greyscale implements DestinationDisplay {
-    private final DestinationDisplay parent;
+    private final DestinationDisplay destination;
 
-    public Greyscale(DestinationDisplay parent) {
-        this.parent = parent;
+    public Greyscale(DestinationDisplay destination) {
+        this.destination = destination;
     }
 
     @Override
     public void setPixel(int x, int y, PixelColour pixelColour) throws NonExistentPixelException {
-        parent.setPixel(x, y, pixelColour.greyscale());
+        destination.setPixel(x, y, pixelColour.greyscale());
     }
 
     @Override
     public int getWidth() {
-        return parent.getWidth();
+        return destination.getWidth();
     }
 
     @Override
     public int getHeight() {
-        return parent.getHeight();
+        return destination.getHeight();
     }
 }

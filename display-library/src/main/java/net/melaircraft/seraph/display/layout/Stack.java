@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Stack implements Buffer.BufferCallback {
-    private final DestinationDisplay parent;
+    private final DestinationDisplay destination;
     private final List<Layer> layers = new ArrayList<>();
 
-    public Stack(DestinationDisplay parent) {
-        this.parent = parent;
+    public Stack(DestinationDisplay destination) {
+        this.destination = destination;
     }
 
     public DestinationDisplay addLayer() {
@@ -29,7 +29,7 @@ public class Stack implements Buffer.BufferCallback {
                 .filter((c) -> !c.equals(PixelColour.BLACK))
                 .findFirst().orElse(PixelColour.BLACK);
 
-        parent.setPixel(x, y, resolvedColour);
+        destination.setPixel(x, y, resolvedColour);
     }
 
     static class Layer implements FullDisplay {
@@ -38,8 +38,8 @@ public class Stack implements Buffer.BufferCallback {
         private final int height;
 
         public Layer(Stack stack) {
-            this.width = stack.parent.getWidth();
-            this.height = stack.parent.getHeight();
+            this.width = stack.destination.getWidth();
+            this.height = stack.destination.getHeight();
             buffer = new Buffer(width, height);
             buffer.registerCallback(stack);
         }

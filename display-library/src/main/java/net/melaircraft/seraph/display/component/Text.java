@@ -7,20 +7,20 @@ import net.melaircraft.seraph.fonts.BitmapFont;
 import net.melaircraft.seraph.fonts.FontOutput;
 
 public class Text {
-    private final DestinationDisplay parent;
+    private final DestinationDisplay destination;
     private final BitmapFont bitmapFont;
     private final PixelColour colour;
     private final Justification justification;
     private final Alignment alignment;
     private final DeltaBuffer deltaBuffer;
 
-    public Text(DestinationDisplay parent, BitmapFont bitmapFont, PixelColour colour, Justification justification, Alignment alignment, String initialContent) {
-        this.parent = parent;
+    public Text(DestinationDisplay destination, BitmapFont bitmapFont, PixelColour colour, Justification justification, Alignment alignment, String initialContent) {
+        this.destination = destination;
         this.bitmapFont = bitmapFont;
         this.colour = colour;
         this.justification = justification;
         this.alignment = alignment;
-        this.deltaBuffer = new DeltaBuffer(parent);
+        this.deltaBuffer = new DeltaBuffer(destination);
 
         setText(initialContent);
     }
@@ -35,19 +35,19 @@ public class Text {
 
         switch (justification) {
             case CENTER:
-                dX = (parent.getWidth() - fontOutput.getWidth()) / 2;
+                dX = (destination.getWidth() - fontOutput.getWidth()) / 2;
                 break;
             case RIGHT:
-                dX = parent.getWidth() - fontOutput.getWidth();
+                dX = destination.getWidth() - fontOutput.getWidth();
                 break;
         }
 
         switch (alignment) {
             case MIDDLE:
-                dY = (parent.getHeight() - fontOutput.getHeight()) / 2;
+                dY = (destination.getHeight() - fontOutput.getHeight()) / 2;
                 break;
             case BOTTOM:
-                dY = parent.getHeight() - fontOutput.getHeight();
+                dY = destination.getHeight() - fontOutput.getHeight();
                 break;
         }
 

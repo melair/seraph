@@ -6,13 +6,13 @@ import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.exception.NonExistentPixelException;
 
 public class Brightness implements DestinationDisplay {
-    private final DestinationDisplay parent;
+    private final DestinationDisplay destination;
     private final Buffer buffer;
     private float brightness;
 
-    public Brightness(DestinationDisplay parent, float brightness) {
-        this.parent = parent;
-        this.buffer = new Buffer(parent.getWidth(), parent.getHeight());
+    public Brightness(DestinationDisplay destination, float brightness) {
+        this.destination = destination;
+        this.buffer = new Buffer(destination.getWidth(), destination.getHeight());
         this.brightness = brightness;
     }
 
@@ -23,8 +23,8 @@ public class Brightness implements DestinationDisplay {
     public void setBrightness(float brightness) {
         this.brightness = brightness;
 
-        for (int x = 0; x < parent.getWidth(); x++) {
-            for (int y = 0; y < parent.getHeight(); y++) {
+        for (int x = 0; x < destination.getWidth(); x++) {
+            for (int y = 0; y < destination.getHeight(); y++) {
                 PixelColour colour = buffer.getPixel(x, y);
                 setPixel(x, y, colour);
             }
@@ -34,16 +34,16 @@ public class Brightness implements DestinationDisplay {
     @Override
     public void setPixel(int x, int y, PixelColour pixelColour) throws NonExistentPixelException {
         buffer.setPixel(x, y, pixelColour);
-        parent.setPixel(x, y, pixelColour.multiply(brightness));
+        destination.setPixel(x, y, pixelColour.multiply(brightness));
     }
 
     @Override
     public int getWidth() {
-        return parent.getWidth();
+        return destination.getWidth();
     }
 
     @Override
     public int getHeight() {
-        return parent.getHeight();
+        return destination.getHeight();
     }
 }

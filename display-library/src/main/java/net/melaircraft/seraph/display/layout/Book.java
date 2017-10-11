@@ -10,16 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Book {
-    static final PixelColour ACTIVE_PAGE_COLOUR = new PixelColour(255, 255, 255);
-    static final PixelColour INACTIVE_PAGE_COLOUR = new PixelColour(32, 32, 32);
+    private static final PixelColour ACTIVE_PAGE_COLOUR = new PixelColour(255, 255, 255);
+    private static final PixelColour INACTIVE_PAGE_COLOUR = new PixelColour(32, 32, 32);
 
-    private final DestinationDisplay parent;
+    private final DestinationDisplay destination;
     private final List<Page> pages = new ArrayList<>();
     private final boolean pagination;
+
     private int currentPage = 0;
 
-    public Book(DestinationDisplay parent, boolean pagination) {
-        this.parent = parent;
+    public Book(DestinationDisplay destination, boolean pagination) {
+        this.destination = destination;
         this.pagination = pagination;
     }
 
@@ -37,15 +38,15 @@ public class Book {
             boolean allowDraw = true;
 
             if (pagination) {
-                if (y == (parent.getHeight() - 1)) {
-                    if (x >= (parent.getWidth() - pages.size())) {
+                if (y == (destination.getHeight() - 1)) {
+                    if (x >= (destination.getWidth() - pages.size())) {
                         allowDraw = false;
                     }
                 }
             }
 
             if (allowDraw) {
-                parent.setPixel(x, y, pixelColour);
+                destination.setPixel(x, y, pixelColour);
             }
         }
     }
@@ -63,10 +64,10 @@ public class Book {
 
         Page page = pages.get(currentPage);
 
-        for (int x = 0; x < parent.getWidth(); x++) {
-            for (int y = 0; y < parent.getHeight(); y++) {
+        for (int x = 0; x < destination.getWidth(); x++) {
+            for (int y = 0; y < destination.getHeight(); y++) {
                 PixelColour colour = page.getPixel(x, y);
-                parent.setPixel(x, y, colour);
+                destination.setPixel(x, y, colour);
             }
         }
 
@@ -75,8 +76,8 @@ public class Book {
 
     private void drawPagination() {
         if (pagination) {
-            int y = parent.getHeight() - 1;
-            int x = parent.getWidth() - pages.size();
+            int y = destination.getHeight() - 1;
+            int x = destination.getWidth() - pages.size();
 
             for (int i = 0; i < pages.size(); i++) {
                 PixelColour colour = INACTIVE_PAGE_COLOUR;
@@ -85,7 +86,7 @@ public class Book {
                     colour = ACTIVE_PAGE_COLOUR;
                 }
 
-                parent.setPixel(x + i, y, colour);
+                destination.setPixel(x + i, y, colour);
             }
         }
     }
@@ -96,7 +97,7 @@ public class Book {
 
         public Page(Book book) {
             this.book = book;
-            this.buffer = new Buffer(book.parent.getWidth(), book.parent.getHeight());
+            this.buffer = new Buffer(book.destination.getWidth(), book.destination.getHeight());
             buffer.registerCallback(this);
         }
 

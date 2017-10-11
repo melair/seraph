@@ -6,22 +6,22 @@ import net.melaircraft.seraph.display.exception.InvalidPixelColourException;
 import net.melaircraft.seraph.display.exception.NonExistentPixelException;
 
 public class Rotate implements DestinationDisplay {
-    private final DestinationDisplay parent;
+    private final DestinationDisplay destination;
     private final Rotation rotation;
 
-    public Rotate(DestinationDisplay parent, Rotation rotation) {
-        this.parent = parent;
+    public Rotate(DestinationDisplay destination, Rotation rotation) {
+        this.destination = destination;
         this.rotation = rotation;
     }
 
     @Override
     public int getWidth() {
-        return rotation.shouldSwapDimension() ? parent.getHeight() : parent.getWidth();
+        return rotation.shouldSwapDimension() ? destination.getHeight() : destination.getWidth();
     }
 
     @Override
     public int getHeight() {
-        return rotation.shouldSwapDimension() ? parent.getWidth() : parent.getHeight();
+        return rotation.shouldSwapDimension() ? destination.getWidth() : destination.getHeight();
     }
 
     @Override
@@ -29,7 +29,7 @@ public class Rotate implements DestinationDisplay {
         int translatedX = translateX(x, y);
         int translatedY = translateY(x, y);
 
-        parent.setPixel(translatedX, translatedY, pixelColour);
+        destination.setPixel(translatedX, translatedY, pixelColour);
     }
 
     private int translateX(int x, int y) {
@@ -37,9 +37,9 @@ public class Rotate implements DestinationDisplay {
             default:
                 return x;
             case ROTATE_90:
-                return (parent.getWidth() - 1) - y;
+                return (destination.getWidth() - 1) - y;
             case ROTATE_180:
-                return (parent.getWidth() - 1) - x;
+                return (destination.getWidth() - 1) - x;
             case ROTATE_270:
                 return y;
         }
@@ -52,9 +52,9 @@ public class Rotate implements DestinationDisplay {
             case ROTATE_90:
                 return x;
             case ROTATE_180:
-                return (parent.getHeight() - 1) - y;
+                return (destination.getHeight() - 1) - y;
             case ROTATE_270:
-                return (parent.getHeight() - 1) - x;
+                return (destination.getHeight() - 1) - x;
         }
     }
 

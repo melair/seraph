@@ -11,7 +11,7 @@ import java.util.List;
 public class Border implements DestinationDisplay {
     private final DestinationDisplay pane;
 
-    public Border(DestinationDisplay parent, PixelColour colour, Side... sides) {
+    public Border(DestinationDisplay destination, PixelColour colour, Side... sides) {
         List<Side> sideList = Arrays.asList(sides);
 
         int offsetX = sideList.contains(Side.LEFT) ? 1 : 0;
@@ -23,29 +23,29 @@ public class Border implements DestinationDisplay {
         int reductionH = sideList.contains(Side.TOP) ? 1 : 0;
         reductionH += sideList.contains(Side.BOTTOM) ? 1 : 0;
 
-        this.pane = new Pane(parent, offsetX, offsetY, parent.getWidth() - reductionW, parent.getHeight() - reductionH);
+        this.pane = new Pane(destination, offsetX, offsetY, destination.getWidth() - reductionW, destination.getHeight() - reductionH);
 
         if (sideList.contains(Side.TOP)) {
-            for (int x = 0; x < parent.getWidth(); x++) {
-                parent.setPixel(x, 0, colour);
+            for (int x = 0; x < destination.getWidth(); x++) {
+                destination.setPixel(x, 0, colour);
             }
         }
 
         if (sideList.contains(Side.BOTTOM)) {
-            for (int x = 0; x < parent.getWidth(); x++) {
-                parent.setPixel(x, (parent.getHeight() - 1), colour);
+            for (int x = 0; x < destination.getWidth(); x++) {
+                destination.setPixel(x, (destination.getHeight() - 1), colour);
             }
         }
 
         if (sideList.contains(Side.LEFT)) {
-            for (int y = 0; y < parent.getHeight(); y++) {
-                parent.setPixel(0, y, colour);
+            for (int y = 0; y < destination.getHeight(); y++) {
+                destination.setPixel(0, y, colour);
             }
         }
 
         if (sideList.contains(Side.RIGHT)) {
-            for (int y = 0; y < parent.getHeight(); y++) {
-                parent.setPixel((parent.getWidth() - 1), y, colour);
+            for (int y = 0; y < destination.getHeight(); y++) {
+                destination.setPixel((destination.getWidth() - 1), y, colour);
             }
         }
     }

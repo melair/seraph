@@ -8,12 +8,12 @@ import java.util.HashSet;
 import java.util.Random;
 
 public class Matrix implements Runnable {
-    private final DestinationDisplay parent;
+    private final DestinationDisplay destination;
     private final Collection<Droplet> droplets = new HashSet<>();
     private final Random random = new Random();
 
-    public Matrix(DestinationDisplay parent) {
-        this.parent = parent;
+    public Matrix(DestinationDisplay destination) {
+        this.destination = destination;
     }
 
     @Override
@@ -21,7 +21,7 @@ public class Matrix implements Runnable {
         droplets.removeIf(Droplet::tick);
 
         if (random.nextBoolean()) {
-            int x = random.nextInt(parent.getWidth());
+            int x = random.nextInt(destination.getWidth());
 
             if (droplets.stream().allMatch((d) -> d.isClear(x))) {
                 droplets.add(new Droplet(x));
@@ -36,14 +36,14 @@ public class Matrix implements Runnable {
 
         Droplet(int x) {
             this.x = x;
-            this.length = (int) Math.round((parent.getHeight() * (1.0 - (0.2 * random.nextFloat()))));
+            this.length = (int) Math.round((destination.getHeight() * (1.0 - (0.2 * random.nextFloat()))));
 
             draw();
         }
 
         private void draw() {
             for (int yI = y; yI >= 0; yI--) {
-                if (yI < parent.getHeight()) {
+                if (yI < destination.getHeight()) {
                     int pos = y - yI;
                     int remaining = length - pos;
 
@@ -67,7 +67,7 @@ public class Matrix implements Runnable {
                         colour = new PixelColour(0, green, 0);
                     }
 
-                    parent.setPixel(x, yI, colour);
+                    destination.setPixel(x, yI, colour);
                 }
             }
         }
@@ -79,7 +79,7 @@ public class Matrix implements Runnable {
         boolean tick() {
             y++;
 
-            if (y - length >= parent.getHeight()) {
+            if (y - length >= destination.getHeight()) {
                 return true;
             } else {
                 draw();

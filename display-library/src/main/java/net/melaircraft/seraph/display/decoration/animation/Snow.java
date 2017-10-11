@@ -10,13 +10,13 @@ import java.util.Random;
 public class Snow implements Runnable {
     private static final PixelColour[] SNOW_COLOUR = { new PixelColour(255, 255, 255), new PixelColour(200, 200, 200), new PixelColour(225, 225, 225) };
 
-    private final DestinationDisplay parent;
+    private final DestinationDisplay destination;
     private final int maxSnow;
     private final Random random = new Random();
     private final Collection<Flake> flakes = new HashSet<>();
 
-    public Snow(DestinationDisplay parent, int maxSnow) {
-        this.parent = parent;
+    public Snow(DestinationDisplay destination, int maxSnow) {
+        this.destination = destination;
         this.maxSnow = maxSnow;
     }
 
@@ -25,7 +25,7 @@ public class Snow implements Runnable {
         flakes.removeIf(Flake::tick);
 
         if (flakes.size() < maxSnow && random.nextInt(5) < 4) {
-            flakes.add(new Flake(random.nextInt(parent.getWidth())));
+            flakes.add(new Flake(random.nextInt(destination.getWidth())));
         }
     }
 
@@ -36,16 +36,16 @@ public class Snow implements Runnable {
         Flake(int x) {
             this.x = x;
 
-            parent.setPixel(x, y, getColour());
+            destination.setPixel(x, y, getColour());
         }
 
         boolean tick() {
-            parent.setPixel(x, y, PixelColour.BLACK);
+            destination.setPixel(x, y, PixelColour.BLACK);
 
             y++;
 
-            if (y < parent.getHeight()) {
-                parent.setPixel(x, y, getColour());
+            if (y < destination.getHeight()) {
+                destination.setPixel(x, y, getColour());
             } else {
                 return true;
             }

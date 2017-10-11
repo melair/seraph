@@ -11,18 +11,18 @@ import java.util.Collections;
 import java.util.HashSet;
 
 public class Tee implements DestinationDisplay {
-    private final Collection<DestinationDisplay> allParents = new HashSet<>();
+    private final Collection<DestinationDisplay> allDestinations = new HashSet<>();
     private final DestinationDisplay first;
 
-    public Tee(DestinationDisplay... parents) {
-        for (int i = 1; i < parents.length; i++) {
-            if (parents[0].getWidth() != parents[i].getWidth() || parents[0].getHeight() != parents[i].getHeight()) {
+    public Tee(DestinationDisplay... destinations) {
+        for (int i = 1; i < destinations.length; i++) {
+            if (destinations[0].getWidth() != destinations[i].getWidth() || destinations[0].getHeight() != destinations[i].getHeight()) {
                 throw new MismatchedDisplaySizeException("All parents must have the same display dimensions!");
             }
         }
 
-        Collections.addAll(allParents, parents);
-        first = parents[0];
+        Collections.addAll(allDestinations, destinations);
+        first = destinations[0];
     }
 
     @Override
@@ -37,6 +37,6 @@ public class Tee implements DestinationDisplay {
 
     @Override
     public void setPixel(int x, int y, PixelColour pixelColour) throws NonExistentPixelException, InvalidPixelColourException {
-        allParents.forEach((d) -> d.setPixel(x, y, pixelColour));
+        allDestinations.forEach((d) -> d.setPixel(x, y, pixelColour));
     }
 }

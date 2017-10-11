@@ -10,11 +10,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Flip implements DestinationDisplay {
-    private final DestinationDisplay parent;
+    private final DestinationDisplay destination;
     private final Set<Direction> flipDirections;
 
-    public Flip(DestinationDisplay parent, Direction... directions) {
-        this.parent = parent;
+    public Flip(DestinationDisplay destination, Direction... directions) {
+        this.destination = destination;
 
         this.flipDirections = new HashSet<>();
         Collections.addAll(flipDirections, directions);
@@ -22,12 +22,12 @@ public class Flip implements DestinationDisplay {
 
     @Override
     public int getWidth() {
-        return parent.getWidth();
+        return destination.getWidth();
     }
 
     @Override
     public int getHeight() {
-        return parent.getHeight();
+        return destination.getHeight();
     }
 
     @Override
@@ -35,7 +35,7 @@ public class Flip implements DestinationDisplay {
         int translatedX = flipDirections.contains(Direction.HORIZONTAL) ? ((getWidth() - 1) - x) : x;
         int translatedY = flipDirections.contains(Direction.VERTICAL) ? ((getHeight() - 1) - y) : y;
 
-        parent.setPixel(translatedX, translatedY, pixelColour);
+        destination.setPixel(translatedX, translatedY, pixelColour);
     }
 
     public enum Direction {

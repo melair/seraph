@@ -8,7 +8,7 @@ import net.melaircraft.seraph.display.exception.InvalidVirtualSizeException;
 import net.melaircraft.seraph.display.exception.NonExistentPixelException;
 
 public class Virtual implements DestinationDisplay {
-    private final DestinationDisplay parent;
+    private final DestinationDisplay destination;
     private final Buffer canvas;
 
     private final boolean wrap;
@@ -16,12 +16,12 @@ public class Virtual implements DestinationDisplay {
     private int viewportX = 0;
     private int viewportY = 0;
 
-    public Virtual(DestinationDisplay parent, int width, int height, boolean wrap) {
-        if (width < parent.getWidth() || height < parent.getHeight()) {
-            throw new InvalidVirtualSizeException("Virtual display can not be smaller then parent display.");
+    public Virtual(DestinationDisplay destination, int width, int height, boolean wrap) {
+        if (width < destination.getWidth() || height < destination.getHeight()) {
+            throw new InvalidVirtualSizeException("Virtual display can not be smaller then destination display.");
         }
 
-        this.parent = parent;
+        this.destination = destination;
         this.canvas = new Buffer(width, height);
         this.wrap = wrap;
     }
@@ -30,8 +30,8 @@ public class Virtual implements DestinationDisplay {
         viewportX = x;
         viewportY = y;
 
-        for (int xI = 0; xI < parent.getWidth(); xI++) {
-            for (int yI = 0; yI < parent.getHeight(); yI++) {
+        for (int xI = 0; xI < destination.getWidth(); xI++) {
+            for (int yI = 0; yI < destination.getHeight(); yI++) {
                 int canvasX = viewportX + xI;
                 int canvasY = viewportY + yI;
 
@@ -46,7 +46,7 @@ public class Virtual implements DestinationDisplay {
                     colour = canvas.getPixel(canvasX, canvasY);
                 }
 
-                parent.setPixel(xI, yI, colour);
+                destination.setPixel(xI, yI, colour);
             }
         }
     }
@@ -68,14 +68,14 @@ public class Virtual implements DestinationDisplay {
         int adjustX = x - viewportX;
         int adjustY = y - viewportY;
 
-        if (adjustX >= 0 && adjustX < parent.getWidth() && adjustY >= 0 && adjustY < parent.getHeight()) {
-            parent.setPixel(adjustX, adjustY, pixelColour);
+        if (adjustX >= 0 && adjustX < destination.getWidth() && adjustY >= 0 && adjustY < destination.getHeight()) {
+            destination.setPixel(adjustX, adjustY, pixelColour);
         } else {
-            adjustX += parent.getWidth();
-            adjustY += parent.getHeight();
+            adjustX += destination.getWidth();
+            adjustY += destination.getHeight();
 
-            if (adjustX >= 0 && adjustX < parent.getWidth() && adjustY >= 0 && adjustY < parent.getHeight()) {
-                parent.setPixel(adjustX, adjustY, pixelColour);
+            if (adjustX >= 0 && adjustX < destination.getWidth() && adjustY >= 0 && adjustY < destination.getHeight()) {
+                destination.setPixel(adjustX, adjustY, pixelColour);
             }
         }
     }

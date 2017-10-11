@@ -9,15 +9,15 @@ import net.melaircraft.seraph.display.exception.NonExistentPixelException;
 public class Mask implements DestinationDisplay, Buffer.BufferCallback {
     private final Buffer mask;
     private final Buffer northBuffer;
-    private final DestinationDisplay parent;
+    private final DestinationDisplay destination;
 
-    public Mask(DestinationDisplay parent) {
-        northBuffer = new Buffer(parent.getWidth(), parent.getHeight());
+    public Mask(DestinationDisplay destination) {
+        northBuffer = new Buffer(destination.getWidth(), destination.getHeight());
 
-        mask = new Buffer(parent.getWidth(), parent.getHeight());
+        mask = new Buffer(destination.getWidth(), destination.getHeight());
         mask.registerCallback(this);
 
-        this.parent = parent;
+        this.destination = destination;
     }
 
     public DestinationDisplay getMask() {
@@ -26,12 +26,12 @@ public class Mask implements DestinationDisplay, Buffer.BufferCallback {
 
     @Override
     public int getWidth() {
-        return parent.getWidth();
+        return destination.getWidth();
     }
 
     @Override
     public int getHeight() {
-        return parent.getHeight();
+        return destination.getHeight();
     }
 
     @Override
@@ -45,7 +45,7 @@ public class Mask implements DestinationDisplay, Buffer.BufferCallback {
         PixelColour maskPixel = mask.getPixel(x, y);
 
         PixelColour output = northPixel.greyscale().multiply(maskPixel);
-        parent.setPixel(x, y, output);
+        destination.setPixel(x, y, output);
     }
 
     @Override
