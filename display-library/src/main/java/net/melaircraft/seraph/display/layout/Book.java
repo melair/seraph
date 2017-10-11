@@ -122,7 +122,7 @@ public class Book {
         }
 
         @Override
-        public void updated(int x, int y, PixelColour colour) {
+        public void updated(Buffer buffer, int x, int y, PixelColour colour) {
             book.setPagePixel(this, x, y, colour);
         }
     }

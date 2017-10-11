@@ -23,7 +23,7 @@ public class Stack implements Buffer.BufferCallback {
     }
 
     @Override
-    public void updated(int x, int y, PixelColour colour) {
+    public void updated(Buffer buffer, int x, int y, PixelColour colour) {
         PixelColour resolvedColour = layers.stream()
                 .map((d) -> d.getPixel(x, y))
                 .filter((c) -> !c.equals(PixelColour.BLACK))

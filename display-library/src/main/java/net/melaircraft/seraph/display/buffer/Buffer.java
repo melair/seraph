@@ -32,7 +32,7 @@ public class Buffer implements CheckedFullDisplay {
     @Override
     public void setActualPixel(int x, int y, PixelColour pixelColour) {
         pixels[x][y] = pixelColour;
-        callbacks.forEach((c) -> c.updated(x, y, pixelColour));
+        callbacks.forEach((c) -> c.updated(this, x, y, pixelColour));
     }
 
     @Override
@@ -51,6 +51,6 @@ public class Buffer implements CheckedFullDisplay {
     }
 
     public interface BufferCallback {
-        void updated(int x, int y, PixelColour colour);
+        void updated(Buffer buffer, int x, int y, PixelColour colour);
     }
 }
