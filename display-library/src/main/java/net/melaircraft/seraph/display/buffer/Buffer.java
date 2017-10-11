@@ -13,6 +13,7 @@ public class Buffer implements CheckedFullDisplay {
         this(new Null(width, height));
     }
 
+    @Deprecated
     public Buffer(DestinationDisplay parent) {
         this.parent = parent;
         pixels = new PixelColour[parent.getWidth()][parent.getHeight()];

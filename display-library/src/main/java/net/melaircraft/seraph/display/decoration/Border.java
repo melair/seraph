@@ -1,14 +1,14 @@
 package net.melaircraft.seraph.display.decoration;
 
-import net.melaircraft.seraph.display.CheckedDestinationDisplay;
 import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
+import net.melaircraft.seraph.display.exception.NonExistentPixelException;
 import net.melaircraft.seraph.display.layout.Pane;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class Border implements CheckedDestinationDisplay {
+public class Border implements DestinationDisplay {
     private final DestinationDisplay pane;
 
     public Border(DestinationDisplay parent, PixelColour colour, Side... sides) {
@@ -51,11 +51,6 @@ public class Border implements CheckedDestinationDisplay {
     }
 
     @Override
-    public void setActualPixel(int x, int y, PixelColour pixelColour) {
-        pane.setPixel(x, y, pixelColour);
-    }
-
-    @Override
     public int getWidth() {
         return pane.getWidth();
     }
@@ -63,6 +58,11 @@ public class Border implements CheckedDestinationDisplay {
     @Override
     public int getHeight() {
         return pane.getHeight();
+    }
+
+    @Override
+    public void setPixel(int x, int y, PixelColour pixelColour) throws NonExistentPixelException {
+        pane.setPixel(x, y, pixelColour);
     }
 
     public enum Side {
