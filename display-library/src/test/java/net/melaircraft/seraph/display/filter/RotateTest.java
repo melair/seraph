@@ -4,7 +4,6 @@ import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
-import net.melaircraft.seraph.display.output.Null;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -12,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 public class RotateTest {
     final int originalWidth = 3;
     final int originalHeight = 2;
-    FullDisplay store = new Buffer(new Null(originalWidth, originalHeight));
+    FullDisplay store = new Buffer(originalWidth, originalHeight);
     PixelColour pixelColour = PixelColour.RED;
 
     @Test

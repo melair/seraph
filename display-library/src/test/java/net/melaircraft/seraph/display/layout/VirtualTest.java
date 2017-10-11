@@ -2,11 +2,9 @@ package net.melaircraft.seraph.display.layout;
 
 import net.melaircraft.seraph.display.CheckedFullDisplay;
 import net.melaircraft.seraph.display.DestinationDisplay;
-import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.exception.InvalidVirtualSizeException;
-import net.melaircraft.seraph.display.output.Null;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -47,7 +45,7 @@ public class VirtualTest {
 
     @Test
     public void testViewPort() {
-        CheckedFullDisplay store = new Buffer(new Null(6, 6));
+        CheckedFullDisplay store = new Buffer(6, 6);
         Virtual virtual = new Virtual(store, 8, 8, false);
         PixelColour colour = PixelColour.RED;
 

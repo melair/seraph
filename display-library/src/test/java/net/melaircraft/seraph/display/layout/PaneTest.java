@@ -6,13 +6,12 @@ import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.exception.InvalidPaneLocationException;
 import net.melaircraft.seraph.display.exception.NonExistentPixelException;
-import net.melaircraft.seraph.display.output.Null;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class PaneTest {
-    CheckedFullDisplay store = new Buffer(new Null(10, 10));
+    CheckedFullDisplay store = new Buffer( 10, 10);
 
     @Test
     public void testWidthHeight() {

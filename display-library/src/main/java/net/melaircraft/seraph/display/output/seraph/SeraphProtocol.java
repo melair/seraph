@@ -2,8 +2,6 @@ package net.melaircraft.seraph.display.output.seraph;
 
 import net.melaircraft.seraph.display.CheckedDestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
-import net.melaircraft.seraph.display.exception.InvalidPixelColourException;
-import net.melaircraft.seraph.display.exception.NonExistentPixelException;
 import net.melaircraft.seraph.display.output.seraph.operations.AdvancePosition;
 import net.melaircraft.seraph.display.output.seraph.operations.Fill;
 import net.melaircraft.seraph.display.output.seraph.operations.SetPixels;

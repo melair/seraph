@@ -2,7 +2,6 @@ package net.melaircraft.seraph.display.component;
 
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
-import net.melaircraft.seraph.display.output.Null;
 import net.melaircraft.seraph.fonts.BDFFontFactory;
 import net.melaircraft.seraph.fonts.BitmapFont;
 import org.junit.Test;
@@ -15,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 public class TextTest {
     @Test
     public void testTextBeingSetTopLeft() throws IOException {
-        Buffer store = new Buffer(new Null(32, 32));
+        Buffer store = new Buffer(32, 32);
 
         InputStream inputStream = TextTest.class.getResourceAsStream("/testfont.bdf");
         BitmapFont font = BDFFontFactory.load(inputStream);
@@ -33,7 +32,7 @@ public class TextTest {
 
     @Test
     public void testTextBeingSetCentreMiddle() throws IOException {
-        Buffer store = new Buffer(new Null(32, 32));
+        Buffer store = new Buffer(32, 32);
 
         InputStream inputStream = TextTest.class.getResourceAsStream("/testfont.bdf");
         BitmapFont font = BDFFontFactory.load(inputStream);
@@ -51,7 +50,7 @@ public class TextTest {
 
     @Test
     public void testTextBeingSetBottomRight() throws IOException {
-        Buffer store = new Buffer(new Null(32, 32));
+        Buffer store = new Buffer(32, 32);
 
         InputStream inputStream = TextTest.class.getResourceAsStream("/testfont.bdf");
         BitmapFont font = BDFFontFactory.load(inputStream);

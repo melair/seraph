@@ -1,10 +1,7 @@
 package net.melaircraft.seraph.display.output;
 
 import net.melaircraft.seraph.display.CheckedDestinationDisplay;
-import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
-import net.melaircraft.seraph.display.exception.InvalidPixelColourException;
-import net.melaircraft.seraph.display.exception.NonExistentPixelException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;

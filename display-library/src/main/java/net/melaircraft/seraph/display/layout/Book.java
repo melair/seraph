@@ -1,9 +1,10 @@
 package net.melaircraft.seraph.display.layout;
 
 import net.melaircraft.seraph.display.DestinationDisplay;
+import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
-import net.melaircraft.seraph.display.output.Null;
+import net.melaircraft.seraph.display.exception.NonExistentPixelException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,18 +90,39 @@ public class Book {
         }
     }
 
-    static class Page extends Buffer {
+    static class Page implements FullDisplay, Buffer.BufferCallback {
         private final Book book;
+        private final Buffer buffer;
 
         public Page(Book book) {
-            super(new Null(book.parent.getWidth(), book.parent.getHeight()));
             this.book = book;
+            this.buffer = new Buffer(book.parent.getWidth(), book.parent.getHeight());
+            buffer.registerCallback(this);
         }
 
         @Override
-        public void setActualPixel(int x, int y, PixelColour pixelColour) {
-            super.setActualPixel(x, y, pixelColour);
-            book.setPagePixel(this, x, y, pixelColour);
+        public void setPixel(int x, int y, PixelColour pixelColour) throws NonExistentPixelException {
+            buffer.setPixel(x, y, pixelColour);
+        }
+
+        @Override
+        public PixelColour getPixel(int x, int y) throws NonExistentPixelException {
+            return buffer.getPixel(x, y);
+        }
+
+        @Override
+        public int getWidth() {
+            return buffer.getWidth();
+        }
+
+        @Override
+        public int getHeight() {
+            return buffer.getHeight();
+        }
+
+        @Override
+        public void updated(int x, int y, PixelColour colour) {
+            book.setPagePixel(this, x, y, colour);
         }
     }
 }

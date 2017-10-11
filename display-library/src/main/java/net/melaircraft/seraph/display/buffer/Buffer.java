@@ -1,22 +1,22 @@
 package net.melaircraft.seraph.display.buffer;
 
 import net.melaircraft.seraph.display.CheckedFullDisplay;
-import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
-import net.melaircraft.seraph.display.output.Null;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class Buffer implements CheckedFullDisplay {
-    private final DestinationDisplay parent;
     private final PixelColour[][] pixels;
+    private final Set<BufferCallback> callbacks = new HashSet<>();
+    private final int width;
+    private final int height;
 
     public Buffer(int width, int height) {
-        this(new Null(width, height));
-    }
+        this.width = width;
+        this.height = height;
 
-    @Deprecated
-    public Buffer(DestinationDisplay parent) {
-        this.parent = parent;
-        pixels = new PixelColour[parent.getWidth()][parent.getHeight()];
+        pixels = new PixelColour[width][height];
 
         for (int x = 0; x < getWidth(); x++) {
             for (int y = 0; y < getHeight(); y++) {
@@ -25,10 +25,14 @@ public class Buffer implements CheckedFullDisplay {
         }
     }
 
+    public void registerCallback(BufferCallback callback) {
+        callbacks.add(callback);
+    }
+
     @Override
     public void setActualPixel(int x, int y, PixelColour pixelColour) {
         pixels[x][y] = pixelColour;
-        parent.setPixel(x, y, pixelColour);
+        callbacks.forEach((c) -> c.updated(x, y, pixelColour));
     }
 
     @Override
@@ -38,11 +42,15 @@ public class Buffer implements CheckedFullDisplay {
 
     @Override
     public int getWidth() {
-        return parent.getWidth();
+        return width;
     }
 
     @Override
     public int getHeight() {
-        return parent.getHeight();
+        return height;
+    }
+
+    public interface BufferCallback {
+        void updated(int x, int y, PixelColour colour);
     }
 }

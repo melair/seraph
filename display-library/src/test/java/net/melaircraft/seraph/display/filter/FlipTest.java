@@ -4,13 +4,12 @@ import net.melaircraft.seraph.display.CheckedFullDisplay;
 import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
-import net.melaircraft.seraph.display.output.Null;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class FlipTest {
-    CheckedFullDisplay store = new Buffer(new Null(4, 4));
+    CheckedFullDisplay store = new Buffer(4, 4);
     PixelColour pixelColour = PixelColour.BLUE;
 
     @Test

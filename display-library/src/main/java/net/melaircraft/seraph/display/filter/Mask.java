@@ -1,30 +1,27 @@
 package net.melaircraft.seraph.display.filter;
 
-import net.melaircraft.seraph.display.CheckedFullDisplay;
 import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.exception.InvalidPixelColourException;
 import net.melaircraft.seraph.display.exception.NonExistentPixelException;
-import net.melaircraft.seraph.display.output.Null;
 
-public class Mask implements DestinationDisplay {
-    private final CheckedFullDisplay mask;
+public class Mask implements DestinationDisplay, Buffer.BufferCallback {
+    private final Buffer mask;
     private final Buffer northBuffer;
     private final DestinationDisplay parent;
 
     public Mask(DestinationDisplay parent) {
         northBuffer = new Buffer(parent.getWidth(), parent.getHeight());
-        mask = new MaskLayer(new Null(parent.getWidth(), parent.getHeight()));
+
+        mask = new Buffer(parent.getWidth(), parent.getHeight());
+        mask.registerCallback(this);
+
         this.parent = parent;
     }
 
     public DestinationDisplay getMask() {
         return mask;
-    }
-
-    private void maskUpdate(int x, int y) {
-        outputPixelToParent(x, y);
     }
 
     @Override
@@ -51,15 +48,8 @@ public class Mask implements DestinationDisplay {
         parent.setPixel(x, y, output);
     }
 
-    class MaskLayer extends Buffer {
-        public MaskLayer(DestinationDisplay parent) {
-            super(parent);
-        }
-
-        @Override
-        public void setActualPixel(int x, int y, PixelColour pixelColour) {
-            super.setActualPixel(x, y, pixelColour);
-            maskUpdate(x, y);
-        }
+    @Override
+    public void updated(int x, int y, PixelColour colour) {
+        outputPixelToParent(x, y);
     }
 }
