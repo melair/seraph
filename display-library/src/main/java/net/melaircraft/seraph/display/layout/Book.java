@@ -1,16 +1,14 @@
 package net.melaircraft.seraph.display.layout;
 
-import net.melaircraft.seraph.display.CheckedDisplayable;
 import net.melaircraft.seraph.display.Displayable;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
-import net.melaircraft.seraph.display.exception.NonExistentPixelException;
 import net.melaircraft.seraph.display.output.Null;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Book extends CheckedDisplayable {
+public class Book {
     static final PixelColour ACTIVE_PAGE_COLOUR = new PixelColour(255, 255, 255);
     static final PixelColour INACTIVE_PAGE_COLOUR = new PixelColour(32, 32, 32);
 
@@ -31,16 +29,6 @@ public class Book extends CheckedDisplayable {
         drawPagination();
 
         return page;
-    }
-
-    @Override
-    public int getWidth() {
-        return parent.getWidth();
-    }
-
-    @Override
-    public int getHeight() {
-        return parent.getHeight();
     }
 
     protected void setPagePixel(Page page, int x, int y, PixelColour pixelColour) {
@@ -101,21 +89,11 @@ public class Book extends CheckedDisplayable {
         }
     }
 
-    @Override
-    protected void setActualPixel(int x, int y, PixelColour pixelColour) {
-        throw new NonExistentPixelException("No direct access to pixels via a Book");
-    }
-
-    @Override
-    protected PixelColour getActualPixel(int x, int y) {
-        throw new NonExistentPixelException("No direct access to pixels via a Book");
-    }
-
     static class Page extends Buffer {
         private final Book book;
 
         public Page(Book book) {
-            super(new Null(book.getWidth(), book.getHeight()));
+            super(new Null(book.parent.getWidth(), book.parent.getHeight()));
             this.book = book;
         }
 

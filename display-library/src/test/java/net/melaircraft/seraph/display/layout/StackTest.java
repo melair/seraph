@@ -13,26 +13,6 @@ public class StackTest {
     Displayable store = new Buffer(new Null(4, 2));
 
     @Test
-    public void testDimensionsArePassedThrough() {
-        Displayable stack = new Stack(store);
-
-        assertEquals(store.getHeight(), stack.getHeight());
-        assertEquals(store.getWidth(), stack.getWidth());
-    }
-
-    @Test(expected = NonExistentPixelException.class)
-    public void testDirectSetThrowsException() {
-        Displayable stack = new Stack(store);
-        stack.setPixel(0, 0, PixelColour.BLACK);
-    }
-
-    @Test(expected = NonExistentPixelException.class)
-    public void testDirectGetThrowsException() {
-        Displayable stack = new Stack(store);
-        stack.getPixel(0, 0);
-    }
-
-    @Test
     public void testLayerIsGivenOut() {
         Stack stack = new Stack(store);
         Displayable page = stack.addLayer();

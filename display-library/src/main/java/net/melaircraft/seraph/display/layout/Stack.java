@@ -1,41 +1,19 @@
 package net.melaircraft.seraph.display.layout;
 
-import net.melaircraft.seraph.display.CheckedDisplayable;
 import net.melaircraft.seraph.display.Displayable;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
-import net.melaircraft.seraph.display.exception.NonExistentPixelException;
 import net.melaircraft.seraph.display.output.Null;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Stack extends CheckedDisplayable {
+public class Stack {
     private final Displayable parent;
     private final List<Layer> layers = new ArrayList<>();
 
     public Stack(Displayable parent) {
         this.parent = parent;
-    }
-
-    @Override
-    protected void setActualPixel(int x, int y, PixelColour pixelColour) {
-        throw new NonExistentPixelException("No direct access to pixels via a Stack");
-    }
-
-    @Override
-    protected PixelColour getActualPixel(int x, int y) {
-        throw new NonExistentPixelException("No direct access to pixels via a Stack");
-    }
-
-    @Override
-    public int getWidth() {
-        return parent.getWidth();
-    }
-
-    @Override
-    public int getHeight() {
-        return parent.getHeight();
     }
 
     protected void resolvePixel(int x, int y) {
@@ -57,7 +35,7 @@ public class Stack extends CheckedDisplayable {
         private final Stack stack;
 
         public Layer(Stack stack) {
-            super(new Null(stack.getWidth(), stack.getHeight()));
+            super(new Null(stack.parent.getWidth(), stack.parent.getHeight()));
             this.stack = stack;
         }
 

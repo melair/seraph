@@ -14,26 +14,6 @@ public class BookTest {
     Displayable store = new Buffer(new Null(4, 2));
 
     @Test
-    public void testDimensionsArePassedThrough() {
-        Displayable book = new Book(store, true);
-
-        assertEquals(store.getHeight(), book.getHeight());
-        assertEquals(store.getWidth(), book.getWidth());
-    }
-
-    @Test(expected = NonExistentPixelException.class)
-    public void testDirectSetThrowsException() {
-        Displayable book = new Book(store, true);
-        book.setPixel(0, 0, PixelColour.BLACK);
-    }
-
-    @Test(expected = NonExistentPixelException.class)
-    public void testDirectGetThrowsException() {
-        Displayable book = new Book(store, true);
-        book.getPixel(0, 0);
-    }
-
-    @Test
     public void testPageIsGivenOut() {
         Book book = new Book(store, true);
         Displayable page = book.addPage();
