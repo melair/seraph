@@ -1,18 +1,15 @@
 package net.melaircraft.seraph.display.layout;
 
-import net.melaircraft.seraph.display.CheckedFullDisplay;
 import net.melaircraft.seraph.display.DestinationDisplay;
-import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.exception.InvalidPixelColourException;
 import net.melaircraft.seraph.display.exception.InvalidVirtualSizeException;
 import net.melaircraft.seraph.display.exception.NonExistentPixelException;
-import net.melaircraft.seraph.display.output.Null;
 
-public class Virtual implements FullDisplay {
+public class Virtual implements DestinationDisplay {
     private final DestinationDisplay parent;
-    private final CheckedFullDisplay canvas;
+    private final Buffer canvas;
 
     private final boolean wrap;
 
@@ -25,7 +22,7 @@ public class Virtual implements FullDisplay {
         }
 
         this.parent = parent;
-        this.canvas = new Buffer(new Null(width, height));
+        this.canvas = new Buffer(width, height);
         this.wrap = wrap;
     }
 
@@ -81,10 +78,5 @@ public class Virtual implements FullDisplay {
                 parent.setPixel(adjustX, adjustY, pixelColour);
             }
         }
-    }
-
-    @Override
-    public PixelColour getPixel(int x, int y) {
-        return canvas.getPixel(x, y);
     }
 }

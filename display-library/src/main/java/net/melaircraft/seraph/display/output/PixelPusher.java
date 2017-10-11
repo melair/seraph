@@ -1,5 +1,6 @@
 package net.melaircraft.seraph.display.output;
 
+import net.melaircraft.seraph.display.CheckedDestinationDisplay;
 import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.exception.InvalidPixelColourException;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class PixelPusher implements DestinationDisplay, Runnable {
+public class PixelPusher implements CheckedDestinationDisplay, Runnable {
     private final int width;
     private final int height;
     private final InetAddress server;
@@ -60,7 +61,7 @@ public class PixelPusher implements DestinationDisplay, Runnable {
     }
 
     @Override
-    public void setPixel(int x, int y, PixelColour pixelColour) throws NonExistentPixelException, InvalidPixelColourException {
+    public void setActualPixel(int x, int y, PixelColour pixelColour) {
         output[x][y] = pixelColour;
         rowChange[y] = true;
     }

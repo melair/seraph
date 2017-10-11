@@ -1,5 +1,6 @@
 package net.melaircraft.seraph.display.output;
 
+import net.melaircraft.seraph.display.CheckedDestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 
@@ -10,14 +11,15 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
-public class SwingGUI extends Buffer {
+public class SwingGUI implements CheckedDestinationDisplay {
+    private final Buffer buffer;
     private final int pixelSize = 10;
     private final int pixelSpace = 2;
 
     private final JFrame frame;
 
     public SwingGUI(int width, int height) {
-        super(new Null(width, height));
+        buffer = new Buffer(width, height);
 
         frame = new JFrame("Seraph Swing GUI");
         int pixelWidth = (width * (pixelSize + pixelSpace)) + pixelSpace;
@@ -34,8 +36,18 @@ public class SwingGUI extends Buffer {
 
     @Override
     public void setActualPixel(int x, int y, PixelColour pixelColour) {
-        super.setActualPixel(x, y, pixelColour);
+        buffer.setPixel(x, y, pixelColour);
         frame.repaint();
+    }
+
+    @Override
+    public int getWidth() {
+        return buffer.getWidth();
+    }
+
+    @Override
+    public int getHeight() {
+        return buffer.getHeight();
     }
 
     class PixelFrame extends JPanel {
@@ -61,7 +73,7 @@ public class SwingGUI extends Buffer {
 
                     g.drawRect(xD, yD, pixelSize, pixelSize);
 
-                    PixelColour pixelColour = getActualPixel(x, y);
+                    PixelColour pixelColour = buffer.getActualPixel(x, y);
                     g.setColor(new Color(pixelColour.getRed(), pixelColour.getGreen(), pixelColour.getBlue()));
                     g.fillRect(xD + 1, yD + 1, pixelSize - 1, pixelSize - 1 );
                 }

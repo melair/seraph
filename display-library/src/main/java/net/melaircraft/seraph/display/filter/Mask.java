@@ -10,11 +10,11 @@ import net.melaircraft.seraph.display.output.Null;
 
 public class Mask implements DestinationDisplay {
     private final CheckedFullDisplay mask;
-    private final CheckedFullDisplay northBuffer;
+    private final Buffer northBuffer;
     private final DestinationDisplay parent;
 
     public Mask(DestinationDisplay parent) {
-        northBuffer = new Buffer(new Null(parent.getWidth(), parent.getHeight()));
+        northBuffer = new Buffer(parent.getWidth(), parent.getHeight());
         mask = new MaskLayer(new Null(parent.getWidth(), parent.getHeight()));
         this.parent = parent;
     }
@@ -26,7 +26,6 @@ public class Mask implements DestinationDisplay {
     private void maskUpdate(int x, int y) {
         outputPixelToParent(x, y);
     }
-
 
     @Override
     public int getWidth() {

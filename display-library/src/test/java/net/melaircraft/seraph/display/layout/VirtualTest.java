@@ -1,6 +1,7 @@
 package net.melaircraft.seraph.display.layout;
 
 import net.melaircraft.seraph.display.CheckedFullDisplay;
+import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
@@ -12,33 +13,24 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 public class VirtualTest {
-    CheckedFullDisplay store = new Buffer(new Null(4, 4));
+    Buffer store = new Buffer(4, 4);
 
     @Test (expected = InvalidVirtualSizeException.class)
     public void testVirtualSmallerThenParent() {
-        FullDisplay virtual = new Virtual(store, 2, 2, false);
+        DestinationDisplay virtual = new Virtual(store, 2, 2, false);
     }
 
     @Test
     public void testDimensions() {
-        FullDisplay virtual = new Virtual(store, 8, 8, false);
+        DestinationDisplay virtual = new Virtual(store, 8, 8, false);
 
         assertEquals(8, virtual.getWidth());
         assertEquals(8, virtual.getHeight());
     }
 
     @Test
-    public void testSettingAndGettingOnCanvasOutsideParent() {
-        FullDisplay virtual = new Virtual(store, 8, 8, false);
-        PixelColour colour = PixelColour.RED;
-
-        virtual.setPixel(7, 7, colour);
-        assertEquals(colour, virtual.getPixel(7, 7));
-    }
-
-    @Test
     public void testSettingInSideViewPortUpdatesStore() {
-        FullDisplay virtual = new Virtual(store, 8, 8, false);
+        DestinationDisplay virtual = new Virtual(store, 8, 8, false);
         PixelColour colour = PixelColour.RED;
 
         virtual.setPixel(0, 0, colour);
@@ -47,7 +39,7 @@ public class VirtualTest {
 
     @Test
     public void testSettingOutSideViewPortDoesNotError() {
-        FullDisplay virtual = new Virtual(store, 8, 8, false);
+        DestinationDisplay virtual = new Virtual(store, 8, 8, false);
         PixelColour colour = PixelColour.RED;
 
         virtual.setPixel(5, 5, colour);
