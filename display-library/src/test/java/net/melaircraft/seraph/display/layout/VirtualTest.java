@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 public class VirtualTest {
-    private Buffer store = new Buffer(4, 4);
+    private final Buffer store = new Buffer(4, 4);
 
     @Test (expected = InvalidVirtualSizeException.class)
     public void testVirtualSmallerThenParent() {

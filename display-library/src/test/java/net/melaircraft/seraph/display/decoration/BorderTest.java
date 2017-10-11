@@ -9,8 +9,8 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class BorderTest {
-    private FullDisplay store = new Buffer(6, 6);
-    private PixelColour colour = PixelColour.RED;
+    private final FullDisplay store = new Buffer(6, 6);
+    private final PixelColour colour = PixelColour.RED;
 
     @Test
     public void testBordersOnAllSidesDimensions() {

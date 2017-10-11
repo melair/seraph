@@ -9,7 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class StackTest {
-    private FullDisplay store = new Buffer(4, 2);
+    private final FullDisplay store = new Buffer(4, 2);
 
     @Test
     public void testLayerIsGivenOut() {

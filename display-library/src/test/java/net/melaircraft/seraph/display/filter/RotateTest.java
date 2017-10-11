@@ -9,10 +9,10 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class RotateTest {
-    final int originalWidth = 3;
-    final int originalHeight = 2;
-    FullDisplay store = new Buffer(originalWidth, originalHeight);
-    PixelColour pixelColour = PixelColour.RED;
+    private final int originalWidth = 3;
+    private final int originalHeight = 2;
+    private final FullDisplay store = new Buffer(originalWidth, originalHeight);
+    private final PixelColour pixelColour = PixelColour.RED;
 
     @Test
     public void testRotationZeroDoesNotSwapDimensions() {

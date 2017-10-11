@@ -9,8 +9,8 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class FlipTest {
-    private FullDisplay store = new Buffer(4, 4);
-    private PixelColour pixelColour = PixelColour.BLUE;
+    private final FullDisplay store = new Buffer(4, 4);
+    private final PixelColour pixelColour = PixelColour.BLUE;
 
     @Test
     public void testNoFlip() {

@@ -8,7 +8,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class MaskTest {
-    private FullDisplay store = new Buffer(1, 1);
+    private final FullDisplay store = new Buffer(1, 1);
 
     @Test
     public void testThatSettingAPixelWithoutAMaskWontDoAnything() {

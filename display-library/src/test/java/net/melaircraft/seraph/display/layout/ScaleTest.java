@@ -9,7 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class ScaleTest {
-    private FullDisplay store = new Buffer(10, 10);
+    private final FullDisplay store = new Buffer(10, 10);
 
     @Test
     public void testDimensionsFactorOne() {

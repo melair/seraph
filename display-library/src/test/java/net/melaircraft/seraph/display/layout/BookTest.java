@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 public class BookTest {
-    private FullDisplay store = new Buffer(4, 2);
+    private final FullDisplay store = new Buffer(4, 2);
 
     @Test
     public void testPageIsGivenOut() {

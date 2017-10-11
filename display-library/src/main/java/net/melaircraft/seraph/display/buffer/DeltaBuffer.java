@@ -6,8 +6,8 @@ import net.melaircraft.seraph.display.PixelColour;
 public class DeltaBuffer {
     private final DestinationDisplay parent;
 
-    private PixelColour[][] current;
-    private PixelColour[][] previous;
+    private final PixelColour[][] current;
+    private final PixelColour[][] previous;
     
     private final int width;
     private final int height;
