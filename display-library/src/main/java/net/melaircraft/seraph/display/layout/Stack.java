@@ -1,6 +1,7 @@
 package net.melaircraft.seraph.display.layout;
 
-import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.DestinationDisplay;
+import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.output.Null;
@@ -9,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Stack {
-    private final Displayable parent;
+    private final DestinationDisplay parent;
     private final List<Layer> layers = new ArrayList<>();
 
-    public Stack(Displayable parent) {
+    public Stack(DestinationDisplay parent) {
         this.parent = parent;
     }
 
@@ -25,7 +26,7 @@ public class Stack {
         parent.setPixel(x, y, colour);
     }
 
-    public Displayable addLayer() {
+    public FullDisplay addLayer() {
         Layer layer = new Layer(this);
         layers.add(layer);
         return layer;

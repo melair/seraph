@@ -1,6 +1,6 @@
 package net.melaircraft.seraph.display.decoration.animation;
 
-import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 
 import java.util.Collection;
@@ -10,12 +10,12 @@ import java.util.Random;
 public class Snow implements Runnable {
     private static final PixelColour[] SNOW_COLOUR = { new PixelColour(255, 255, 255), new PixelColour(200, 200, 200), new PixelColour(225, 225, 225) };
 
-    private final Displayable parent;
+    private final DestinationDisplay parent;
     private final int maxSnow;
     private final Random random = new Random();
     private final Collection<Flake> flakes = new HashSet<>();
 
-    public Snow(Displayable parent, int maxSnow) {
+    public Snow(DestinationDisplay parent, int maxSnow) {
         this.parent = parent;
         this.maxSnow = maxSnow;
     }

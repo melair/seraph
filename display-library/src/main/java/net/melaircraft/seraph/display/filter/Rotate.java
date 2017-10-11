@@ -1,15 +1,15 @@
 package net.melaircraft.seraph.display.filter;
 
-import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.exception.InvalidPixelColourException;
 import net.melaircraft.seraph.display.exception.NonExistentPixelException;
 
-public class Rotate implements Displayable {
-    private final Displayable parent;
+public class Rotate implements DestinationDisplay {
+    private final DestinationDisplay parent;
     private final Rotation rotation;
 
-    public Rotate(Displayable parent, Rotation rotation) {
+    public Rotate(DestinationDisplay parent, Rotation rotation) {
         this.parent = parent;
         this.rotation = rotation;
     }
@@ -30,14 +30,6 @@ public class Rotate implements Displayable {
         int translatedY = translateY(x, y);
 
         parent.setPixel(translatedX, translatedY, pixelColour);
-    }
-
-    @Override
-    public PixelColour getPixel(int x, int y) {
-        int translatedX = translateX(x, y);
-        int translatedY = translateY(x, y);
-
-        return parent.getPixel(translatedX, translatedY);
     }
 
     private int translateX(int x, int y) {

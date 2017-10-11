@@ -1,6 +1,6 @@
 package net.melaircraft.seraph.display.buffer;
 
-import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import org.junit.Test;
 
@@ -11,7 +11,7 @@ import static org.mockito.Mockito.when;
 public class InitialisingBufferTest {
     @Test
     public void testInitialisationSetsParentToBlack() {
-        Displayable store = mock(Displayable.class);
+        FullDisplay store = mock(FullDisplay.class);
         when(store.getWidth()).thenReturn(2);
         when(store.getHeight()).thenReturn(1);
 
@@ -23,7 +23,7 @@ public class InitialisingBufferTest {
 
     @Test
     public void testInitialisationWithBlock() {
-        Displayable store = mock(Displayable.class);
+        FullDisplay store = mock(FullDisplay.class);
         when(store.getWidth()).thenReturn(4);
         when(store.getHeight()).thenReturn(2);
 

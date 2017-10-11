@@ -1,18 +1,18 @@
 package net.melaircraft.seraph.display.layout;
 
 import net.melaircraft.seraph.display.CheckedDisplayable;
-import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.exception.InvalidPaneLocationException;
 
 public class Pane extends CheckedDisplayable {
-    private final Displayable parent;
+    private final FullDisplay parent;
     private final int offsetX;
     private final int offsetY;
     private final int width;
     private final int height;
 
-    public Pane(Displayable parent, int offsetX, int offsetY, int width, int height) throws InvalidPaneLocationException {
+    public Pane(FullDisplay parent, int offsetX, int offsetY, int width, int height) throws InvalidPaneLocationException {
         this.parent = parent;
         this.offsetX = offsetX;
         this.offsetY = offsetY;

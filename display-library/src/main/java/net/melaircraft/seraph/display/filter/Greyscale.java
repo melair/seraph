@@ -1,13 +1,13 @@
 package net.melaircraft.seraph.display.filter;
 
-import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 
 public class Greyscale extends Buffer {
-    private final Displayable parent;
+    private final DestinationDisplay parent;
 
-    public Greyscale(Displayable parent) {
+    public Greyscale(DestinationDisplay parent) {
         super(parent);
         this.parent = parent;
     }

@@ -1,6 +1,7 @@
 package net.melaircraft.seraph.display.layout;
 
-import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.DestinationDisplay;
+import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.exception.InvalidPixelColourException;
@@ -8,16 +9,16 @@ import net.melaircraft.seraph.display.exception.InvalidVirtualSizeException;
 import net.melaircraft.seraph.display.exception.NonExistentPixelException;
 import net.melaircraft.seraph.display.output.Null;
 
-public class Virtual implements Displayable {
-    private final Displayable parent;
-    private final Displayable canvas;
+public class Virtual implements FullDisplay {
+    private final DestinationDisplay parent;
+    private final FullDisplay canvas;
 
     private final boolean wrap;
 
     private int viewportX = 0;
     private int viewportY = 0;
 
-    public Virtual(Displayable parent, int width, int height, boolean wrap) {
+    public Virtual(DestinationDisplay parent, int width, int height, boolean wrap) {
         if (width < parent.getWidth() || height < parent.getHeight()) {
             throw new InvalidVirtualSizeException("Virtual display can not be smaller then parent display.");
         }

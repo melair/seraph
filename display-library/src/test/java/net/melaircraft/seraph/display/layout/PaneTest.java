@@ -1,6 +1,6 @@
 package net.melaircraft.seraph.display.layout;
 
-import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.exception.InvalidPaneLocationException;
@@ -11,11 +11,11 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class PaneTest {
-    Displayable store = new Buffer(new Null(10, 10));
+    FullDisplay store = new Buffer(new Null(10, 10));
 
     @Test
     public void testWidthHeight() {
-        Displayable pane = new Pane(store, 2, 2, 4, 2);
+        FullDisplay pane = new Pane(store, 2, 2, 4, 2);
 
         assertEquals(4, pane.getWidth());
         assertEquals(2, pane.getHeight());
@@ -23,17 +23,17 @@ public class PaneTest {
 
     @Test(expected = InvalidPaneLocationException.class)
     public void testInvalidPlacementX() {
-        Displayable pane = new Pane(store, 8, 2, 4, 2);
+        FullDisplay pane = new Pane(store, 8, 2, 4, 2);
     }
 
     @Test(expected = InvalidPaneLocationException.class)
     public void testInvalidPlacementY() {
-        Displayable pane = new Pane(store, 0, 9, 4, 2);
+        FullDisplay pane = new Pane(store, 0, 9, 4, 2);
     }
 
     @Test
     public void testRemappedCoordinates() {
-        Displayable pane = new Pane(store, 2, 2, 4, 2);
+        FullDisplay pane = new Pane(store, 2, 2, 4, 2);
         PixelColour colour = PixelColour.BLUE;
 
         pane.setPixel(0, 0, colour);
@@ -44,7 +44,7 @@ public class PaneTest {
 
     @Test(expected = NonExistentPixelException.class)
     public void testPixelOutSidepane() {
-        Displayable pane = new Pane(store, 2, 2, 4, 2);
+        FullDisplay pane = new Pane(store, 2, 2, 4, 2);
 
         pane.setPixel(10, 10, PixelColour.BLACK);
     }

@@ -3,7 +3,6 @@ package net.melaircraft.seraph.display.component;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.output.Null;
-import net.melaircraft.seraph.display.output.SwingGUI;
 import net.melaircraft.seraph.fonts.BDFFontFactory;
 import net.melaircraft.seraph.fonts.BitmapFont;
 import org.junit.Test;

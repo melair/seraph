@@ -1,6 +1,6 @@
 package net.melaircraft.seraph.display.decoration;
 
-import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.output.Null;
@@ -9,12 +9,12 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class BorderTest {
-    Displayable store = new Buffer(new Null(6, 6));
+    FullDisplay store = new Buffer(new Null(6, 6));
     PixelColour colour = PixelColour.RED;
 
     @Test
     public void testBordersOnAllSidesDimensions() {
-        Displayable border = new Border(store, colour, Border.Side.TOP, Border.Side.LEFT, Border.Side.RIGHT, Border.Side.BOTTOM);
+        FullDisplay border = new Border(store, colour, Border.Side.TOP, Border.Side.LEFT, Border.Side.RIGHT, Border.Side.BOTTOM);
 
         assertEquals(store.getWidth() - 2, border.getWidth());
         assertEquals(store.getHeight() - 2, border.getHeight());
@@ -22,7 +22,7 @@ public class BorderTest {
 
     @Test
     public void testPixelWriteThrough() {
-        Displayable border = new Border(store, colour, Border.Side.TOP, Border.Side.LEFT, Border.Side.RIGHT, Border.Side.BOTTOM);
+        FullDisplay border = new Border(store, colour, Border.Side.TOP, Border.Side.LEFT, Border.Side.RIGHT, Border.Side.BOTTOM);
         PixelColour dot = PixelColour.GREEN;
 
         border.setPixel(0, 0, dot);
@@ -36,7 +36,7 @@ public class BorderTest {
 
     @Test
     public void testBorders() {
-        Displayable border = new Border(store, colour, Border.Side.TOP, Border.Side.LEFT, Border.Side.RIGHT, Border.Side.BOTTOM);
+        FullDisplay border = new Border(store, colour, Border.Side.TOP, Border.Side.LEFT, Border.Side.RIGHT, Border.Side.BOTTOM);
 
         assertEquals(colour, store.getPixel(0, 1));
         assertEquals(colour, store.getPixel(1, 0));

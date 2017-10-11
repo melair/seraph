@@ -1,6 +1,6 @@
 package net.melaircraft.seraph.display.output.seraph;
 
-import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.exception.InvalidPixelColourException;
 import net.melaircraft.seraph.display.exception.NonExistentPixelException;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class SeraphProtocol implements Displayable, Runnable {
+public class SeraphProtocol implements DestinationDisplay, Runnable {
     private static final int FULL_FRAME_INTERVAL = 5000;
 
     private final int width;
@@ -159,11 +159,6 @@ public class SeraphProtocol implements Displayable, Runnable {
                 e.printStackTrace();
             }
         }
-    }
-
-    @Override
-    public PixelColour getPixel(int x, int y) throws NonExistentPixelException {
-        return output[x][y];
     }
 
     @Override

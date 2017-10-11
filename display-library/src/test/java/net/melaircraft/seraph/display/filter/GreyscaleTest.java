@@ -1,6 +1,6 @@
 package net.melaircraft.seraph.display.filter;
 
-import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.output.Null;
@@ -9,11 +9,11 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class GreyscaleTest {
-    Displayable store = new Buffer(new Null(4, 2));
+    FullDisplay store = new Buffer(new Null(4, 2));
 
     @Test
     public void testDimensionsPassThrough() {
-        Displayable greyscale = new Greyscale(store);
+        FullDisplay greyscale = new Greyscale(store);
 
         assertEquals(store.getWidth(), greyscale.getWidth());
         assertEquals(store.getHeight(), greyscale.getHeight());
@@ -21,7 +21,7 @@ public class GreyscaleTest {
 
     @Test
     public void testGreyscaleWriteThroughBrightWhite() {
-        Displayable greyscale = new Greyscale(store);
+        FullDisplay greyscale = new Greyscale(store);
 
         greyscale.setPixel(0, 0, PixelColour.WHITE);
 
@@ -37,7 +37,7 @@ public class GreyscaleTest {
 
     @Test
     public void testGreyscaleWriteThroughDimRed() {
-        Displayable greyscale = new Greyscale(store);
+        FullDisplay greyscale = new Greyscale(store);
 
         greyscale.setPixel(0, 0, new PixelColour(60, 0, 0));
 

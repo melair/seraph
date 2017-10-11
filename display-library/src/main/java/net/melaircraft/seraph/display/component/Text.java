@@ -1,25 +1,20 @@
 package net.melaircraft.seraph.display.component;
 
-import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.DeltaBuffer;
-import net.melaircraft.seraph.fonts.BitmapCharacter;
 import net.melaircraft.seraph.fonts.BitmapFont;
 import net.melaircraft.seraph.fonts.FontOutput;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 public class Text {
-    private final Displayable parent;
+    private final FullDisplay parent;
     private final BitmapFont bitmapFont;
     private final PixelColour colour;
     private final Justification justification;
     private final Alignment alignment;
     private final DeltaBuffer deltaBuffer;
 
-    public Text(Displayable parent, BitmapFont bitmapFont, PixelColour colour, Justification justification, Alignment alignment, String initialContent) {
+    public Text(FullDisplay parent, BitmapFont bitmapFont, PixelColour colour, Justification justification, Alignment alignment, String initialContent) {
         this.parent = parent;
         this.bitmapFont = bitmapFont;
         this.colour = colour;

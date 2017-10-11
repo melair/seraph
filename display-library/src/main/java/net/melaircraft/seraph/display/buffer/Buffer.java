@@ -1,14 +1,14 @@
 package net.melaircraft.seraph.display.buffer;
 
 import net.melaircraft.seraph.display.CheckedDisplayable;
-import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 
 public class Buffer extends CheckedDisplayable {
-    private final Displayable parent;
+    private final DestinationDisplay parent;
     private final PixelColour[][] pixels;
 
-    public Buffer(Displayable parent) {
+    public Buffer(DestinationDisplay parent) {
         this.parent = parent;
         pixels = new PixelColour[parent.getWidth()][parent.getHeight()];
 

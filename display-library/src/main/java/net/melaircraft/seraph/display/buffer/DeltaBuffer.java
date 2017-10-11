@@ -1,10 +1,10 @@
 package net.melaircraft.seraph.display.buffer;
 
-import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 
 public class DeltaBuffer {
-    private final Displayable parent;
+    private final DestinationDisplay parent;
 
     private PixelColour[][] current;
     private PixelColour[][] previous;
@@ -12,7 +12,7 @@ public class DeltaBuffer {
     private final int width;
     private final int height;
 
-    public DeltaBuffer(Displayable parent) {
+    public DeltaBuffer(DestinationDisplay parent) {
         this.parent = parent;
 
         width = parent.getWidth();

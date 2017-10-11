@@ -1,14 +1,14 @@
 package net.melaircraft.seraph.display.buffer;
 
-import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 
 public class InitialisingBuffer extends Buffer {
-    public InitialisingBuffer(Displayable parent) {
+    public InitialisingBuffer(DestinationDisplay parent) {
         this(parent, null, 0, 0);
     }
 
-    public InitialisingBuffer(Displayable parent, PixelColour[][] img, int imgWidth, int imgHeight) {
+    public InitialisingBuffer(DestinationDisplay parent, PixelColour[][] img, int imgWidth, int imgHeight) {
         super(parent);
 
         for (int x = 0; x < getWidth(); x++) {

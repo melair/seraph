@@ -1,24 +1,25 @@
 package net.melaircraft.seraph.display.filter;
 
-import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.DestinationDisplay;
+import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.exception.InvalidPixelColourException;
 import net.melaircraft.seraph.display.exception.NonExistentPixelException;
 import net.melaircraft.seraph.display.output.Null;
 
-public class Mask implements Displayable {
-    private final Displayable mask;
-    private final Displayable northBuffer;
-    private final Displayable parent;
+public class Mask implements DestinationDisplay {
+    private final FullDisplay mask;
+    private final FullDisplay northBuffer;
+    private final FullDisplay parent;
 
-    public Mask(Displayable parent) {
+    public Mask(FullDisplay parent) {
         northBuffer = new Buffer(new Null(parent.getWidth(), parent.getHeight()));
         mask = new MaskLayer(new Null(parent.getWidth(), parent.getHeight()));
         this.parent = parent;
     }
 
-    public Displayable getMask() {
+    public FullDisplay getMask() {
         return mask;
     }
 
@@ -51,13 +52,8 @@ public class Mask implements Displayable {
         parent.setPixel(x, y, output);
     }
 
-    @Override
-    public PixelColour getPixel(int x, int y) throws NonExistentPixelException {
-        return northBuffer.getPixel(x, y);
-    }
-
     class MaskLayer extends Buffer {
-        public MaskLayer(Displayable parent) {
+        public MaskLayer(FullDisplay parent) {
             super(parent);
         }
 

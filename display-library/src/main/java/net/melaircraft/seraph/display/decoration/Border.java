@@ -1,7 +1,7 @@
 package net.melaircraft.seraph.display.decoration;
 
 import net.melaircraft.seraph.display.CheckedDisplayable;
-import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.layout.Pane;
 
@@ -9,9 +9,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Border extends CheckedDisplayable {
-    private final Displayable pane;
+    private final FullDisplay pane;
 
-    public Border(Displayable parent, PixelColour colour, Side... sides) {
+    public Border(FullDisplay parent, PixelColour colour, Side... sides) {
         List<Side> sideList = Arrays.asList(sides);
 
         int offsetX = sideList.contains(Side.LEFT) ? 1 : 0;

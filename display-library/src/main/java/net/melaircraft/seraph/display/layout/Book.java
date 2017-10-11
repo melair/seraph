@@ -1,6 +1,7 @@
 package net.melaircraft.seraph.display.layout;
 
-import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.DestinationDisplay;
+import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.output.Null;
@@ -12,17 +13,17 @@ public class Book {
     static final PixelColour ACTIVE_PAGE_COLOUR = new PixelColour(255, 255, 255);
     static final PixelColour INACTIVE_PAGE_COLOUR = new PixelColour(32, 32, 32);
 
-    private final Displayable parent;
+    private final DestinationDisplay parent;
     private final List<Page> pages = new ArrayList<>();
     private final boolean pagination;
     private int currentPage = 0;
 
-    public Book(Displayable parent, boolean pagination) {
+    public Book(DestinationDisplay parent, boolean pagination) {
         this.parent = parent;
         this.pagination = pagination;
     }
 
-    public Displayable addPage() {
+    public FullDisplay addPage() {
         Page page = new Page(this);
         pages.add(page);
 

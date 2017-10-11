@@ -1,6 +1,6 @@
 package net.melaircraft.seraph.display.layout;
 
-import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.output.Null;
@@ -9,11 +9,11 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class ScaleTest {
-    Displayable store = new Buffer(new Null(10, 10));
+    FullDisplay store = new Buffer(new Null(10, 10));
 
     @Test
     public void testDimensionsFactorOne() {
-        Displayable scale = new Scale(store, 1);
+        FullDisplay scale = new Scale(store, 1);
 
         assertEquals(10, scale.getWidth());
         assertEquals(10, scale.getHeight());
@@ -21,7 +21,7 @@ public class ScaleTest {
 
     @Test
     public void testDimensionsFactorTwo() {
-        Displayable scale = new Scale(store, 2);
+        FullDisplay scale = new Scale(store, 2);
 
         assertEquals(5, scale.getWidth());
         assertEquals(5, scale.getHeight());
@@ -29,7 +29,7 @@ public class ScaleTest {
 
     @Test
     public void testDimensionsFactorThree() {
-        Displayable scale = new Scale(store, 3);
+        FullDisplay scale = new Scale(store, 3);
 
         assertEquals(3, scale.getWidth());
         assertEquals(3, scale.getHeight());
@@ -37,7 +37,7 @@ public class ScaleTest {
 
     @Test
     public void testSetPixelscaleTwo() {
-        Displayable scale = new Scale(store, 2);
+        FullDisplay scale = new Scale(store, 2);
         PixelColour colour = PixelColour.RED;
 
         scale.setPixel(1, 1, colour);
@@ -50,7 +50,7 @@ public class ScaleTest {
 
     @Test
     public void testGetPixelscaleTwo() {
-        Displayable scale = new Scale(store, 2);
+        FullDisplay scale = new Scale(store, 2);
         PixelColour colour = PixelColour.RED;
 
         scale.setPixel(1, 1, colour);

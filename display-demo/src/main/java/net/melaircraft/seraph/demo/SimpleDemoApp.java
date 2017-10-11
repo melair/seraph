@@ -1,6 +1,6 @@
 package net.melaircraft.seraph.demo;
 
-import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.component.Text;
 import net.melaircraft.seraph.display.decoration.Border;
@@ -36,28 +36,28 @@ public class SimpleDemoApp {
         Tee tee = new Tee(new Brightness(seraphProtocol, 0.4F), gui);
 
         Stack stack = new Stack(tee);
-        Displayable top = stack.addLayer();
+        FullDisplay top = stack.addLayer();
 
         Mask mask = new Mask(top);
         new Rainbow(mask.getMask());
 
         Stack stack2 = new Stack(mask);
-        Displayable top2 = stack2.addLayer();
-        Displayable bottom2 = stack2.addLayer();
+        FullDisplay top2 = stack2.addLayer();
+        FullDisplay bottom2 = stack2.addLayer();
 
         BitmapFont bitmapFont = BDFFontFactory.load(new FileInputStream("contrib/gohufont-11.bdf"));
         Text text = new Text(top2, bitmapFont, PixelColour.WHITE, Text.Justification.CENTER, Text.Alignment.BOTTOM, getTime());
         Text text2 = new Text(bottom2, bitmapFont, PixelColour.WHITE, Text.Justification.CENTER, Text.Alignment.TOP, "Time is");
 
-        Displayable bottom = stack.addLayer();
+        FullDisplay bottom = stack.addLayer();
         Book book = new Book(bottom, true);
 
-        Displayable one = book.addPage();
+        FullDisplay one = book.addPage();
         Pane paneOne = new Pane(one, 0, 0, gui.getWidth(), gui.getHeight() - 1);
         Border borderOne = new Border(paneOne, new PixelColour(100, 255, 100), Border.Side.BOTTOM);
         Matrix matrix = new Matrix(new Brightness(borderOne, 0.25F));
 
-        Displayable two = book.addPage();
+        FullDisplay two = book.addPage();
         Pane paneTwo = new Pane(two, 0, 0, gui.getWidth(), gui.getHeight() - 1);
         Border borderTwo = new Border(paneTwo, new PixelColour(150, 150, 150), Border.Side.BOTTOM);
         Snow snow = new Snow(borderTwo, 40);

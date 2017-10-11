@@ -1,14 +1,14 @@
 package net.melaircraft.seraph.display.filter;
 
-import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 
 public class Brightness extends Buffer {
-    private final Displayable parent;
+    private final DestinationDisplay parent;
     private float brightness;
 
-    public Brightness(Displayable parent, float brightness) {
+    public Brightness(DestinationDisplay parent, float brightness) {
         super(parent);
         this.parent = parent;
         this.brightness = brightness;

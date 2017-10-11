@@ -1,6 +1,6 @@
 package net.melaircraft.seraph.display.layout;
 
-import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.exception.InvalidVirtualSizeException;
@@ -11,16 +11,16 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 public class VirtualTest {
-    Displayable store = new Buffer(new Null(4, 4));
+    FullDisplay store = new Buffer(new Null(4, 4));
 
     @Test (expected = InvalidVirtualSizeException.class)
     public void testVirtualSmallerThenParent() {
-        Displayable virtual = new Virtual(store, 2, 2, false);
+        FullDisplay virtual = new Virtual(store, 2, 2, false);
     }
 
     @Test
     public void testDimensions() {
-        Displayable virtual = new Virtual(store, 8, 8, false);
+        FullDisplay virtual = new Virtual(store, 8, 8, false);
 
         assertEquals(8, virtual.getWidth());
         assertEquals(8, virtual.getHeight());
@@ -28,7 +28,7 @@ public class VirtualTest {
 
     @Test
     public void testSettingAndGettingOnCanvasOutsideParent() {
-        Displayable virtual = new Virtual(store, 8, 8, false);
+        FullDisplay virtual = new Virtual(store, 8, 8, false);
         PixelColour colour = PixelColour.RED;
 
         virtual.setPixel(7, 7, colour);
@@ -37,7 +37,7 @@ public class VirtualTest {
 
     @Test
     public void testSettingInSideViewPortUpdatesStore() {
-        Displayable virtual = new Virtual(store, 8, 8, false);
+        FullDisplay virtual = new Virtual(store, 8, 8, false);
         PixelColour colour = PixelColour.RED;
 
         virtual.setPixel(0, 0, colour);
@@ -46,7 +46,7 @@ public class VirtualTest {
 
     @Test
     public void testSettingOutSideViewPortDoesNotError() {
-        Displayable virtual = new Virtual(store, 8, 8, false);
+        FullDisplay virtual = new Virtual(store, 8, 8, false);
         PixelColour colour = PixelColour.RED;
 
         virtual.setPixel(5, 5, colour);
@@ -54,7 +54,7 @@ public class VirtualTest {
 
     @Test
     public void testViewPort() {
-        Displayable store = new Buffer(new Null(6, 6));
+        FullDisplay store = new Buffer(new Null(6, 6));
         Virtual virtual = new Virtual(store, 8, 8, false);
         PixelColour colour = PixelColour.RED;
 

@@ -1,6 +1,6 @@
 package net.melaircraft.seraph.display.decoration.animation;
 
-import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 
 import java.util.Collection;
@@ -8,11 +8,11 @@ import java.util.HashSet;
 import java.util.Random;
 
 public class Matrix implements Runnable {
-    private final Displayable parent;
+    private final DestinationDisplay parent;
     private final Collection<Droplet> droplets = new HashSet<>();
     private final Random random = new Random();
 
-    public Matrix(Displayable parent) {
+    public Matrix(DestinationDisplay parent) {
         this.parent = parent;
     }
 

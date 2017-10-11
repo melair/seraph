@@ -3,7 +3,7 @@ package net.melaircraft.seraph.display;
 import net.melaircraft.seraph.display.exception.InvalidPixelColourException;
 import net.melaircraft.seraph.display.exception.NonExistentPixelException;
 
-public abstract class CheckedDisplayable implements Displayable {
+public abstract class CheckedDisplayable implements FullDisplay {
     protected abstract void setActualPixel(int x, int y, PixelColour pixelColour);
 
     protected abstract PixelColour getActualPixel(int x, int y);
