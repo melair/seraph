@@ -71,7 +71,7 @@ public class SeraphProtocol implements Displayable, Runnable {
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                if ((fullFrame && !output[x][y].equals(PixelColour.BLACK) )|| changedOutput[x][y]) {
+                if ((fullFrame && !output[x][y].equals(PixelColour.BLACK))|| changedOutput[x][y]) {
                     pixelsToProcess.add(new Pixel(x, y, output[x][y]));
                     changedOutput[x][y] = false;
                 }
@@ -167,14 +167,12 @@ public class SeraphProtocol implements Displayable, Runnable {
     }
 
     @Override
-    public void setPixel(int x, int y, int r, int g, int b) throws NonExistentPixelException, InvalidPixelColourException {
-        PixelColour newColour = new PixelColour(r, g, b);
-
-        if (newColour.equals(output[x][y])) {
+    public void setPixel(int x, int y, PixelColour pixelColour) throws NonExistentPixelException, InvalidPixelColourException {
+        if (pixelColour.equals(output[x][y])) {
             return;
         }
 
-        output[x][y] = newColour;
+        output[x][y] = pixelColour;
         changedOutput[x][y] = true;
     }
 

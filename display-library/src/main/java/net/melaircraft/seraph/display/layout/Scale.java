@@ -25,13 +25,13 @@ public class Scale extends CheckedDisplayable {
     }
 
     @Override
-    protected void setActualPixel(int x, int y, int r, int g, int b) {
+    protected void setActualPixel(int x, int y, PixelColour pixelColour) {
         int baseX = x * factor;
         int baseY = y * factor;
 
         for (int xI = baseX; xI < baseX + factor; xI++) {
             for (int yI = baseY; yI < baseY + factor; yI++) {
-                parent.setPixel(xI, yI, r, g, b);
+                parent.setPixel(xI, yI, pixelColour);
             }
         }
     }

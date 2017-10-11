@@ -1,6 +1,7 @@
 package net.melaircraft.seraph.display.filter;
 
 import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.output.Null;
 import org.junit.Test;
@@ -22,7 +23,7 @@ public class BrightnessTest {
     public void testBrightnessInitialSet() {
         Displayable brightness = new Brightness(store, 0.5F);
 
-        brightness.setPixel(0, 0, 255, 255, 255);
+        brightness.setPixel(0, 0, PixelColour.WHITE);
 
         assertEquals(128, store.getPixel(0, 0).getRed());
         assertEquals(255, brightness.getPixel(0, 0).getRed());
@@ -38,7 +39,7 @@ public class BrightnessTest {
     public void testBrightnessSecondSet() {
         Brightness brightness = new Brightness(store, 0.5F);
 
-        brightness.setPixel(0, 0, 255, 255, 255);
+        brightness.setPixel(0, 0, PixelColour.WHITE);
 
         brightness.setBrightness(0.25F);
 

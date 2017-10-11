@@ -15,9 +15,9 @@ public class Brightness extends Buffer {
     }
 
     @Override
-    protected void setActualPixel(int x, int y, int r, int g, int b) {
-        super.setActualPixel(x, y, r, g, b);
-        setParentPixelScaled(x, y, r, g, b);
+    protected void setActualPixel(int x, int y, PixelColour pixelColour) {
+        super.setActualPixel(x, y, pixelColour);
+        setParentPixelScaled(x, y, pixelColour);
     }
 
     public float getBrightness() {
@@ -30,16 +30,12 @@ public class Brightness extends Buffer {
         for (int x = 0; x < parent.getWidth(); x++) {
             for (int y = 0; y < parent.getHeight(); y++) {
                 PixelColour colour = getActualPixel(x, y);
-                setParentPixelScaled(x, y, colour.getRed(), colour.getGreen(), colour.getBlue());
+                setParentPixelScaled(x, y, colour);
             }
         }
     }
 
-    private void setParentPixelScaled(int x, int y, int r, int g, int b) {
-        int rX = Math.min(Math.round(r * brightness), 255);
-        int gX = Math.min(Math.round(g * brightness), 255);
-        int bX = Math.min(Math.round(b * brightness), 255);
-
-        parent.setPixel(x, y, rX, gX, bX);
+    private void setParentPixelScaled(int x, int y, PixelColour pixelColour) {
+        parent.setPixel(x, y, pixelColour.multiply(brightness));
     }
 }

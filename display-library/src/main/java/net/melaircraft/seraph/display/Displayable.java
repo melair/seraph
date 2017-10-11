@@ -1,4 +1,4 @@
 package net.melaircraft.seraph.display;
 
-public interface Displayable extends HasSize, SettableDisplay, GettableDisplay {
+public interface Displayable extends SettableDisplay, GettableDisplay {
 }

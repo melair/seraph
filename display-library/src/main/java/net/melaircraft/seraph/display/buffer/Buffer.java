@@ -20,9 +20,9 @@ public class Buffer extends CheckedDisplayable {
     }
 
     @Override
-    protected void setActualPixel(int x, int y, int r, int g, int b) {
-        pixels[x][y] = new PixelColour(r, g, b);
-        parent.setPixel(x, y, r, g, b);
+    protected void setActualPixel(int x, int y, PixelColour pixelColour) {
+        pixels[x][y] = pixelColour;
+        parent.setPixel(x, y, pixelColour);
     }
 
     @Override

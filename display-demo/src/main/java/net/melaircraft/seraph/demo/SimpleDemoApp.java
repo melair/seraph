@@ -45,7 +45,7 @@ public class SimpleDemoApp {
         Displayable top2 = stack2.addLayer();
         Displayable bottom2 = stack2.addLayer();
 
-        BitmapFont bitmapFont = BDFFontFactory.load(new FileInputStream("contrib/zevv-peep-iso8859-1-07x14.bdf"));
+        BitmapFont bitmapFont = BDFFontFactory.load(new FileInputStream("contrib/gohufont-11.bdf"));
         Text text = new Text(top2, bitmapFont, PixelColour.WHITE, Text.Justification.CENTER, Text.Alignment.BOTTOM, getTime());
         Text text2 = new Text(bottom2, bitmapFont, PixelColour.WHITE, Text.Justification.CENTER, Text.Alignment.TOP, "Time is");
 

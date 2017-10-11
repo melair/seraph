@@ -46,6 +46,6 @@ public class PaneTest {
     public void testPixelOutSidepane() {
         Displayable pane = new Pane(store, 2, 2, 4, 2);
 
-        pane.setPixel(10, 10, 0, 0, 0);
+        pane.setPixel(10, 10, PixelColour.BLACK);
     }
 }

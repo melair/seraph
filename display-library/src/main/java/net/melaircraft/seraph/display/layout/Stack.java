@@ -19,7 +19,7 @@ public class Stack extends CheckedDisplayable {
     }
 
     @Override
-    protected void setActualPixel(int x, int y, int r, int g, int b) {
+    protected void setActualPixel(int x, int y, PixelColour pixelColour) {
         throw new NonExistentPixelException("No direct access to pixels via a Stack");
     }
 
@@ -62,8 +62,8 @@ public class Stack extends CheckedDisplayable {
         }
 
         @Override
-        protected void setActualPixel(int x, int y, int r, int g, int b) {
-            super.setActualPixel(x, y, r, g, b);
+        protected void setActualPixel(int x, int y, PixelColour pixelColour) {
+            super.setActualPixel(x, y, pixelColour);
             stack.resolvePixel(x, y);
         }
     }

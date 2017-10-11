@@ -35,8 +35,8 @@ public class Pane extends CheckedDisplayable {
     }
 
     @Override
-    protected void setActualPixel(int x, int y, int r, int g, int b) {
-        parent.setPixel(x + offsetX, y + offsetY, r, g, b);
+    protected void setActualPixel(int x, int y, PixelColour pixelColour) {
+        parent.setPixel(x + offsetX, y + offsetY, pixelColour);
     }
 
     @Override

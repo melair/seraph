@@ -15,9 +15,9 @@ public class InitialisingBuffer extends Buffer {
             for (int y = 0; y < getHeight(); y++) {
                 if (x < imgWidth && y < imgHeight) {
                     PixelColour colour = img[x][y];
-                    setActualPixel(x, y, colour.getRed(), colour.getGreen(), colour.getBlue());
+                    setActualPixel(x, y, colour);
                 } else {
-                    setActualPixel(x, y, 0, 0, 0);
+                    setActualPixel(x, y, PixelColour.BLACK);
                 }
             }
         }

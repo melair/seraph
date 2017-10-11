@@ -3,7 +3,9 @@ package net.melaircraft.seraph.display.layout;
 import net.melaircraft.seraph.display.Displayable;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
+import net.melaircraft.seraph.display.exception.InvalidPixelColourException;
 import net.melaircraft.seraph.display.exception.InvalidVirtualSizeException;
+import net.melaircraft.seraph.display.exception.NonExistentPixelException;
 import net.melaircraft.seraph.display.output.Null;
 
 public class Virtual implements Displayable {
@@ -61,20 +63,20 @@ public class Virtual implements Displayable {
     }
 
     @Override
-    public void setPixel(int x, int y, int r, int g, int b) {
-        canvas.setPixel(x, y, r, g, b);
+    public void setPixel(int x, int y, PixelColour pixelColour) throws NonExistentPixelException, InvalidPixelColourException {
+        canvas.setPixel(x, y, pixelColour);
 
         int adjustX = x - viewportX;
         int adjustY = y - viewportY;
 
         if (adjustX >= 0 && adjustX < parent.getWidth() && adjustY >= 0 && adjustY < parent.getHeight()) {
-            parent.setPixel(adjustX, adjustY, r, g, b);
+            parent.setPixel(adjustX, adjustY, pixelColour);
         } else {
             adjustX += parent.getWidth();
             adjustY += parent.getHeight();
 
             if (adjustX >= 0 && adjustX < parent.getWidth() && adjustY >= 0 && adjustY < parent.getHeight()) {
-                parent.setPixel(adjustX, adjustY, r, g, b);
+                parent.setPixel(adjustX, adjustY, pixelColour);
             }
         }
     }

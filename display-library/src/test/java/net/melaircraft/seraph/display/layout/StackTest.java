@@ -23,7 +23,7 @@ public class StackTest {
     @Test(expected = NonExistentPixelException.class)
     public void testDirectSetThrowsException() {
         Displayable stack = new Stack(store);
-        stack.setPixel(0, 0, 0, 0, 0);
+        stack.setPixel(0, 0, PixelColour.BLACK);
     }
 
     @Test(expected = NonExistentPixelException.class)

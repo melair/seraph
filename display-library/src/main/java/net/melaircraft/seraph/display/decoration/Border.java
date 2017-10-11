@@ -51,8 +51,8 @@ public class Border extends CheckedDisplayable {
     }
 
     @Override
-    protected void setActualPixel(int x, int y, int r, int g, int b) {
-        pane.setPixel(x, y, r, g, b);
+    protected void setActualPixel(int x, int y, PixelColour pixelColour) {
+        pane.setPixel(x, y, pixelColour);
     }
 
     @Override

@@ -33,8 +33,8 @@ public class SwingGUI extends Buffer {
     }
 
     @Override
-    protected void setActualPixel(int x, int y, int r, int g, int b) {
-        super.setActualPixel(x, y, r, g, b);
+    protected void setActualPixel(int x, int y, PixelColour pixelColour) {
+        super.setActualPixel(x, y, pixelColour);
         frame.repaint();
     }
 

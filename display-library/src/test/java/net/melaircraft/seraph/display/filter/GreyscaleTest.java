@@ -1,6 +1,7 @@
 package net.melaircraft.seraph.display.filter;
 
 import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.output.Null;
 import org.junit.Test;
@@ -22,7 +23,7 @@ public class GreyscaleTest {
     public void testGreyscaleWriteThroughBrightWhite() {
         Displayable greyscale = new Greyscale(store);
 
-        greyscale.setPixel(0, 0, 255, 255, 255);
+        greyscale.setPixel(0, 0, PixelColour.WHITE);
 
         assertEquals(255, store.getPixel(0, 0).getRed());
         assertEquals(255, greyscale.getPixel(0, 0).getRed());
@@ -38,7 +39,7 @@ public class GreyscaleTest {
     public void testGreyscaleWriteThroughDimRed() {
         Displayable greyscale = new Greyscale(store);
 
-        greyscale.setPixel(0, 0, 60, 0, 0);
+        greyscale.setPixel(0, 0, new PixelColour(60, 0, 0));
 
         assertEquals(13, store.getPixel(0, 0).getRed());
         assertEquals(60, greyscale.getPixel(0, 0).getRed());

@@ -43,10 +43,10 @@ public class TeeTest {
 
         Displayable tee = new Tee(one, two);
 
-        tee.setPixel(0, 0, 1, 1, 1);
+        tee.setPixel(0, 0, PixelColour.WHITE);
 
-        verify(one).setPixel(0, 0, 1, 1, 1);
-        verify(two).setPixel(0, 0, 1, 1, 1);
+        verify(one).setPixel(0, 0, PixelColour.WHITE);
+        verify(two).setPixel(0, 0, PixelColour.WHITE);
     }
 
     @Test

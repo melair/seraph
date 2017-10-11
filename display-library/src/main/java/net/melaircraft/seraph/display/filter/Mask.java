@@ -38,27 +38,17 @@ public class Mask implements Displayable {
     }
 
     @Override
-    public void setPixel(int x, int y, int r, int g, int b) throws NonExistentPixelException, InvalidPixelColourException {
-        northBuffer.setPixel(x, y, r, g, b);
+    public void setPixel(int x, int y, PixelColour pixelColour) throws NonExistentPixelException, InvalidPixelColourException {
+        northBuffer.setPixel(x, y, pixelColour);
         outputPixelToParent(x, y);
     }
 
     private void outputPixelToParent(int x, int y) {
         PixelColour northPixel = northBuffer.getPixel(x, y);
-
-        int r = northPixel.getRed();
-        int g = northPixel.getBlue();
-        int b = northPixel.getBlue();
-
-        double intensity = ((0.2125 * r) + (0.7154 * g) + (0.0721 * b)) / 255;
-
         PixelColour maskPixel = mask.getPixel(x, y);
 
-        r = (int) Math.round(intensity * maskPixel.getRed());
-        g = (int) Math.round(intensity * maskPixel.getGreen());
-        b = (int) Math.round(intensity * maskPixel.getBlue());
-
-        parent.setPixel(x, y, r, g, b);
+        PixelColour output = northPixel.greyscale().multiply(maskPixel);
+        parent.setPixel(x, y, output);
     }
 
     @Override
@@ -72,8 +62,8 @@ public class Mask implements Displayable {
         }
 
         @Override
-        protected void setActualPixel(int x, int y, int r, int g, int b) {
-            super.setActualPixel(x, y, r, g, b);
+        protected void setActualPixel(int x, int y, PixelColour pixelColour) {
+            super.setActualPixel(x, y, pixelColour);
             maskUpdate(x, y);
         }
     }

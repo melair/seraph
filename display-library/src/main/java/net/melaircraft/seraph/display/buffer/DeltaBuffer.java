@@ -30,12 +30,8 @@ public class DeltaBuffer {
         }
     }
 
-    public void setPixel(int x, int y, int r, int g, int b) {
-        current[x][y] = new PixelColour(r, g, b);
-    }
-
     public void setPixel(int x, int y, PixelColour pixelColour) {
-        setPixel(x, y, pixelColour.getRed(), pixelColour.getGreen(), pixelColour.getBlue());
+        current[x][y] = pixelColour;
     }
 
     public void clearCurrent() {
@@ -50,7 +46,7 @@ public class DeltaBuffer {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 if (!previous[x][y].equals(current[x][y])) {
-                    parent.setPixel(x, y, current[x][y].getRed(), current[x][y].getGreen(), current[x][y].getBlue());
+                    parent.setPixel(x, y, current[x][y]);
                     previous[x][y] = current[x][y];
                 }
             }

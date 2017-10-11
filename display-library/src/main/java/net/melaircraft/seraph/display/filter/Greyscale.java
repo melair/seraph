@@ -1,6 +1,7 @@
 package net.melaircraft.seraph.display.filter;
 
 import net.melaircraft.seraph.display.Displayable;
+import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 
 public class Greyscale extends Buffer {
@@ -12,13 +13,12 @@ public class Greyscale extends Buffer {
     }
 
     @Override
-    protected void setActualPixel(int x, int y, int r, int g, int b) {
-        super.setActualPixel(x, y, r, g, b);
-        setParentPixelScaled(x, y, r, g, b);
+    protected void setActualPixel(int x, int y, PixelColour pixelColour) {
+        super.setActualPixel(x, y, pixelColour);
+        setParentPixelScaled(x, y, pixelColour);
     }
 
-    private void setParentPixelScaled(int x, int y, int r, int g, int b) {
-        int grey = (int) Math.round((0.2125 * r) + (0.7154 * g) + (0.0721 * b));
-        parent.setPixel(x, y, grey, grey, grey);
+    private void setParentPixelScaled(int x, int y, PixelColour pixelColour) {
+        parent.setPixel(x, y, pixelColour.greyscale());
     }
 }

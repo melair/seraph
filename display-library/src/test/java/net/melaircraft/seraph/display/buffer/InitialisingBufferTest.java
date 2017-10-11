@@ -17,8 +17,8 @@ public class InitialisingBufferTest {
 
         InitialisingBuffer buffer = new InitialisingBuffer(store);
 
-        verify(store).setPixel(0, 0, 0, 0, 0);
-        verify(store).setPixel(1, 0, 0, 0, 0);
+        verify(store).setPixel(0, 0, PixelColour.BLACK);
+        verify(store).setPixel(1, 0, PixelColour.BLACK);
     }
 
     @Test
@@ -37,13 +37,13 @@ public class InitialisingBufferTest {
 
         InitialisingBuffer buffer = new InitialisingBuffer(store, img, imgWidth, imgHeight);
 
-        verify(store).setPixel(0, 0, 255, 0, 0);
-        verify(store).setPixel(0, 1, 0, 0, 0);
-        verify(store).setPixel(1, 0, 0, 255, 0);
-        verify(store).setPixel(1, 1, 0, 0, 0);
-        verify(store).setPixel(2, 0, 0, 0, 255);
-        verify(store).setPixel(2, 1, 0, 0, 0);
-        verify(store).setPixel(3, 0, 0, 0, 0);
-        verify(store).setPixel(3, 1, 0, 0, 0);
+        verify(store).setPixel(0, 0, PixelColour.RED);
+        verify(store).setPixel(0, 1, PixelColour.BLACK);
+        verify(store).setPixel(1, 0, PixelColour.GREEN);
+        verify(store).setPixel(1, 1, PixelColour.BLACK);
+        verify(store).setPixel(2, 0, PixelColour.BLUE);
+        verify(store).setPixel(2, 1, PixelColour.BLACK);
+        verify(store).setPixel(3, 0, PixelColour.BLACK);
+        verify(store).setPixel(3, 1, PixelColour.BLACK);
     }
 }

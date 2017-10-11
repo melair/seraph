@@ -49,7 +49,7 @@ public class DeltaBufferTest {
         reset(store);
         deltaBuffer.setPixel(0, 0, PixelColour.RED);
         deltaBuffer.sendDelta();
-        verify(store).setPixel(0, 0, 255, 0, 0);
+        verify(store).setPixel(0, 0, PixelColour.RED);
     }
 
     @Test
@@ -67,6 +67,6 @@ public class DeltaBufferTest {
         deltaBuffer.clearCurrent();
         deltaBuffer.sendDelta();
 
-        verify(store).setPixel(0, 0, 0, 0, 0);
+        verify(store).setPixel(0, 0, PixelColour.BLACK);
     }
 }

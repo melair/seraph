@@ -23,7 +23,8 @@ public final class Null extends CheckedDisplayable {
     }
 
     @Override
-    protected void setActualPixel(int x, int y, int r, int g, int b) {
+    protected void setActualPixel(int x, int y, PixelColour pixelColour) {
+
     }
 
     @Override

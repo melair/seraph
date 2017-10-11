@@ -24,7 +24,7 @@ public class BookTest {
     @Test(expected = NonExistentPixelException.class)
     public void testDirectSetThrowsException() {
         Displayable book = new Book(store, true);
-        book.setPixel(0, 0, 0, 0, 0);
+        book.setPixel(0, 0, PixelColour.BLACK);
     }
 
     @Test(expected = NonExistentPixelException.class)

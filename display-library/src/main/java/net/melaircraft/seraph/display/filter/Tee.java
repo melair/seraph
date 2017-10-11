@@ -2,7 +2,9 @@ package net.melaircraft.seraph.display.filter;
 
 import net.melaircraft.seraph.display.Displayable;
 import net.melaircraft.seraph.display.PixelColour;
+import net.melaircraft.seraph.display.exception.InvalidPixelColourException;
 import net.melaircraft.seraph.display.exception.MismatchedDisplaySizeException;
+import net.melaircraft.seraph.display.exception.NonExistentPixelException;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -15,8 +17,6 @@ public class Tee implements Displayable {
     public Tee(Displayable... parents) {
         for (int i = 1; i < parents.length; i++) {
             if (parents[0].getWidth() != parents[i].getWidth() || parents[0].getHeight() != parents[i].getHeight()) {
-                System.out.println(parents[0].getWidth() + " != " + parents[i].getWidth());
-                System.out.println(parents[0].getHeight() + " != " + parents[i].getHeight());
                 throw new MismatchedDisplaySizeException("All parents must have the same display dimensions!");
             }
         }
@@ -36,8 +36,8 @@ public class Tee implements Displayable {
     }
 
     @Override
-    public void setPixel(int x, int y, int r, int g, int b) {
-        allParents.forEach((d) -> d.setPixel(x, y, r, g, b));
+    public void setPixel(int x, int y, PixelColour pixelColour) throws NonExistentPixelException, InvalidPixelColourException {
+        allParents.forEach((d) -> d.setPixel(x, y, pixelColour));
     }
 
     @Override

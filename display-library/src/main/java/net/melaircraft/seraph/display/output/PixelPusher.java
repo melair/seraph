@@ -60,8 +60,8 @@ public class PixelPusher implements Displayable, Runnable {
     }
 
     @Override
-    public void setPixel(int x, int y, int r, int g, int b) throws NonExistentPixelException, InvalidPixelColourException {
-        output[x][y] = new PixelColour(r, g, b);
+    public void setPixel(int x, int y, PixelColour pixelColour) throws NonExistentPixelException, InvalidPixelColourException {
+        output[x][y] = pixelColour;
         rowChange[y] = true;
     }
 
