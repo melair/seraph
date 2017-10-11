@@ -1,7 +1,7 @@
 package net.melaircraft.seraph.display.layout;
 
-import net.melaircraft.seraph.display.CheckedFullDisplay;
 import net.melaircraft.seraph.display.DestinationDisplay;
+import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import org.junit.Test;
@@ -9,7 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class ScaleTest {
-    CheckedFullDisplay store = new Buffer(10, 10);
+    private FullDisplay store = new Buffer(10, 10);
 
     @Test
     public void testDimensionsFactorOne() {

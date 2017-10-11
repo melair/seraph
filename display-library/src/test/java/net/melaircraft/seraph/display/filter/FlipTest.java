@@ -1,7 +1,7 @@
 package net.melaircraft.seraph.display.filter;
 
-import net.melaircraft.seraph.display.CheckedFullDisplay;
 import net.melaircraft.seraph.display.DestinationDisplay;
+import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import org.junit.Test;
@@ -9,8 +9,8 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class FlipTest {
-    CheckedFullDisplay store = new Buffer(4, 4);
-    PixelColour pixelColour = PixelColour.BLUE;
+    private FullDisplay store = new Buffer(4, 4);
+    private PixelColour pixelColour = PixelColour.BLUE;
 
     @Test
     public void testNoFlip() {

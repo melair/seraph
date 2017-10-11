@@ -1,7 +1,7 @@
 package net.melaircraft.seraph.display.decoration;
 
-import net.melaircraft.seraph.display.CheckedFullDisplay;
 import net.melaircraft.seraph.display.DestinationDisplay;
+import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import org.junit.Test;
@@ -9,8 +9,8 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class BorderTest {
-    CheckedFullDisplay store = new Buffer(6, 6);
-    PixelColour colour = PixelColour.RED;
+    private FullDisplay store = new Buffer(6, 6);
+    private PixelColour colour = PixelColour.RED;
 
     @Test
     public void testBordersOnAllSidesDimensions() {
