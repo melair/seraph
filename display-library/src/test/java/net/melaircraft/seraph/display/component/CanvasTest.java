@@ -182,17 +182,13 @@ public class CanvasTest {
         canvas.run();
         canvas.run();
         canvas.run();
-
         assertEquals(PixelColour.RED, buffer.getActualPixel(3, 0));
 
         canvas.run();
         canvas.run();
         canvas.run();
-
         assertEquals(PixelColour.BLACK, buffer.getActualPixel(5, 0));
 
-        canvas.run();
-        canvas.run();
         canvas.run();
         canvas.run();
 
