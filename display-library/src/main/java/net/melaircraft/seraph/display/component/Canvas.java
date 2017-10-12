@@ -86,11 +86,13 @@ public class Canvas implements SourceDisplay.DisplayCallback, Runnable {
 
     @Override
     public void run() {
+        redraw();
+
         switch (scrollDirection) {
             case LEFT:
                 currentPos++;
 
-                if (currentPos > currentWidth + parentWidth) {
+                if (currentPos > currentWidth) {
                     currentPos = 0 - parentWidth;
                 }
                 break;
@@ -99,15 +101,9 @@ public class Canvas implements SourceDisplay.DisplayCallback, Runnable {
                 currentPos--;
 
                 if (currentPos < -parentWidth) {
-                    currentPos = currentWidth + parentWidth;
+                    currentPos = parentWidth;
                 }
                 break;
-        }
-
-        redraw();
-
-        if (scrollDirection == Direction.NONE) {
-            return;
         }
     }
 
@@ -136,7 +132,7 @@ public class Canvas implements SourceDisplay.DisplayCallback, Runnable {
 
         deltaBuffer.clearCurrent();
 
-        int displayX = xGroupStart;
+        int displayX = xGroupStart - currentPos;
 
         Iterator<SourceDisplay> iterator = displays.iterator();
         SourceDisplay source = iterator.hasNext() ? iterator.next() : null;

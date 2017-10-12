@@ -141,4 +141,61 @@ public class CanvasTest {
         assertEquals(PixelColour.RED, buffer.getActualPixel(2, 2));
         assertEquals(PixelColour.RED, buffer.getActualPixel(5, 2));
     }
+
+
+    @Test
+    public void testLeftScrollTopItemAlignmentTopGroupAlignment() {
+        Canvas canvas = new Canvas(buffer, Canvas.Direction.LEFT, Canvas.Alignment.TOP, Canvas.Alignment.TOP);
+        canvas.append(filledH);
+        canvas.append(filledV);
+        canvas.run();
+
+        assertEquals(PixelColour.RED, buffer.getActualPixel(0, 0));
+        assertEquals(PixelColour.RED, buffer.getActualPixel(3, 0));
+
+        canvas.run();
+        canvas.run();
+        canvas.run();
+
+        assertEquals(PixelColour.RED, buffer.getActualPixel(0, 0));
+
+        canvas.run();
+
+        assertEquals(PixelColour.BLACK, buffer.getActualPixel(0, 0));
+
+        canvas.run();
+        canvas.run();
+
+        assertEquals(PixelColour.RED, buffer.getActualPixel(5, 0));
+    }
+
+    @Test
+    public void testRightScrollTopItemAlignmentTopGroupAlignment() {
+        Canvas canvas = new Canvas(buffer, Canvas.Direction.RIGHT, Canvas.Alignment.TOP, Canvas.Alignment.TOP);
+        canvas.append(filledH);
+        canvas.append(filledV);
+        canvas.run();
+
+        assertEquals(PixelColour.RED, buffer.getActualPixel(0, 0));
+        assertEquals(PixelColour.RED, buffer.getActualPixel(3, 0));
+
+        canvas.run();
+        canvas.run();
+        canvas.run();
+
+        assertEquals(PixelColour.RED, buffer.getActualPixel(3, 0));
+
+        canvas.run();
+        canvas.run();
+        canvas.run();
+
+        assertEquals(PixelColour.BLACK, buffer.getActualPixel(5, 0));
+
+        canvas.run();
+        canvas.run();
+        canvas.run();
+        canvas.run();
+
+        assertEquals(PixelColour.RED, buffer.getActualPixel(0, 0));
+    }
 }
