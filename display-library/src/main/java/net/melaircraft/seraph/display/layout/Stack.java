@@ -3,12 +3,15 @@ package net.melaircraft.seraph.display.layout;
 import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
+import net.melaircraft.seraph.display.SourceDisplay;
 import net.melaircraft.seraph.display.buffer.Buffer;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
-public class Stack implements Buffer.BufferCallback {
+public class Stack implements SourceDisplay.DisplayCallback {
     private final DestinationDisplay destination;
     private final List<Layer> layers = new ArrayList<>();
 
@@ -23,7 +26,7 @@ public class Stack implements Buffer.BufferCallback {
     }
 
     @Override
-    public void updated(Buffer buffer, int x, int y, PixelColour colour) {
+    public void notification(SourceDisplay display, int x, int y, PixelColour colour) {
         PixelColour resolvedColour = layers.stream()
                 .map((d) -> d.getPixel(x, y))
                 .filter((c) -> !c.equals(PixelColour.BLACK))
@@ -36,6 +39,7 @@ public class Stack implements Buffer.BufferCallback {
         private final Buffer buffer;
         private final int width;
         private final int height;
+        private Collection<DisplayCallback> callbacks = new HashSet<>();
 
         Layer(Stack stack) {
             this.width = stack.destination.getWidth();
@@ -52,6 +56,11 @@ public class Stack implements Buffer.BufferCallback {
         @Override
         public PixelColour getPixel(int x, int y) {
             return buffer.getPixel(x, y);
+        }
+
+        @Override
+        public Collection<DisplayCallback> getCallbacks() {
+            return callbacks;
         }
 
         @Override

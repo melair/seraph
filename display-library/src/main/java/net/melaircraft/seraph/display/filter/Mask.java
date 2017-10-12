@@ -2,11 +2,12 @@ package net.melaircraft.seraph.display.filter;
 
 import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.PixelColour;
+import net.melaircraft.seraph.display.SourceDisplay;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.exception.InvalidPixelColourException;
 import net.melaircraft.seraph.display.exception.NonExistentPixelException;
 
-public class Mask implements DestinationDisplay, Buffer.BufferCallback {
+public class Mask implements DestinationDisplay, SourceDisplay.DisplayCallback {
     private final Buffer mask;
     private final Buffer northBuffer;
     private final DestinationDisplay destination;
@@ -49,7 +50,7 @@ public class Mask implements DestinationDisplay, Buffer.BufferCallback {
     }
 
     @Override
-    public void updated(Buffer buffer, int x, int y, PixelColour colour) {
+    public void notification(SourceDisplay display, int x, int y, PixelColour colour) {
         outputPixelToParent(x, y);
     }
 }

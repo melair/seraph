@@ -3,10 +3,13 @@ package net.melaircraft.seraph.display.layout;
 import net.melaircraft.seraph.display.DestinationDisplay;
 import net.melaircraft.seraph.display.FullDisplay;
 import net.melaircraft.seraph.display.PixelColour;
+import net.melaircraft.seraph.display.SourceDisplay;
 import net.melaircraft.seraph.display.buffer.Buffer;
 import net.melaircraft.seraph.display.exception.NonExistentPixelException;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 public class Book {
@@ -91,9 +94,10 @@ public class Book {
         }
     }
 
-    static class Page implements FullDisplay, Buffer.BufferCallback {
+    static class Page implements FullDisplay, SourceDisplay.DisplayCallback {
         private final Book book;
         private final Buffer buffer;
+        private Collection<DisplayCallback> callbacks = new HashSet<>();
 
         Page(Book book) {
             this.book = book;
@@ -112,6 +116,11 @@ public class Book {
         }
 
         @Override
+        public Collection<DisplayCallback> getCallbacks() {
+            return callbacks;
+        }
+
+        @Override
         public int getWidth() {
             return buffer.getWidth();
         }
@@ -122,7 +131,7 @@ public class Book {
         }
 
         @Override
-        public void updated(Buffer buffer, int x, int y, PixelColour colour) {
+        public void notification(SourceDisplay display, int x, int y, PixelColour colour) {
             book.setPagePixel(this, x, y, colour);
         }
     }
