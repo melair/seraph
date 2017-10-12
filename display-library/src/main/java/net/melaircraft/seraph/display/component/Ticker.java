@@ -38,6 +38,8 @@ public class Ticker implements SourceDisplay.DisplayCallback, Runnable {
     }
 
     public Ticker(DestinationDisplay destinationDisplay, Justification justification, Alignment itemAlignment, Alignment groupAlignment) {
+        this.parentWidth = destinationDisplay.getWidth();
+
         this.scrollDirection = Direction.NONE;
         this.justification = justification;
         this.itemAlignment = itemAlignment;
