@@ -7,15 +7,17 @@ import net.melaircraft.seraph.display.SourceDisplay;
 import net.melaircraft.seraph.display.buffer.DeltaBuffer;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class Ticker implements SourceDisplay.DisplayCallback, Runnable {
+public class Canvas implements SourceDisplay.DisplayCallback, Runnable {
     private final Direction scrollDirection;
     private final Justification justification;
     private final Alignment itemAlignment;
     private final Alignment groupAlignment;
     private final DeltaBuffer deltaBuffer;
 
+    private final int parentHeight;
     private final int parentWidth;
 
     private int currentWidth = 0;
@@ -25,8 +27,9 @@ public class Ticker implements SourceDisplay.DisplayCallback, Runnable {
 
     private final List<SourceDisplay> displays = new ArrayList<>();
 
-    public Ticker(DestinationDisplay destinationDisplay, Direction scrollDirection, Alignment itemAlignment, Alignment groupAlignment) {
+    public Canvas(DestinationDisplay destinationDisplay, Direction scrollDirection, Alignment itemAlignment, Alignment groupAlignment) {
         this.parentWidth = destinationDisplay.getWidth();
+        this.parentHeight = destinationDisplay.getHeight();
 
         this.scrollDirection = scrollDirection;
         this.justification = Justification.LEFT;
@@ -37,8 +40,9 @@ public class Ticker implements SourceDisplay.DisplayCallback, Runnable {
         recalculateSize();
     }
 
-    public Ticker(DestinationDisplay destinationDisplay, Justification justification, Alignment itemAlignment, Alignment groupAlignment) {
+    public Canvas(DestinationDisplay destinationDisplay, Justification justification, Alignment itemAlignment, Alignment groupAlignment) {
         this.parentWidth = destinationDisplay.getWidth();
+        this.parentHeight = destinationDisplay.getHeight();
 
         this.scrollDirection = Direction.NONE;
         this.justification = justification;
@@ -100,17 +104,76 @@ public class Ticker implements SourceDisplay.DisplayCallback, Runnable {
                 break;
         }
 
+        redraw();
+
         if (scrollDirection == Direction.NONE) {
             return;
         }
-
-        redraw();
     }
 
     private void redraw() {
+        int xGroupStart = 0;
+
+        switch (justification) {
+            case CENTER:
+                xGroupStart = (parentWidth - currentWidth) / 2;
+                break;
+            case RIGHT:
+                xGroupStart = parentWidth - currentWidth;
+        }
+
+        int yGroupOffset = 0;
+
+        switch (groupAlignment) {
+            case MIDDLE:
+                yGroupOffset = (parentHeight - currentHeight) / 2;
+                break;
+
+            case BOTTOM:
+                yGroupOffset = parentHeight - currentHeight;
+                break;
+        }
+
         deltaBuffer.clearCurrent();
 
-        // Calculate New Window
+        int displayX = xGroupStart;
+
+        Iterator<SourceDisplay> iterator = displays.iterator();
+        SourceDisplay source = iterator.hasNext() ? iterator.next() : null;
+        int sourceX = 0;
+
+        while (displayX < parentWidth) {
+            if (source != null && sourceX >= source.getWidth()) {
+                source = iterator.hasNext() ? iterator.next() : null;
+                sourceX = 0;
+            }
+
+            if (displayX >= 0) {
+                for (int y = 0; y < parentHeight; y++) {
+                    deltaBuffer.setPixel(displayX, y, PixelColour.BLACK);
+                }
+
+                if (source != null) {
+                    int ySourceOffset = 0;
+
+                    switch (itemAlignment) {
+                        case MIDDLE:
+                            ySourceOffset = (currentHeight - source.getHeight()) / 2;
+                            break;
+                        case BOTTOM:
+                            ySourceOffset = currentHeight - source.getHeight();
+                            break;
+                    }
+
+                    for (int sourceY = 0; sourceY < source.getHeight(); sourceY++) {
+                        deltaBuffer.setPixel(displayX, sourceY + yGroupOffset + ySourceOffset, source.getPixel(sourceX, sourceY));
+                    }
+                }
+            }
+
+            displayX++;
+            sourceX++;
+        }
 
         deltaBuffer.sendDelta();
     }
