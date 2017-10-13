@@ -108,6 +108,10 @@ public final class PixelColour {
     }
 
     public int toInteger() {
+        return rgbToInteger(r, g, b);
+    }
+
+    public static int rgbToInteger(int r, int g, int b) {
         return (r << 16) + (g << 8) + b;
     }
 }
