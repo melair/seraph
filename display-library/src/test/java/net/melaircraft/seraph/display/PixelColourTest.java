@@ -56,4 +56,16 @@ public class PixelColourTest {
         assertEquals(32, newColour.getGreen());
         assertEquals(32, newColour.getBlue());
     }
+
+    @Test
+    public void testIntegerColourCreation() {
+        int c = (128 << 16) + (64 << 8) + 32;
+
+        PixelColour colour = new PixelColour(c);
+
+        assertEquals(128, colour.getRed());
+        assertEquals(64, colour.getGreen());
+        assertEquals(32, colour.getBlue());
+    }
+
 }

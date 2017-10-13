@@ -23,6 +23,16 @@ public final class PixelColour {
         this.b = b;
     }
 
+    public PixelColour(int c) {
+        int r = (c >> 16) & 0xff;
+        int g = (c >> 8) & 0xff;
+        int b = (c) & 0xff;
+
+        this.r = r;
+        this.g = g;
+        this.b = b;
+    }
+
     public int getRed() {
         return r;
     }
