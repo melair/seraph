@@ -106,4 +106,8 @@ public final class PixelColour {
                 ", b=" + b +
                 '}';
     }
+
+    public int toInteger() {
+        return (r << 16) + (g << 8) + b;
+    }
 }

@@ -66,6 +66,8 @@ public class PixelColourTest {
         assertEquals(128, colour.getRed());
         assertEquals(64, colour.getGreen());
         assertEquals(32, colour.getBlue());
+
+        assertEquals(c, colour.toInteger());
     }
 
 }
