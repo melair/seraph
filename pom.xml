@@ -11,5 +11,6 @@
         <module>display-demo</module>
         <module>bitmap-font</module>
         <module>display-library</module>
+        <module>display-server</module>
     </modules>
 </project>

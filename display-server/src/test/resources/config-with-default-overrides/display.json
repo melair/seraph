@@ -1,0 +1,8 @@
+{
+  "hostname": "1.2.3.4",
+  "port": 7777,
+  "width": 128,
+  "height": 64,
+  "mtu": 2000,
+  "framerate": 100
+}

@@ -1,0 +1,6 @@
+{
+  "host": "not-localhost",
+  "enabled": false,
+  "port": 800,
+  "allowWrite": false
+}
