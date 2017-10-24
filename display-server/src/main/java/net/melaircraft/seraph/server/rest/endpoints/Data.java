@@ -1,5 +1,8 @@
 package net.melaircraft.seraph.server.rest.endpoints;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import net.melaircraft.seraph.server.data.DataManager;
 
 import javax.ws.rs.Consumes;
@@ -12,6 +15,7 @@ import javax.ws.rs.core.Response;
 
 @Path("/data")
 public class Data {
+    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private final DataManager dataManager;
     private final boolean allowWrite;
 
@@ -32,7 +36,11 @@ public class Data {
     @Consumes("application/json")
     public Response put(@PathParam("name") String name, String body) {
         if (!allowWrite) {
-
+            JsonObject message = new JsonObject();
+            message.addProperty("message", "Writes are not enabled.");
+            JsonObject status = new JsonObject();
+            status.add("error", message);
+            return Response.status(Response.Status.METHOD_NOT_ALLOWED).entity(gson.toJson(status)).type("application/json").build();
         }
 
         return Response.status(Response.Status.NOT_IMPLEMENTED).build();

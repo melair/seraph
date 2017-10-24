@@ -11,10 +11,10 @@ public class RestManagerTest {
     public void testReusedPortThrowsException() {
         RestConfiguration restConfiguration = new RestConfiguration();
 
-        RestManager restManagerOne = new RestManager(restConfiguration, dataManager);
+        RestManager restManagerOne = new RestManager(restConfiguration, null);
 
         try {
-            RestManager restManagerTwo = new RestManager(restConfiguration, dataManager);
+            RestManager restManagerTwo = new RestManager(restConfiguration, null);
         } catch (RestException e) {
             return;
         } finally {
