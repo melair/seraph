@@ -33,7 +33,7 @@ public class Data {
     public Response list() {
         JsonObject list = new JsonObject();
 
-        dataManager.getEntryNames().forEach((name) -> {
+        dataManager.getEntryNames().stream().sorted().forEach((name) -> {
             JsonObject object = new JsonObject();
 
             Entry entry = dataManager.get(name);
