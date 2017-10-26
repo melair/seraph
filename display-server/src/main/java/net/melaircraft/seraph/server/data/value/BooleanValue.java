@@ -1,9 +1,9 @@
 package net.melaircraft.seraph.server.data.value;
 
-public class NumberValue implements Value<Number> {
-    private final Number value;
+public class BooleanValue implements Value<Boolean> {
+    private final Boolean value;
 
-    public NumberValue(Number value) {
+    public BooleanValue(Boolean value) {
         this.value = value;
     }
 
@@ -13,7 +13,7 @@ public class NumberValue implements Value<Number> {
     }
 
     @Override
-    public Number getRaw() {
+    public Boolean getRaw() {
         return value;
     }
 }

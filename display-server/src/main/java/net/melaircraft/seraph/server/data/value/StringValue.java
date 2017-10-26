@@ -1,6 +1,6 @@
 package net.melaircraft.seraph.server.data.value;
 
-public class StringValue implements Value {
+public class StringValue implements Value<String> {
     private final String value;
 
     public StringValue(String value) {
@@ -9,6 +9,11 @@ public class StringValue implements Value {
 
     @Override
     public String output() {
+        return value;
+    }
+
+    @Override
+    public String getRaw() {
         return value;
     }
 }
